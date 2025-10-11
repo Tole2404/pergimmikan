@@ -1,0 +1,53 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top button {
+  background-color: var(--retro-brown, #8b5a2b);
+  color: var(--retro-cream, #f9f5f0);
+  border: 2px solid var(--retro-cream, #f9f5f0);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  transform: rotate(-3deg);
+}
+
+.scroll-to-top button:hover {
+  background-color: var(--retro-brown-dark, #6b4520);
+  transform: rotate(0) scale(1.1);
+}
+
+.scroll-to-top button svg {
+  font-size: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .scroll-to-top button {
+    width: 40px;
+    height: 40px;
+  }
+}

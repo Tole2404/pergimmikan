@@ -1,0 +1,112 @@
+/* Legacy Management Styles */
+.legacy-management-container {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Card Styles */
+.legacy-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styles */
+.legacy-table {
+  margin-bottom: 0;
+}
+
+.legacy-table-header {
+  background-color: #f8f9fa;
+}
+
+.legacy-row:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.action-cell {
+  width: 150px;
+}
+
+.description-cell {
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Button Styles */
+.btn-edit, .btn-delete {
+  transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+  background-color: #e0a800;
+  border-color: #d39e00;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+.btn-add-legacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Search Styles */
+
+.search-box {
+  max-width: 800px;
+}
+
+.search-icon {
+  top: 100px;
+  left: 50px;
+  color: #6c757d;
+}
+
+.search-input__legacy {
+  height: 38px;
+  padding-left: 50px;
+}
+
+/* Empty state */
+.empty-state {
+  padding: 2rem;
+}
+
+/* Modal Styles */
+.retro-modal .modal-content {
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.retro-modal .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.retro-modal .modal-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Responsive Styles */
+@media (max-width: 767.98px) {
+  .action-cell {
+    width: 100px;
+  }
+  
+  .btn-edit, .btn-delete {
+    width: 40px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

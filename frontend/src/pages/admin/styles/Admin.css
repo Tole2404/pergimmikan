@@ -1,0 +1,701 @@
+/* Retro Orange Theme Variables */
+:root {
+  --retro-orange: #ff6b35;
+  --retro-orange-dark: #cc5629;
+  --retro-orange-light: #ff8659;
+  --active-menu: #f39c12; /* Warna kuning oranye untuk menu aktif */
+  --active-menu-hover: #e67e22; /* Warna hover untuk menu aktif */
+  --sidebar-width: 250px;
+  --sidebar-width-collapsed: 70px;
+  --header-height: 60px;
+}
+
+/* Admin Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: var(--sidebar-width);
+  background: linear-gradient(135deg, var(--retro-orange), var(--retro-orange-dark));
+  color: white;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  position: fixed;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.admin-sidebar.open {
+  width: var(--sidebar-width);
+}
+
+.admin-sidebar:not(.open) {
+  width: var(--sidebar-width-collapsed);
+}
+
+/* Sidebar Header */
+.sidebar-headerr {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.toggle-btn {
+  color: white !important;
+  padding: 0.5rem;
+}
+
+.toggle-btn:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-links-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.logout-container {
+  position: sticky;
+  bottom: 0;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logout-button {
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: none;
+}
+
+.logout-button .nav-text {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.logout-button svg {
+  font-size: 1.2rem;
+}
+
+.admin-sidebar:not(.open) .logout-button {
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
+
+.sidebar-nav .nav-link {
+  color: white;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.sidebar-nav .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 4px solid var(--active-menu);
+  color: white;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-button {
+  width: 100%;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.logout-button:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Main Content */
+.admin-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
+}
+
+.admin-main.expanded {
+  margin-left: var(--sidebar-width-collapsed);
+}
+
+/* Header */
+.admin-header {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.admin-header .container-fluid {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.header-titles {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+}
+
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--retro-orange);
+}
+
+.header-subtitle-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-divider {
+  width: 2px;
+  height: 24px;
+  background: var(--retro-orange);
+  opacity: 0.3;
+}
+
+.header-subtitle {
+  color: var(--retro-orange-dark);
+  font-size: 0.9rem;
+}
+
+.user-info__admin {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.user-name__admin {
+  font-weight: 500;
+  color: var(--retro-orange-dark);
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  color: var(--retro-orange);
+}
+
+.toggle-btn {
+  padding: 0.5rem;
+  color: var(--retro-orange) !important;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 992px) {
+  .admin-sidebar {
+    width: var(--sidebar-width);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .admin-main {
+    margin-left: 0 !important;
+    width: 100%;
+  }
+  
+  .mobile-toggle {
+    display: block !important;
+    margin-right: 1rem;
+  }
+  
+  .header-title {
+    font-size: 1.5rem;
+  }
+  
+  /* Tambahkan overlay saat sidebar terbuka */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+  }
+  
+  .sidebar-overlay.active {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.3rem;
+  }
+  
+  .header-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .admin-content {
+    padding: 1rem !important;
+  }
+  
+  .sidebar-nav .nav-link,
+  .nav-dropdown-toggle {
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-title {
+    font-size: 1.1rem;
+  }
+  
+  .header-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .user-name {
+    display: none;
+  }
+  
+  .admin-sidebar {
+    width: 85%;
+    max-width: 280px;
+  }
+  
+  .admin-content {
+    padding: 0.75rem !important;
+  }
+  
+  .admin-header {
+    padding: 0.5rem 0;
+  }
+  
+  .header-content {
+    flex-wrap: wrap;
+  }
+}
+
+/* Collapsed Sidebar States */
+.admin-sidebar:not(.open) .nav-text,
+.admin-sidebar:not(.open) .brand-text {
+  display: none;
+}
+
+.admin-sidebar:not(.open) .sidebar-nav .nav-link {
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.admin-sidebar:not(.open) .logout-button {
+  justify-content: center;
+}
+
+/* Dashboard */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--retro-orange);
+  margin: 0;
+}
+
+/* User Management */
+.user-table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.role-badge,
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.role-badge.admin {
+  background: var(--retro-orange);
+  color: white;
+}
+
+.role-badge.user {
+  background: #3498db;
+  color: white;
+}
+
+.status-badge.active {
+  background: #2ecc71;
+  color: white;
+}
+
+.status-badge.inactive {
+  background: #95a5a6;
+  color: white;
+}
+
+/* Content Management */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.content-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.content-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.content-body {
+  padding: 1rem;
+}
+
+.content-actions {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Buttons */
+.add-user-btn,
+.add-content-btn,
+.journey-add-button_management,
+.journey-refresh-button_management,
+.journey-delete-btn_management,
+.journey-edit-btn_management {
+  background: var(--retro-orange);
+  color: white;
+  border: none !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.journey-add-button_management,
+.journey-refresh-button_management {
+  background: var(--retro-orange);
+  color: white;
+  border: none !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: all 0.3s ease;
+}
+
+.journey-add-button_management:hover,
+.journey-refresh-button_management:hover {
+  background: var(--retro-orange-dark);
+  transform: translateY(-1px);
+}
+
+.journey-delete-btn_management,
+.journey-edit-btn_management {
+  background: var(--retro-orange);
+  color: white;
+  border: none !important;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: none !important;
+  outline: none !important;
+  transition: all 0.3s ease;
+}
+
+.journey-delete-btn_management:hover {
+  background: #e74c3c;
+}
+
+.journey-edit-btn_management:hover {
+  background: #3498db;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background: #3498db;
+  color: white;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Dropdown Menu */
+.nav-dropdown {
+  position: relative;
+  padding: 0.5rem 1rem;
+  color: var(--bs-nav-link-color);
+  text-decoration: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.nav-dropdown.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s;
+}
+
+.nav-dropdown-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-dropdown-menu {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.nav-dropdown-menu .nav-link {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.nav-dropdown-menu .nav-link svg {
+  font-size: 0.9em;
+}
+
+/* Animasi untuk dropdown */
+.nav-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+.nav-dropdown.active .nav-dropdown-menu {
+  max-height: 200px; /* Sesuaikan dengan kebutuhan */
+}
+
+/* Admin Content */
+.admin-content {
+  padding: 20px;
+  min-height: calc(100vh - var(--header-height) - 60px); /* Adjusted for footer */
+}
+
+/* Additional Button Styles */
+button {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+/* Override Bootstrap button styles */
+.btn,
+.btn-primary,
+.btn-warning,
+.btn-danger,
+.btn-outline-primary {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn:hover,
+.btn-primary:hover,
+.btn-warning:hover,
+.btn-danger:hover,
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  transition: all 0.3s ease;
+}
+
+/* Admin Footer */
+.admin-footer {
+  background-color: white;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+.footer-copyright p,
+.footer-info p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.875rem;
+}
+
+.footer-info p {
+  text-align: right;
+  color: var(--retro-orange);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .footer-info p {
+    text-align: center;
+  }
+}

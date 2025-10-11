@@ -1,0 +1,285 @@
+/* SimpleLogin.css - Fully transparent design with video background */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --light-color: #ecf0f1;
+  --dark-color: #34495e;
+  --transparent-white: rgba(255, 255, 255, 0.1);
+  --border-radius: 8px;
+  --box-shadow: none;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Video Background Container */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.video-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+  z-index: 1;
+}
+
+.background-image {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.video-background video {
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+/* Scanlines effect - very subtle */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.03) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.02;
+}
+
+.simple-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 3;
+  font-family: 'Roboto', sans-serif;
+}
+
+.simple-login-card {
+  width: 100%;
+  max-width: 380px;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.simple-login-header {
+  padding: 30px 25px 20px;
+  text-align: center;
+}
+
+.simple-login-header h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.simple-login-header p {
+  margin: 0;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.session-expired-alert {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: rgba(231, 76, 60, 0.2);
+  border-left: 3px solid var(--accent-color);
+  color: white;
+  text-align: left;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.simple-login-form {
+  padding: 25px 30px;
+  position: relative;
+}
+
+.simple-form-group {
+  margin-bottom: 22px;
+}
+
+.simple-form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.simple-form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.simple-form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.simple-form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.simple-login-button {
+  width: 100%;
+  padding: 14px 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+  margin-top: 15px;
+}
+
+.simple-login-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.simple-login-button:active {
+  transform: translateY(1px);
+}
+
+.simple-login-button:disabled {
+  background-color: rgba(149, 165, 166, 0.5);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.simple-login-footer {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Loading overlay */
+.simple-login-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: var(--border-radius);
+}
+
+/* Mobile responsiveness adjustments */
+@media (max-width: 480px) {
+  .simple-login-card {
+    max-width: 100%;
+    margin: 0 10px;
+    background-color: transparent;
+  }
+  
+  .simple-login-header {
+    padding: 25px 20px 15px;
+  }
+  
+  .simple-login-header h1 {
+    font-size: 24px;
+  }
+  
+  .simple-login-header p {
+    font-size: 14px;
+  }
+  
+  .simple-login-form {
+    padding: 20px;
+  }
+
+  .simple-login-footer{
+    padding: 20px 0;
+    margin-top: 20px;
+  }
+  
+  .simple-form-group {
+    margin-bottom: 18px;
+  }
+  
+  /* Ensure video fits on mobile */
+  .video-background video {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Ensure iPhone SE and other small devices look good */
+@media (max-width: 375px) {
+  .simple-login-header h1 {
+    font-size: 22px;
+  }
+  
+  .simple-form-group input {
+    padding: 10px 12px;
+  }
+  
+  .simple-login-button {
+    padding: 12px 16px;
+  }
+}

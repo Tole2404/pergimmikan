@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Build
+dist/
+build/
+frontend/dist/
+frontend/build/
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Uploads (jika ada folder upload besar)
+server/uploads/
+public/uploads/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Temporary
+*.tmp
+temp/
+tmp/
+
+.git_backup/

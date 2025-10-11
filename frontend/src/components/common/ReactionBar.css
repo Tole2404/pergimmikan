@@ -1,0 +1,152 @@
+.reaction-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+  margin: 20px 0;
+}
+
+.reaction-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.reaction-emojis {
+  display: flex;
+  gap: 2px;
+}
+
+.reaction-emoji-small {
+  font-size: 16px;
+  display: inline-block;
+}
+
+.reaction-count {
+  font-weight: 600;
+  color: #333;
+}
+
+.reaction-empty {
+  color: #999;
+  font-size: 13px;
+}
+
+.reaction-button-container {
+  position: relative;
+}
+
+.reaction-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  transition: all 0.2s;
+}
+
+.reaction-button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.reaction-button.reacted {
+  background: #e7f3ff;
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.reaction-button span:first-child {
+  font-size: 18px;
+}
+
+.reaction-picker {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 100;
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reaction-option {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.reaction-option:hover {
+  background: #f8f9fa;
+  transform: scale(1.2);
+}
+
+.reaction-option.active {
+  background: #e7f3ff;
+}
+
+.reaction-emoji {
+  font-size: 24px;
+  display: block;
+}
+
+.reaction-option-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: #666;
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reaction-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .reaction-picker {
+    right: auto;
+    left: 0;
+  }
+
+  .reaction-emoji {
+    font-size: 20px;
+  }
+}

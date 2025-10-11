@@ -1,0 +1,204 @@
+/* SweetAlert Retro Theme CSS */
+
+:root {
+  --retro-brown: #5e3a1e;
+  --retro-light-brown: #8b5a2b;
+  --retro-cream: #f2eecb;
+  --retro-orange: #d86137;
+  --retro-green: #5b7b4c;
+  --retro-red: #b83838;
+  --retro-gold: #d4af37;
+  --retro-dark: #332722;
+}
+
+/* Container styling */
+.pgm-swal-container {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Popup styling */
+.pgm-swal-popup {
+  background: linear-gradient(to bottom, #8b5a2b, #5e3a1e);
+  border: 3px solid var(--retro-gold);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 0, 0, 0.3);
+  color: var(--retro-cream);
+  padding: 20px;
+}
+
+/* Title styling */
+.pgm-swal-title {
+  color: var(--retro-cream) !important;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  position: relative;
+  padding: 10px 0;
+}
+
+.pgm-swal-title::after {
+  content: '★ ★ ★';
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  color: var(--retro-gold);
+  text-align: center;
+}
+
+/* Content styling */
+.pgm-swal-content {
+  color: var(--retro-cream);
+  font-family: 'Roboto', sans-serif;
+  margin: 15px 0;
+}
+
+/* Button styling */
+.pgm-swal-confirm {
+  background: linear-gradient(to bottom, var(--retro-gold), #b18725);
+  color: var(--retro-dark) !important;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px 5px;
+}
+
+.pgm-swal-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #e4bf45, #c19835);
+}
+
+.pgm-swal-cancel {
+  background: linear-gradient(to bottom, #999, #777);
+  color: white !important;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 10px 5px;
+}
+
+.pgm-swal-cancel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom, #aaa, #888);
+}
+
+/* Icons styling */
+.pgm-swal-icon {
+  border-color: var(--retro-gold) !important;
+}
+
+.pgm-swal-icon--success {
+  border-color: var(--retro-green) !important;
+}
+
+.pgm-swal-icon--success__line {
+  background-color: var(--retro-green) !important;
+}
+
+.pgm-swal-icon--success__ring {
+  border-color: var(--retro-green) !important;
+}
+
+.pgm-swal-icon--error {
+  border-color: var(--retro-red) !important;
+}
+
+.pgm-swal-icon--error__line {
+  background-color: var(--retro-red) !important;
+}
+
+.pgm-swal-icon--warning {
+  border-color: var(--retro-orange) !important;
+}
+
+.pgm-swal-icon--warning__body, 
+.pgm-swal-icon--warning__dot {
+  background-color: var(--retro-orange) !important;
+}
+
+.pgm-swal-icon--info {
+  border-color: var(--retro-gold) !important;
+}
+
+.pgm-swal-icon--info::after, 
+.pgm-swal-icon--info::before {
+  background-color: var(--retro-gold) !important;
+}
+
+/* Toast notifications */
+.pgm-swal-toast {
+  background: linear-gradient(to right, #8b5a2b, #5e3a1e);
+  border-left: 4px solid var(--retro-gold);
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 15px 20px;
+}
+
+.pgm-swal-toast-title {
+  color: var(--retro-cream) !important;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.pgm-swal-toast-icon {
+  font-size: 20px;
+}
+
+/* Loading animation enhancement */
+.swal2-loader {
+  border-color: var(--retro-gold) transparent var(--retro-gold) transparent !important;
+}
+
+/* Animate.css requirement for animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate__animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animate__faster {
+  animation-duration: 0.5s;
+}
+
+.animate__fadeIn {
+  animation-name: fadeIn;
+}
+
+.animate__fadeOut {
+  animation-name: fadeOut;
+}

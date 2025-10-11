@@ -1,0 +1,1462 @@
+/* ManagementComponents.css - Shared styles for all management components */
+
+:root {
+  --gallery-primary: #3498db;
+  --gallery-secondary: #2c3e50;
+  --gallery-accent: #e74c3c;
+  --gallery-light: #ecf0f1;
+  --gallery-dark: #34495e;
+  --gallery-success: #2ecc71;
+  --gallery-warning: #f39c12;
+  --gallery-danger: #e74c3c;
+  --gallery-gray: #95a5a6;
+  --gallery-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  --gallery-border-radius: 12px;
+}
+
+/* Base Container */
+.management-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.management-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gallery-light);
+}
+
+.management-header h5 {
+  color: var(--retro-orange);
+  margin: 0;
+}
+
+/* Buttons */
+.management-header button {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--gallery-border-radius);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.management-header button.btn-primary {
+  background-color: var(--retro-orange);
+  color: white;
+}
+
+.management-header button.btn-primary:hover {
+  background-color: #fff;
+  color: var(--retro-orange);
+  border: 1px solid var(--retro-orange);
+}
+
+.management-header button.btn-info {
+  background-color: white;
+  color: var(--retro-orange);
+  border: 1px solid var(--retro-orange);
+}
+
+.management-header button.btn-info:hover {
+  background-color: var(--retro-orange);
+  color: white;
+}
+
+/* Modal Styling */
+.management-modal .modal-content {
+  border-radius: var(--gallery-border-radius);
+  border: none;
+  box-shadow: var(--gallery-shadow);
+  overflow: hidden;
+}
+
+.management-modal .modal-header {
+  background-color: var(--retro-orange);
+  color: white;
+  border-bottom: none;
+  padding: 1.5rem;
+}
+
+.management-modal .modal-title {
+  font-weight: 600;
+}
+
+.management-modal .modal-header .btn-close {
+  color: white;
+  opacity: 0.8;
+  box-shadow: none;
+}
+
+.management-modal .modal-body {
+  padding: 2rem;
+}
+
+.management-modal .form-label {
+  font-weight: 500;
+  color: var(--gallery-dark);
+  margin-bottom: 0.5rem;
+}
+
+.management-modal .form-control {
+  border-radius: 8px;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+.management-modal .form-control:focus {
+  border-color: var(--gallery-primary);
+  box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Button styles */
+.management-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.management-actions button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  transition: all 0.25s ease;
+}
+
+.management-actions button.btn-outline-primary {
+  color: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+}
+
+.management-actions button.btn-outline-primary:hover {
+  background-color: var(--gallery-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.management-actions button.btn-outline-danger {
+  color: var(--gallery-danger);
+  border-color: var(--gallery-danger);
+}
+
+.management-actions button.btn-outline-danger:hover {
+  background-color: var(--gallery-danger);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Tags styling */
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  background-color: var(--gallery-light);
+  color: var(--gallery-dark);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Error state */
+.error {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: var(--gallery-danger);
+  padding: 2rem;
+  border-radius: var(--gallery-border-radius);
+  text-align: center;
+  font-weight: 500;
+  margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .management-container {
+    padding: 1rem;
+  }
+  
+  .management-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .management-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .management-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .management-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Journey Management Styles */
+
+/* Container & Layout */
+.journey-container_management {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.journey-header_management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+.journey-title_management {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-title_management h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gallery-dark);
+  margin-bottom: 0.25rem;
+}
+
+.journey-subtitle_management {
+  color: var(--gallery-gray);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.journey-add-button_management {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  background-color: var(--gallery-primary);
+  border: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.journey-add-button_management:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: var(--gallery-shadow);
+}
+
+/* Card Styling */
+.journey-card_management {
+  border: none;
+  border-radius: var(--gallery-border-radius);
+  box-shadow: var(--gallery-shadow);
+  overflow: hidden;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.journey-card-header_management {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1.5rem;
+}
+
+.journey-count-badge_management {
+  padding: 0.5rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: var(--gallery-primary);
+}
+
+.journey-card-body_management {
+  padding: 1.5rem;
+}
+
+/* Table Styling */
+.journey-table-container_management {
+  overflow-x: auto;
+}
+
+.journey-table_management {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.journey-table-header_management th {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--gallery-secondary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #eee;
+}
+
+.journey-table-row_management {
+  transition: all 0.2s ease;
+}
+
+.journey-table-row_management:hover {
+  background-color: rgba(52, 152, 219, 0.05);
+}
+
+.journey-table-row_management td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #eee;
+}
+
+.journey-year_management {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.journey-icon_management {
+  color: var(--gallery-primary);
+  font-size: 0.9rem;
+}
+
+.journey-title-cell_management {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-row-title_management {
+  font-weight: 500;
+  color: var(--gallery-dark);
+}
+
+.journey-description_management {
+  color: var(--gallery-gray);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.journey-photos-badge_management {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+}
+
+.journey-actions_management {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+}
+
+.journey-edit-btn_management, 
+.journey-delete-btn_management {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.journey-edit-btn_management {
+  background-color: var(--gallery-warning);
+}
+
+.journey-edit-btn_management:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.journey-delete-btn_management {
+  background-color: var(--gallery-danger);
+}
+
+.journey-delete-btn_management:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Empty State */
+.journey-empty_management {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--gallery-gray);
+}
+
+.journey-empty-icon_management {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.journey-empty_management h4 {
+  color: var(--gallery-dark);
+  margin-bottom: 0.75rem;
+}
+
+.journey-empty_management p {
+  margin-bottom: 1.5rem;
+}
+
+/* Loading State */
+.journey-loading_management {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: var(--gallery-primary);
+}
+
+.journey-loading_management p {
+  margin-top: 1rem;
+  color: var(--gallery-gray);
+}
+
+/* Error State */
+.journey-error_management {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: var(--gallery-border-radius);
+  padding: 2.5rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.error-icon_management {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.journey-error_management h3 {
+  color: var(--gallery-danger);
+  margin-bottom: 0.75rem;
+}
+
+.journey-error_management p {
+  color: var(--gallery-gray);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .journey-header_management {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .journey-add-button_management {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .journey-container_management {
+    padding: 1rem 0.5rem;
+  }
+  
+  .journey-card-body_management {
+    padding: 1rem 0.5rem;
+  }
+  
+  .journey-table_management th,
+  .journey-table_management td {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .journey-actions_management {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .journey-edit-btn_management, 
+  .journey-delete-btn_management {
+    width: 100%;
+    border-radius: 4px;
+  }
+}
+
+/* Journey Edit & Add Form Styles */
+.journey-edit-container_management,
+.journey-add-container_management {
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.journey-edit-header_management,
+.journey-add-header_management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+
+.journey-edit-title_management,
+.journey-add-title_management {
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-edit-title_management h5,
+.journey-add-title_management h5 {
+  font-weight: 700;
+  color: var(--retro-orange);
+  margin-bottom: 0.25rem;
+}
+
+.journey-edit-subtitle_management,
+.journey-add-subtitle_management {
+  color: var(--gallery-gray);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.journey-back-button_management {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.journey-back-button_management:hover {
+  transform: translateY(-2px);
+}
+
+.journey-edit-card_management,
+.journey-add-card_management {
+  border: none;
+  border-radius: var(--gallery-border-radius);
+  box-shadow: var(--gallery-shadow);
+  overflow: hidden;
+  background-color: #fff;
+  margin-bottom: 2rem;
+}
+
+.journey-edit-card-header_management,
+.journey-add-card-header_management {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  padding: 1rem 1.5rem;
+}
+
+.journey-photo-count-badge_management {
+  padding: 0.5rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.journey-edit-card-body_management,
+.journey-add-card-body_management {
+  padding: 1.5rem;
+}
+
+.journey-edit-form_management,
+.journey-add-form_management {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.journey-form-label_management {
+  font-weight: 600;
+  color: var(--gallery-dark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.journey-form-control_management {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.journey-form-control_management:focus {
+  border-color: var(--gallery-primary);
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+}
+
+.journey-photos-section_management {
+  margin: 1.5rem 0;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
+
+.journey-photos-header_management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.journey-upload-button_management {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.journey-upload-button_management:hover {
+  transform: translateY(-2px);
+}
+
+.journey-photo-grid_management {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.journey-no-photos_management {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #ddd;
+}
+
+.journey-no-photos-icon_management {
+  font-size: 3rem;
+  color: var(--gallery-gray);
+  margin-bottom: 1rem;
+}
+
+.journey-photo-item_management {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.journey-photo-item_management:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.journey-photo-item-header_management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.journey-photo-number_management {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.journey-remove-photo_management {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.journey-photo-preview_management {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  min-height: 200px;
+}
+
+.journey-photo-image_management {
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.journey-caption-group_management {
+  padding: 1rem;
+}
+
+.journey-caption-label_management {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.journey-caption-input_management {
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.journey-existing-badge_management {
+  margin-top: 0.5rem;
+}
+
+.journey-form-actions_management {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.journey-save-button_management,
+.journey-cancel-button_management {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.journey-save-button_management {
+  background-color: var(--gallery-primary);
+  border-color: var(--gallery-primary);
+}
+
+.journey-save-button_management:hover:not(:disabled) {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.journey-year-alert_management {
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
+
+/* Responsive styles for journey forms */
+@media (max-width: 992px) {
+  .journey-edit-header_management,
+  .journey-add-header_management {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .journey-back-button_management {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .journey-photos-header_management {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .journey-upload-button_management {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .journey-form-actions_management {
+    flex-direction: column;
+  }
+  
+  .journey-save-button_management,
+  .journey-cancel-button_management {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .journey-photo-grid_management {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Gallery Modal Styles */
+.gallery-modal_management .modal-content {
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+}
+
+.gallery-modal-header_management {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 20px;
+}
+
+.gallery-modal-body_management {
+  padding: 20px;
+}
+
+.gallery-image-card_management {
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  height: 100%;
+}
+
+.gallery-image-card_management:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-image-wrapper_management {
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-image_management {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-image-wrapper_management:hover .gallery-image_management {
+  transform: scale(1.05);
+}
+
+.gallery-image-overlay_management {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-image-wrapper_management:hover .gallery-image-overlay_management {
+  opacity: 1;
+}
+
+.gallery-image-actions_management {
+  display: flex;
+  gap: 10px;
+}
+
+.gallery-image-action-btn_management {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.gallery-image-action-btn_management:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+/* Mobile responsiveness for gallery */
+@media (max-width: 768px) {
+  .gallery-modal_management .modal-dialog {
+    margin: 0.5rem;
+  }
+  
+  .gallery-modal_management .modal-content {
+    border-radius: 12px;
+  }
+  
+  .gallery-modal-header_management {
+    padding: 12px 15px;
+  }
+  
+  .gallery-modal-header_management .modal-title {
+    font-size: 1.1rem;
+  }
+  
+  .gallery-modal-body_management {
+    padding: 12px;
+  }
+  
+  .gallery-image-wrapper_management {
+    height: 150px;
+  }
+  
+  .gallery-image-card_management {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-modal_management .modal-dialog {
+    margin: 0.25rem;
+  }
+  
+  .gallery-modal-body_management {
+    padding: 10px;
+  }
+  
+  .gallery-image-wrapper_management {
+    height: 120px;
+  }
+  
+  .gallery-images-container_management [class*="col-"] {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  
+  .gallery-image-card_management {
+    margin-bottom: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gallery-empty_management {
+    padding: 2rem 1rem;
+  }
+  
+  .gallery-empty-icon_management {
+    font-size: 2.5rem;
+  }
+}
+
+/* Activities Management Styles */
+.activities-container_management {
+  padding: 20px;
+}
+
+.activities-header_management {
+  margin-bottom: 20px;
+}
+
+.activities-title_management h5 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--retro-orange);
+}
+
+.activities-subtitle_management {
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.activities-card_management {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: none;
+  overflow: hidden;
+}
+
+.activities-card-header_management {
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0;
+}
+
+.activities-tabs_management {
+  padding: 0 0.5rem;
+}
+
+.activities-tabs_management .nav-link {
+  font-weight: 600;
+  color: #666;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-bottom: 3px solid transparent;
+}
+
+.activities-tabs_management .nav-link.active {
+  color: #0d6efd;
+  border-bottom: 3px solid #0d6efd;
+  background-color: transparent;
+}
+
+.activities-tab-content_management {
+  padding: 1.5rem;
+}
+
+.activities-toolbar_management,
+.categories-toolbar_management {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.activities-search_management {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-input-container_management {
+  position: relative;
+}
+
+.search-icon_management {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+.search-input_management {
+  padding-left: 35px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+}
+
+.search-input_management:focus {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+  border-color: #86b7fe;
+}
+
+.activities-actions_management,
+.categories-actions_management {
+  display: flex;
+}
+
+.activities-refresh-button_management,
+.categories-refresh-button_management {
+  border-radius: 20px;
+}
+
+.activities-add-button_management,
+.categories-add-button_management {
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.activities-error-alert_management {
+  background-color: #f8d7da;
+  color: #842029;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.activities-empty_management,
+.categories-empty_management,
+.gallery-empty_management {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+}
+
+.activities-empty-icon_management,
+.categories-empty-icon_management,
+.gallery-empty-icon_management {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.activities-table-container_management,
+.categories-table-container_management {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.activities-table_management,
+.categories-table_management {
+  margin-bottom: 0;
+}
+
+.activities-table-header_management th,
+.categories-table-header_management th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+  border-top: none;
+  padding: 12px 15px;
+}
+
+.activities-table-row_management,
+.categories-table-row_management {
+  transition: background-color 0.2s;
+}
+
+.activities-table-row_management:hover,
+.categories-table-row_management:hover {
+  background-color: #f8f9fa;
+}
+
+.activity-title_management {
+  font-weight: 600;
+  color: #212529;
+}
+
+.activity-title-cell_management {
+  max-width: 200px;
+}
+
+.activity-date_management,
+.activity-location_management,
+.activity-category_management {
+  display: flex;
+  align-items: center;
+}
+
+.activity-icon_management,
+.category-icon_management {
+  color: #6c757d;
+}
+
+.activity-status-badge_management {
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.activity-actions_management,
+.category-actions_management {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.activity-gallery-btn_management,
+.activity-edit-btn_management,
+.activity-delete-btn_management,
+.category-edit-btn_management,
+.category-delete-btn_management {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.category-activities-count_management {
+  font-size: 0.875rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.category-name_management {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.category-count-badge_management {
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.gallery-modal_management .modal-content {
+  border-radius: 10px;
+  border: none;
+  overflow: hidden;
+}
+
+.gallery-modal-header_management {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 15px 20px;
+}
+
+.gallery-modal-body_management {
+  padding: 20px;
+}
+
+.gallery-upload-section_management {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.gallery-upload-container_management {
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-upload-label_management {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.gallery-file-input_management {
+  border: 1px dashed #ced4da;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.gallery-images-container_management {
+  margin: 0 -10px;
+}
+
+.gallery-image-card_management {
+  border-radius: 8px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.gallery-image-card_management:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-image-wrapper_management {
+  height: 180px;
+  overflow: hidden;
+}
+
+.gallery-image_management {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-image-body_management {
+  padding: 10px;
+}
+
+.gallery-delete-btn_management {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile card styles for activities and categories */
+.activities-cards-container_management,
+.categories-cards-container_management {
+  margin-bottom: 1rem;
+}
+
+.activity-card-mobile_management,
+.category-card-mobile_management {
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.activity-card-mobile_management:hover,
+.category-card-mobile_management:hover {
+  transform: translateY(-3px);
+}
+
+.activity-card-header-mobile_management {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 12px 15px;
+}
+
+.activity-title-mobile_management {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.activity-card-body-mobile_management,
+.category-card-body-mobile_management {
+  padding: 15px;
+}
+
+.activity-detail-item_management {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.activity-actions-mobile_management,
+.category-actions-mobile_management {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mobile-action-btn_management {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  flex: 1;
+  min-width: 80px;
+  max-width: 110px;
+}
+
+.category-name-mobile_management {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.category-activities-count-mobile_management {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .activities-container_management {
+    padding: 15px 10px;
+  }
+
+  .activities-card_management {
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .activities-title_management h2 {
+    font-size: 1.5rem;
+  }
+
+  .activities-subtitle_management {
+    font-size: 0.9rem;
+  }
+
+  .activities-tab-content_management {
+    padding: 15px 10px;
+  }
+
+  .activities-toolbar_management,
+  .categories-toolbar_management {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .activities-search_management,
+  .categories-count_management {
+    margin-bottom: 10px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .activities-actions_management,
+  .categories-actions_management {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .activity-detail-item_management {
+    margin-bottom: 8px;
+  }
+
+  .gallery-image-wrapper_management {
+    height: 150px;
+  }
+
+  .gallery-modal_management .modal-body {
+    padding: 15px 10px;
+  }
+
+  /* Make tabs more compact */
+  .activities-tabs_management .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  /* Make action buttons more compact and touch-friendly */
+  .mobile-action-btn_management {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .activities-container_management {
+    padding: 10px 5px;
+  }
+
+  .activities-card_management {
+    border-radius: 6px;
+  }
+
+  .activities-tab-content_management {
+    padding: 10px 8px;
+  }
+
+  .gallery-images-container_management {
+    margin: 0;
+  }
+
+  .activities-header_management {
+    margin-bottom: 15px;
+  }
+
+  .activity-actions-mobile_management,
+  .category-actions-mobile_management {
+    justify-content: space-between;
+  }
+
+  .mobile-action-btn_management {
+    flex: 1;
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+
+  .gallery-modal_management .modal-dialog {
+    margin: 0.5rem;
+  }
+
+  .gallery-modal_management .modal-content {
+    border-radius: 8px;
+  }
+
+  .activity-title-mobile_management {
+    font-size: 1rem;
+    max-width: 140px;
+  }
+
+  /* Add full-width layout for small screens */
+  .activities-container_management {
+    max-width: 100%;
+    padding: 10px 5px;
+  }
+
+  .mobile-action-btn_management {
+    min-width: unset;
+    max-width: unset;
+    width: calc(33.333% - 6px);
+  }
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f9f5ec"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1280" height="80" fill="#d4a76a"/>
+  <text x="640" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#fff" font-weight="bold">PERGIMMIKAN - Events</text>
+  
+  <!-- Page Title -->
+  <text x="640" y="120" font-family="Arial" font-size="32" text-anchor="middle" fill="#333" font-weight="bold">Upcoming Events</text>
+  
+  <!-- Event Cards -->
+  <rect x="140" y="160" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="140" y="160" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="290" y="220" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="290" y="300" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 1</text>
+  <text x="290" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">23 April 2025</text>
+  <text x="290" y="360" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Bandung, Indonesia</text>
+  
+  <rect x="490" y="160" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="490" y="160" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="640" y="220" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="640" y="300" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 2</text>
+  <text x="640" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">15 May 2025</text>
+  <text x="640" y="360" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Jakarta, Indonesia</text>
+  
+  <rect x="840" y="160" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="840" y="160" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="990" y="220" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="990" y="300" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 3</text>
+  <text x="990" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">7 June 2025</text>
+  <text x="990" y="360" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Yogyakarta, Indonesia</text>
+  
+  <!-- More Events -->
+  <rect x="140" y="420" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="140" y="420" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="290" y="480" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="290" y="560" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 4</text>
+  <text x="290" y="590" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">20 July 2025</text>
+  <text x="290" y="620" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Bali, Indonesia</text>
+  
+  <rect x="490" y="420" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="490" y="420" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="640" y="480" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="640" y="560" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 5</text>
+  <text x="640" y="590" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">12 August 2025</text>
+  <text x="640" y="620" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Surabaya, Indonesia</text>
+  
+  <rect x="840" y="420" width="300" height="240" fill="#fff" rx="8" ry="8" stroke="#d4a76a" stroke-width="3"/>
+  <rect x="840" y="420" width="300" height="120" fill="#e2bc8a" rx="8" ry="0"/>
+  <text x="990" y="480" font-family="Arial" font-size="16" text-anchor="middle" fill="#fff">Event Image</text>
+  <text x="990" y="560" font-family="Arial" font-size="18" text-anchor="middle" fill="#333" font-weight="bold">Event 6</text>
+  <text x="990" y="590" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">5 September 2025</text>
+  <text x="990" y="620" font-family="Arial" font-size="14" text-anchor="middle" fill="#666">Lombok, Indonesia</text>
+  
+  <text x="640" y="700" font-family="Arial" font-size="14" text-anchor="middle" fill="#999">Events Screenshot - PERGIMMIKAN</text>
+</svg>

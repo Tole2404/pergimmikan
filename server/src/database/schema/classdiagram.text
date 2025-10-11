@@ -1,0 +1,305 @@
+classDiagram
+
+    class Activities {
+        +id: int
+        +title: string
+        +date: date
+        +time: time
+        +location: string
+        +description: text
+        +category_id: int
+        +image_url: string
+        +status: enum
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class ActivityCategories {
+        +id: int
+        +name: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class ActivityGallery {
+        +id: int
+        +activity_id: int
+        +image_url: string
+        +caption: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Events {
+        +id: int
+        +title: string
+        +description: text
+        +event_date: date
+        +event_time: time
+        +location: string
+        +status: enum
+        +max_participants: int
+        +registration_deadline: datetime
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Galleries {
+        +id: int
+        +caption: string
+        +date: date
+        +author: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class GalleryImages {
+        +id: int
+        +gallery_id: int
+        +image_url: string
+        +is_main: boolean
+        +created_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class GalleryTags {
+        +gallery_id: int
+        +tag_id: int
+        +tambahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class JourneyPhotos {
+        +id: int
+        +journey_year_id: int
+        +image_src: string
+        +caption: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class JourneyYears {
+        +id: int
+        +year: int
+        +title: string
+        +description: text
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Legacies {
+        +id: int
+        +year: string
+        +title: string
+        +description: text
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class LoginHistory {
+        +id: int
+        +user_id: int
+        +ip_address: string
+        +user_agent: string
+        +login_time: timestamp
+        +logout_time: timestamp
+        +login_status: enum
+        +tambahData()
+        +lihatData()
+    }
+
+    class Quotes {
+        +id: int
+        +text: string
+        +author_name: string
+        +author_title: string
+        +is_featured: boolean
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Roles {
+        +id: int
+        +name: string
+        +description: text
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Savings {
+        +id: int
+        +user_id: int
+        +amount: decimal
+        +description: text
+        +receipt_url: string
+        +status: enum
+        +jenis_transaksi: enum
+        +transaction_date: date
+        +admin_id: int
+        +admin_notes: text
+        +created_at: timestamp
+        +updated_at: timestamp
+        +GetMemberSavings(user_id_param: int)
+        +GetMemberSavingsHistory(user_id_param: int, limit_param: int)
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class SocialMedia {
+        +id: int
+        +team_id: int
+        +platform: enum
+        +url: string
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Tags {
+        +id: int
+        +name: string
+        +created_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class TblApiKeys {
+        +id: int
+        +name: string
+        +api_key: string
+        +permissions: json
+        +expires_at: datetime
+        +last_used: datetime
+        +created_by: int
+        +created_at: datetime
+        +updated_at: datetime
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class TblLoginAdmin {
+        +id: int
+        +username: string
+        +password: string
+        +nama_lengkap: string
+        +email: string
+        +role: enum
+        +status: enum
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+        +login()
+        +logout()
+    }
+
+    class Teams {
+        +id: int
+        +name: string
+        +role: string
+        +image_url: string
+        +description: text
+        +status: enum
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+    }
+
+    class Users {
+        +id: int
+        +username: string
+        +password: string
+        +email: string
+        +full_name: string
+        +role_id: int
+        +status: enum
+        +image_url: string
+        +bio: text
+        +created_at: timestamp
+        +updated_at: timestamp
+        +tambahData()
+        +ubahData()
+        +hapusData()
+        +lihatData()
+        +login()
+        +register()
+    }
+
+    %% Relationships (All changed to Association as per user request)
+    Galleries "1" -- "0..*" GalleryImages : berisi_gambar
+    JourneyYears "1" -- "0..*" JourneyPhotos : berisi_foto
+    Galleries "1" -- "0..*" GalleryTags : memiliki_asosiasi_tag
+    Tags "1" -- "0..*" GalleryTags : terkait_melalui_asosiasi_tag
+    TblLoginAdmin "1" -- "0..*" TblApiKeys : membuat_kunci_api
+    Activities "1" -- "0..*" ActivityGallery : mendokumentasikan_dengan_gambar
+    Users "1" -- "0..*" LoginHistory : mencatat_riwayat_login
+    Users "1" -- "0..*" Savings : memiliki_tabungan
+    Teams "1" -- "0..*" SocialMedia : memiliki_tautan_sosmed
+
+    ActivityCategories "1" -- "0..*" Activities : mengkategorikan_aktivitas
+    Roles "1" -- "0..*" Users : menetapkan_peran_ke_pengguna
+
+    Savings "0..*" -- "0..1" TblLoginAdmin : dikelola_oleh_admin
+
+    %% Original dependencies changed to Association
+    %% Multiplicity is usually not added to original dependency relationships, so kept as is for these.
+    Savings -- Users : menggunakan_data_pengguna
+    Savings -- TblLoginAdmin : menggunakan_data_admin

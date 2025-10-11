@@ -1,0 +1,528 @@
+/* Retro Headers Styling - Vintage Brown Theme */
+
+.section-header.retro {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  position: relative;
+  padding: 1.5rem 0;
+  background: #f8f3e6;
+  box-shadow: 0 0 15px rgba(139, 69, 19, 0.1) inset;
+  border-radius: 5px;
+  border: 1px solid #e6d5b8;
+}
+.section-description {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-description p {
+  font-size: 1.2rem;
+  color: var(--story-text);
+  font-family: 'Work Sans', sans-serif;
+  margin: 0;
+  opacity: 0.9;
+}
+.section-header.retro::before,
+.section-header.retro::after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 90%;
+  left: 5%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264.888-.14 1.652-1.1 2.782.14 5.11-1.41 1.697-1.126 2.382-1.736 3.61-1.871 1.843-.2 3.92.56 5.777-1.465 2.74-2.99 4.16-3.377 5.9-4.634v-4c-1.74 1.247-3.16 1.634-5.9 4.624-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143v-2.97c.36-.01.72-.14.89-.143 1.65-1.1 2.78.14 5.11-1.41 1.696-1.126 2.38-1.736 3.61-1.871 1.842-.2 3.92.56 5.777-1.465 2.74-2.99 4.16-3.377 5.9-4.634v-4c-1.74 1.247-3.16 1.634-5.9 4.624-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143V-15c-.014 3.577 0 7.19 0 10.648 0 4.96 0 10.05 0 15.05v4.588z' stroke='%23a67c52' fill='%23a67c52' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+.section-header.retro::before {
+  top: 0;
+  transform: rotate(180deg);
+}
+
+.section-header.retro::after {
+  bottom: 0;
+}
+
+.section-header.retro .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.7rem;
+  margin-bottom: 0.8rem;
+  color: #573319;
+  text-shadow: 2px 2px 0 rgba(201, 173, 134, 0.5);
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-header.retro .section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8b4513, transparent);
+}
+
+.section-header.retro .section-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: #6d5c45;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+/* Header decorations */
+.header-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.2rem auto;
+  width: 85%;
+  max-width: 650px;
+  position: relative;
+  z-index: 2;
+}
+
+.header-decoration.bottom {
+  margin-top: 1.5rem;
+}
+
+.decoration-line {
+  height: 3px;
+  background-color: #8b4513;
+  flex-grow: 1;
+  position: relative;
+}
+
+.decoration-line.retro-pattern {
+  height: 5px;
+  background: repeating-linear-gradient(
+    to right,
+    #8b4513,
+    #8b4513 8px,
+    #e6d5b8 8px,
+    #e6d5b8 14px
+  );
+}
+
+.decoration-line.retro-dash {
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    #8b4513,
+    #8b4513 6px,
+    transparent 6px,
+    transparent 10px
+  );
+}
+
+.decoration-line.wavy {
+  height: 6px;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='12' viewBox='0 0 80 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 6c7.732 0 14 3 20 3s12.268-3 20-3-7.732 0-20 0-12.268 0-20 0z' transform='translate(0 0)' fill='%238b4513' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 80px 12px;
+}
+
+.decoration-line.zigzag {
+  height: 10px;
+  background: 
+    linear-gradient(135deg, #8b4513 25%, transparent 25%) -5px 0,
+    linear-gradient(225deg, #8b4513 25%, transparent 25%) -5px 0,
+    linear-gradient(315deg, #8b4513 25%, transparent 25%),
+    linear-gradient(45deg, #8b4513 25%, transparent 25%);
+  background-size: 10px 10px;
+}
+
+.decoration-line.short {
+  max-width: 40px;
+}
+
+.decoration-star {
+  font-size: 2rem;
+  color: #8b4513;
+  margin: 0 15px;
+  transform: rotate(0deg);
+  animation: rotateStarSlow 20s linear infinite;
+  position: relative;
+  display: inline-block;
+}
+
+.decoration-star::before {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #c9ad86;
+  z-index: -1;
+  transform: scale(1.2);
+}
+
+@keyframes rotateStarSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.decoration-diamond {
+  width: 18px;
+  height: 18px;
+  background-color: #8b4513;
+  margin: 0 15px;
+  transform: rotate(45deg);
+  position: relative;
+  border: 1px solid #c9ad86;
+}
+
+.decoration-diamond::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #e6d5b8;
+  top: 4px;
+  left: 4px;
+}
+
+.decoration-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #8b4513;
+  margin: 0 8px;
+  box-shadow: 0 0 0 2px #e6d5b8;
+}
+
+.decoration-circle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #8b4513;
+  margin: 0 8px;
+  background: #f8f3e6;
+  position: relative;
+}
+
+.decoration-circle::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #8b4513;
+  border-radius: 50%;
+  top: 4px;
+  left: 4px;
+}
+
+/* Vintage stamp */
+.vintage-stamp {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 60px;
+  height: 60px;
+  background: #c9ad86;
+  transform: rotate(15deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #573319;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 0.7rem;
+  border: 1px dashed #573319;
+  box-shadow: 0 0 0 2px #c9ad86;
+  z-index: 3;
+}
+
+.vintage-stamp-text {
+  transform: rotate(-15deg);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .section-header.retro .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+  }
+  
+  .section-header.retro .section-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .header-decoration {
+    width: 90%;
+    margin: 0.8rem auto;
+  }
+  
+  .vintage-stamp {
+    width: 45px;
+    height: 45px;
+    font-size: 0.5rem;
+    top: -10px;
+    right: -10px;
+  }
+  
+  .section-description {
+    margin-bottom: 2rem;
+  }
+  
+  .section-description p {
+    font-size: 0.95rem;
+  }
+  
+  .decoration-star {
+    font-size: 1.5rem;
+    margin: 0 10px;
+  }
+  
+  .decoration-diamond {
+    width: 14px;
+    height: 14px;
+    margin: 0 10px;
+  }
+  
+  .decoration-diamond::after {
+    width: 8px;
+    height: 8px;
+    top: 3px;
+    left: 3px;
+  }
+  
+  .decoration-dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 6px;
+  }
+  
+  .decoration-circle {
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+  }
+  
+  .decoration-circle::after {
+    width: 4px;
+    height: 4px;
+    top: 4px;
+    left: 4px;
+  }
+  
+  .divider-star {
+    font-size: 12px;
+    margin: 0 5px;
+  }
+  
+  .divider-line {
+    height: 1px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-header.retro .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-description p {
+    font-size: 0.85rem;
+    padding: 0 1rem;
+  }
+  
+  .section-header.retro {
+    margin-bottom: 2rem;
+    padding: 1.2rem 0;
+  }
+  
+  .header-decoration {
+    width: 95%;
+  }
+  
+  .decoration-star {
+    font-size: 1.2rem;
+    margin: 0 8px;
+  }
+  
+  .decoration-diamond {
+    width: 12px;
+    height: 12px;
+    margin: 0 8px;
+  }
+  
+  .vintage-stamp {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Retro styles for Journey page */
+.pgm-journey__header {
+  background: #f8f3e6;
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(139, 69, 19, 0.1) inset;
+  border: 1px solid #e6d5b8;
+  position: relative;
+}
+
+.pgm-journey__header::before,
+.pgm-journey__header::after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 90%;
+  left: 5%;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264.888-.14 1.652-1.1 2.782.14 5.11-1.41 1.697-1.126 2.382-1.736 3.61-1.871 1.843-.2 3.92.56 5.777-1.465 2.74-2.99 4.16-3.377 5.9-4.634v-4c-1.74 1.247-3.16 1.634-5.9 4.624-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143v-2.97c.36-.01.72-.14.89-.143 1.65-1.1 2.78.14 5.11-1.41 1.696-1.126 2.38-1.736 3.61-1.871 1.842-.2 3.92.56 5.777-1.465 2.74-2.99 4.16-3.377 5.9-4.634v-4c-1.74 1.247-3.16 1.634-5.9 4.624-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143V5.73c.36-.01.72-.14.89-.143 1.65-1.1 2.78.14 5.11-1.41 1.696-1.126 2.38-1.736 3.61-1.871 1.842-.2 3.92.56 5.777-1.465C39.47.288 40.89-.1 42.63-1.356v-4C40.89-4.11 39.47-3.724 36.73-.734c-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143v-2.97c.36-.01.72-.14.89-.143 1.65-1.1 2.78.14 5.11-1.41 1.697-1.126 2.382-1.736 3.61-1.871 1.843-.2 3.92.56 5.777-1.465 2.74-2.99 4.16-3.377 5.9-4.634v-4c-1.74 1.247-3.16 1.634-5.9 4.624-1.857 2.026-3.935 1.266-5.777 1.465-1.23.135-1.914.745-3.61 1.87-2.33 1.55-3.458.31-5.11 1.41-.17-.01-.53.13-.886.143V-15c-.014 3.577 0 7.19 0 10.648 0 4.96 0 10.05 0 15.05v4.588z' stroke='%23a67c52' fill='%23a67c52' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+.pgm-journey__header::before {
+  top: 0;
+  transform: rotate(180deg);
+}
+
+.pgm-journey__header::after {
+  bottom: 0;
+}
+
+.pgm-journey__header-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem auto;
+  width: 90%;
+  max-width: 700px;
+  position: relative;
+  z-index: 2;
+}
+
+.pgm-journey__header-decoration.bottom {
+  margin-top: 1.5rem;
+}
+
+.pgm-journey__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: #573319;
+  text-shadow: 2px 2px 0 rgba(201, 173, 134, 0.5);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.pgm-journey__title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8b4513, transparent);
+}
+
+.pgm-journey__subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+  color: #6d5c45;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.pgm-journey .decoration-line.retro-pattern {
+  height: 5px;
+  background: repeating-linear-gradient(
+    to right,
+    #8b4513,
+    #8b4513 8px,
+    #e6d5b8 8px,
+    #e6d5b8 14px
+  );
+}
+
+.pgm-journey .decoration-line.retro-dash {
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    #8b4513,
+    #8b4513 6px,
+    transparent 6px,
+    transparent 10px
+  );
+}
+
+.pgm-journey .decoration-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #8b4513;
+  margin: 0 8px;
+  box-shadow: 0 0 0 2px #e6d5b8;
+}
+
+/* Special Gallery Header Styles */
+.gallery-header .gallery-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.2rem 0;
+  padding: 0 2rem;
+}
+
+.gallery-header .section-subtitle.left-aligned {
+  text-align: left;
+  margin: 0;
+  font-style: italic;
+  color: #6d5c45;
+  max-width: 50%;
+}
+
+.gallery-header .gallery-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  color: #573319;
+  text-shadow: 2px 2px 0 rgba(201, 173, 134, 0.5);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  margin: 0;
+  text-align: right;
+  max-width: 50%;
+}
+
+.gallery-header .gallery-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8b4513);
+}
+
+/* Responsive design for gallery header */
+@media (max-width: 768px) {
+  .gallery-header .gallery-header-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .gallery-header .section-subtitle.left-aligned,
+  .gallery-header .gallery-title {
+    max-width: 100%;
+    text-align: center;
+  }
+  
+  .gallery-header .gallery-title {
+    font-size: 2.2rem;
+  }
+  
+  .gallery-header .gallery-title::after {
+    left: 10%;
+    width: 80%;
+    background: linear-gradient(90deg, transparent, #8b4513, transparent);
+  }
+}

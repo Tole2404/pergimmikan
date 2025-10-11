@@ -1,0 +1,223 @@
+erDiagram
+    Users {
+        int id PK
+        string username
+        string email
+        int role_id FK
+        string full_name
+        string password
+        enum status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Roles {
+        int id PK
+        string name
+        string description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    TblLoginAdmin {
+        int id PK
+        string username
+        string password
+        string nama_lengkap
+        string email
+        enum role
+        enum status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Activities {
+        int id PK
+        string title
+        date date
+        time time
+        string location
+        string description
+        int category_id FK
+        string image_url
+        enum status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ActivityCategories {
+        int id PK
+        string name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ActivityGallery {
+        int id PK
+        int activity_id FK
+        string image_url
+        string caption
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Events {
+        int id PK
+        string title
+        string description
+        date event_date
+        time event_time
+        string location
+        enum status
+        int max_participants
+        datetime registration_deadline
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Galleries {
+        int id PK
+        string caption
+        date date
+        string author
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    GalleryImages {
+        int id PK
+        int gallery_id FK
+        string image_url
+        boolean is_main
+        timestamp created_at
+    }
+
+    Tags {
+        int id PK
+        string name
+        timestamp created_at
+    }
+
+    GalleryTags {
+        int gallery_id PK, FK
+        int tag_id PK, FK
+    }
+
+    JourneyYears {
+        int id PK
+        int year
+        string title
+        string description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    JourneyPhotos {
+        int id PK
+        int journey_year_id FK
+        string image_src
+        string caption
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Legacies {
+        int id PK
+        string year
+        string title
+        string description
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    LoginHistory {
+        int id PK
+        int user_id FK
+        string ip_address
+        string user_agent
+        timestamp login_time
+        timestamp logout_time
+        enum login_status
+    }
+
+    Quotes {
+        int id PK
+        string text
+        string author_name
+        string author_title
+        boolean is_featured
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Savings {
+        int id PK
+        int user_id FK
+        decimal amount
+        string description
+        string receipt_url
+        enum status
+        enum jenis_transaksi
+        date transaction_date
+        int admin_id FK
+        string admin_notes
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    Teams {
+        int id PK
+        string name
+        string role
+        string image_url
+        string description
+        enum status
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    SocialMedia {
+        int id PK
+        int team_id FK
+        enum platform
+        string url
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    TblApiKeys {
+        int id PK
+        string name
+        string api_key
+        json permissions
+        datetime expires_at
+        datetime last_used
+        int created_by FK
+        datetime created_at
+        datetime updated_at
+    }
+
+    %% Relationships - Kardinalitas
+    Users                             }o--|| Roles              : memiliki_satu
+    Activities                        }o--|| ActivityCategories : termasuk_dalam_satu
+    Activities                        ||--o{ ActivityGallery    : memiliki_banyak
+    Galleries                         ||--o{ GalleryImages      : memiliki_banyak
+    JourneyYears                      ||--o{ JourneyPhotos      : memiliki_banyak
+    Users                             ||--o{ LoginHistory       : memiliki_banyak
+    Users                             ||--o{ Savings            : memiliki_banyak
+    Teams                             ||--o{ SocialMedia        : memiliki_banyak
+    TblLoginAdmin                     ||--o{ TblApiKeys         : membuat_banyak 
+    Galleries                         ||--o{ GalleryImages      : "memiliki_banyak"
+    JourneyYears                      ||--o{ JourneyPhotos      : "memiliki_banyak"
+    Users                             ||--o{ LoginHistory       : "memiliki_banyak"
+    Users                             ||--o{ Savings            : "memiliki_banyak"
+    Teams                             ||--o{ SocialMedia        : "memiliki_banyak"
+    TblLoginAdmin                     ||--o{ TblApiKeys         : "membuat_banyak"
+
+    %% Relationship for Savings and TblLoginAdmin (admin_id is nullable in Savings)
+    %% A Saving is managed by zero or one Admin. An Admin can manage zero or many Savings.
+    Savings                           }|..o{ TblLoginAdmin      : "dikelola_oleh_satu_atau_tidak_sama_sekali"
+
+    %% Many-to-Many Relationships via GalleryTags
+    Galleries                         ||--o{ GalleryTags        : "memiliki_penghubung_tag"
+    Tags                              ||--o{ GalleryTags        : "dimiliki_oleh_penghubung_galeri"

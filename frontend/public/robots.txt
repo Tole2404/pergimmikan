@@ -1,0 +1,59 @@
+# robots.txt untuk PERGIMMIKAN
+# https://pergimmikan.site/
+
+# Google Bot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login/
+Disallow: /private/
+Disallow: /config/
+Disallow: /debug/
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login/
+Disallow: /private/
+Disallow: /config/
+Disallow: /debug/
+
+# Semua Bot Lainnya
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login/
+Disallow: /private/
+Disallow: /config/
+Disallow: /debug/
+
+# Mengizinkan akses ke resource statis
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.gif$
+Allow: /*.ico$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /images/
+Allow: /assets/
+Allow: /fonts/
+
+# Crawl-delay untuk bot tertentu
+User-agent: Slurp
+Crawl-delay: 10
+
+User-agent: Yandex
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://pergimmikan.site/sitemap.xml
+Sitemap: https://pergimmikan.site/team-sitemap.xml

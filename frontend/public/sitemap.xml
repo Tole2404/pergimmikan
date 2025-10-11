@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+   <!-- Halaman Utama -->
+   <url>
+      <loc>https://pergimmikan.site/</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>1.0</priority>
+   </url>
+   
+   <!-- Halaman Journey -->
+   <url>
+      <loc>https://pergimmikan.site/journey</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   
+   <!-- Halaman Activities -->
+   <url>
+      <loc>https://pergimmikan.site/activities</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
+   
+   <!-- Halaman Team -->
+   <url>
+      <loc>https://pergimmikan.site/team</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <!-- Halaman Gallery -->
+   <url>
+      <loc>https://pergimmikan.site/gallery</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+   </url>
+   
+   <!-- Halaman About -->
+   <url>
+      <loc>https://pergimmikan.site/about</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   
+   <!-- Halaman Contact -->
+   <url>
+      <loc>https://pergimmikan.site/contact</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.6</priority>
+   </url>
+   
+   <!-- Halaman Login (tidak perlu diindeks tinggi) -->
+   <url>
+      <loc>https://pergimmikan.site/login</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.3</priority>
+   </url>
+   
+   <!-- Halaman Profil Anggota Tim -->
+   <url>
+      <loc>https://pergimmikan.site/team#tunggul-bayu-kusuma</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://pergimmikan.site/images/team/tunggul-bayu-kusuma.jpg</image:loc>
+         <image:title>Tunggul Bayu Kusuma - PERGIMMIKAN</image:title>
+      </image:image>
+   </url>
+   
+   <url>
+      <loc>https://pergimmikan.site/team#deva-satrya-ramadhan</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://pergimmikan.site/images/team/deva-satrya-ramadhan.jpg</image:loc>
+         <image:title>Deva Satrya Ramadhan - PERGIMMIKAN</image:title>
+      </image:image>
+   </url>
+   
+   <url>
+      <loc>https://pergimmikan.site/team#akbar-hidayatullah</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://pergimmikan.site/images/team/akbar-hidayatullah.jpg</image:loc>
+         <image:title>Akbar Hidayatullah - PERGIMMIKAN</image:title>
+      </image:image>
+   </url>
+   
+   <url>
+      <loc>https://pergimmikan.site/team#fildzah-putri-zhafirah-awliya</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://pergimmikan.site/images/team/fildzah-putri-zhafirah-awliya.jpg</image:loc>
+         <image:title>Fildzah Putri Zhafirah Awliya - PERGIMMIKAN</image:title>
+      </image:image>
+   </url>
+   
+   <url>
+      <loc>https://pergimmikan.site/team#muhammad-kahfi-chidani</loc>
+      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+      <image:image>
+         <image:loc>https://pergimmikan.site/images/team/muhammad-kahfi-chidani.jpg</image:loc>
+         <image:title>Muhammad Kahfi ChidNI - PERGIMMIKAN</image:title>
+      </image:image>
+   </url>
+</urlset>

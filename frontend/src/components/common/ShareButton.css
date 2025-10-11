@@ -1,0 +1,248 @@
+.share-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.share-button:active {
+  transform: translateY(0);
+}
+
+.share-button svg {
+  font-size: 16px;
+}
+
+/* Share Menu Overlay */
+.share-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Share Menu */
+.share-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.share-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.share-menu-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.share-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.share-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Share Options */
+.share-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.share-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px;
+  background: #f8f9fa;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+}
+
+.share-option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-option svg {
+  font-size: 24px;
+}
+
+/* Platform Colors */
+.share-option.facebook {
+  background: #1877f2;
+  color: white;
+}
+
+.share-option.facebook:hover {
+  background: #166fe5;
+}
+
+.share-option.twitter {
+  background: #1da1f2;
+  color: white;
+}
+
+.share-option.twitter:hover {
+  background: #1a91da;
+}
+
+.share-option.whatsapp {
+  background: #25d366;
+  color: white;
+}
+
+.share-option.whatsapp:hover {
+  background: #20bd5a;
+}
+
+.share-option.telegram {
+  background: #0088cc;
+  color: white;
+}
+
+.share-option.telegram:hover {
+  background: #0077b5;
+}
+
+.share-option.email {
+  background: #ea4335;
+  color: white;
+}
+
+.share-option.email:hover {
+  background: #d33426;
+}
+
+.share-option.copy {
+  background: #6c757d;
+  color: white;
+}
+
+.share-option.copy:hover {
+  background: #5a6268;
+}
+
+/* Desktop View */
+@media (min-width: 768px) {
+  .share-menu {
+    position: absolute;
+    bottom: auto;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    border-radius: 12px;
+    min-width: 350px;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  .share-overlay {
+    display: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .share-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .share-button span {
+    display: none;
+  }
+
+  .share-button {
+    padding: 10px 15px;
+  }
+}

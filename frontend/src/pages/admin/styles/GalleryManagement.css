@@ -1,0 +1,213 @@
+
+:root {
+  --retro-orange: #ff6b35;
+  --retro-orange-dark: #cc5629;
+  --retro-orange-light: #ff8659;
+  --active-menu: #f39c12; /* Warna kuning oranye untuk menu aktif */
+  --active-menu-hover: #e67e22; /* Warna hover untuk menu aktif */
+  --sidebar-width: 250px;
+  --sidebar-width-collapsed: 70px;
+  --header-height: 60px;
+}
+
+.gallery-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  min-height: 600px;
+  /* Changed from fixed max-height with hidden overflow to allow scrolling */
+  overflow-y: auto;
+}
+
+/* Gallery Card Styling */
+.gallery-card {
+  border-radius: var(--gallery-border-radius);
+  background: white;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+
+.gallery-card:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gallery-primary), var(--gallery-accent));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card .card-img-container {
+  height: 180px;
+  overflow: hidden;
+}
+
+.gallery-card .card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s ease;
+}
+
+.gallery-card .card-body {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.gallery-card .card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gallery-dark);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.gallery-card .card-text {
+  color: var(--gallery-gray);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Placeholder styling for empty slots in 3x3 grid */
+.gallery-card-placeholder {
+  background-color: rgba(236, 240, 241, 0.5);
+  border: 2px dashed rgba(52, 152, 219, 0.3);
+}
+
+.placeholder-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(236, 240, 241, 0.8);
+}
+
+.placeholder-icon {
+  font-size: 3rem;
+  color: rgba(52, 152, 219, 0.4);
+}
+
+.gallery-card-placeholder .card-title,
+.gallery-card-placeholder .card-text {
+  text-align: center;
+}
+
+.gallery-card-placeholder:hover .placeholder-icon {
+  color: rgba(52, 152, 219, 0.7);
+}
+
+.gallery-card-placeholder .gallery-card-actions {
+  justify-content: center;
+}
+
+/* Gallery Tag Styling */
+.gallery-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.gallery-tags .tag-badge {
+  background-color: rgba(52, 152, 219, 0.15);
+  color: var(--gallery-primary);
+  font-weight: 500;
+}
+
+/* Gallery Card Actions */
+.gallery-card-actions {
+  margin-top: auto;
+}
+
+.gallery-card-actions button {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Tag Management Modal */
+.tag-management-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tag-management-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag-list-section {
+  margin-top: 1.5rem;
+}
+
+.tag-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.tag-item:hover {
+  background: rgba(52, 152, 219, 0.2);
+}
+
+.tag-delete-btn {
+  color: var(--gallery-danger);
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.tag-delete-btn:hover {
+  opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .gallery-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .gallery-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 576px) {
+  .gallery-grid-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-card .card-img-container {
+    height: 200px;
+  }
+}

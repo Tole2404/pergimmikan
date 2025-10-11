@@ -1,0 +1,538 @@
+.nav-loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Animasi fade untuk loading */
+.nav-loading-container .pgm-loading {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Mengubah warna teks loading */
+.nav-loading-container .pgm-loading__text {
+  color: #333;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Profile styles */
+.profile-container {
+  position: relative;
+}
+
+.profile-button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.profile-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--retro-gold);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.profile-name {
+  margin-left: 0.5rem;
+  color: var(--retro-cream);
+  font-weight: 500;
+}
+
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 200px;
+  max-height: calc(100vh - 150px); /* Limit height to prevent offscreen */
+  background: linear-gradient(to bottom, #2d2a2e, #1e1c1f);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  overflow-y: auto; /* Add scrolling capability */
+  z-index: 100;
+  border: 1px solid var(--retro-gold);
+  animation: dropdownFadeIn 0.3s ease;
+}
+
+@media (max-width: 992px) {
+  .profile-menu {
+    max-height: 250px; /* More restricted height on smaller screens */
+    right: 10px;
+  }
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-menu a, 
+.profile-menu button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.menu-item {
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  color: var(--retro-cream);
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--retro-gold);
+}
+
+.menu-icon {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.profile-menu a:not(:last-child) .menu-item,
+.profile-menu button:not(:last-child) .menu-item {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.logout-button {
+  background-color: transparent;
+}
+
+.logout-button .menu-item {
+  color: #ff6b6b;
+}
+
+.logout-button:hover .menu-item {
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.nav-ribbon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.5); /* Transparan saat tidak scroll */
+}
+
+.nav-ribbon.scrolled {
+  background: #ffffff; /* Putih saat di-scroll */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-ribbon.scrolled a,
+.nav-ribbon.scrolled .profile-button {
+  color: #333333;
+}
+
+.nav-ribbon.scrolled a span,
+.nav-ribbon.scrolled .profile-name {
+  color: #666666;
+}
+
+.nav-ribbon.scrolled .profile-menu {
+  background: #ffffff;
+  border-color: #e0e0e0;
+}
+
+.nav-ribbon.scrolled .profile-menu a,
+.nav-ribbon.scrolled .profile-menu button {
+  color: #333333;
+}
+
+.nav-ribbon.scrolled .profile-menu a:hover,
+.nav-ribbon.scrolled .profile-menu button:hover {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+/* Style default (transparan) */
+.nav-ribbon a,
+.nav-ribbon .profile-button {
+  color: var(--retro-cream);
+}
+
+.nav-ribbon .profile-menu {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  border-color: var(--retro-cream);
+}
+
+.nav-ribbon .profile-menu a,
+.nav-ribbon .profile-menu button {
+  color: var(--retro-cream);
+}
+
+.nav-ribbon .profile-menu a:hover,
+.nav-ribbon .profile-menu button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile profile styles */
+.mobile-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.mobile-menu.active .mobile-profile {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  margin: 1rem;
+  border-radius: 8px;
+}
+
+.mobile-profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-profile-header:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-profile-header .profile-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid var(--retro-mustard);
+}
+
+.mobile-profile-header .profile-name {
+  color: var(--retro-cream);
+  font-size: 1.1rem;
+  font-weight: 600;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto; /* Enable scrolling if needed */
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: var(--retro-cream);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.mobile-menu-item i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.mobile-menu-item.logout-button {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff6b6b;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+
+.mobile-menu-item.logout-button:hover {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+/* Override navbar styles for mobile profile */
+.nav-ribbon .mobile-menu.active {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.nav-ribbon.scrolled .mobile-profile .profile-name,
+.nav-ribbon.scrolled .mobile-profile-menu a,
+.nav-ribbon.scrolled .mobile-profile-menu button {
+  color: var(--retro-cream);
+}
+
+.nav-ribbon.scrolled .mobile-profile-menu a:hover,
+.nav-ribbon.scrolled .mobile-profile-menu button:hover {
+  background-color: var(--retro-cream);
+  color: var(--retro-brown);
+}
+
+/* Active link styles for mobile menu */
+.mobile-menu .nav-links a.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-left: 4px solid var(--retro-cream);
+  padding-left: calc(1rem - 4px);
+  position: relative;
+}
+
+.mobile-menu .nav-links a.active::after {
+  content: '★';
+  position: absolute;
+  right: 1rem;
+  color: var(--retro-cream);
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.mobile-menu .nav-links a.active span {
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Make sure the active link style stays even when scrolled */
+.nav-ribbon.scrolled .mobile-menu .nav-links a.active {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-left-color: var(--retro-brown);
+}
+
+.nav-ribbon.scrolled .mobile-menu .nav-links a.active::after {
+  color: var(--retro-brown);
+}
+
+.nav-ribbon.scrolled .mobile-menu .nav-links a.active span {
+  color: var(--retro-cream);
+}
+
+/* Hamburger button improvements */
+.hamburger {
+  display: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+  position: relative;
+}
+
+.hamburger-box {
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
+}
+
+.hamburger-inner {
+  width: 30px;
+  height: 3px;
+  background-color: var(--retro-cream);
+  border-radius: 3px;
+  position: absolute;
+  transition: background-color 0.3s ease;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hamburger-inner::before,
+.hamburger-inner::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: var(--retro-cream);
+  border-radius: 3px;
+  position: absolute;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-inner::before {
+  top: -10px;
+}
+
+.hamburger-inner::after {
+  bottom: -10px;
+}
+
+.hamburger.active .hamburger-inner {
+  background-color: transparent;
+}
+
+.hamburger.active .hamburger-inner::before {
+  transform: translateY(10px) rotate(45deg);
+  background-color: var(--retro-gold);
+}
+
+.hamburger.active .hamburger-inner::after {
+  transform: translateY(-10px) rotate(-45deg);
+  background-color: var(--retro-gold);
+}
+
+/* Fix for scrolled navbar hamburger */
+.nav-ribbon.scrolled .hamburger-inner,
+.nav-ribbon.scrolled .hamburger-inner::before,
+.nav-ribbon.scrolled .hamburger-inner::after {
+  background-color: #333;
+}
+
+.nav-ribbon.scrolled .hamburger.active .hamburger-inner {
+  background-color: transparent;
+}
+
+.nav-ribbon.scrolled .hamburger.active .hamburger-inner::before,
+.nav-ribbon.scrolled .hamburger.active .hamburger-inner::after {
+  background-color: var(--retro-brown);
+}
+
+/* Mobile Menu Styling */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 5rem 2rem 2rem;
+  overflow-y: auto; /* Enable scrolling */
+}
+
+.mobile-menu .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.mobile-menu .nav-links a {
+  display: block;
+  padding: 1rem;
+  text-align: center;
+  color: var(--retro-cream);
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-menu .nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.mobile-menu .nav-links a span {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.25rem;
+}
+
+/* Improved mobile layout for profile section */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1001;
+  }
+  
+  .nav-right, .nav-left {
+    display: none;
+  }
+  
+  .nav-container {
+    padding: 0.5rem 1rem;
+    justify-content: center;
+  }
+  
+  .mobile-profile {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .mobile-profile-header {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .mobile-menu-item {
+    width: 100%;
+  }
+}
+
+/* Enhancements for larger mobile devices */
+@media (min-width: 480px) and (max-width: 768px) {
+  .mobile-menu {
+    width: 400px;
+    right: 0;
+    left: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

@@ -1,0 +1,849 @@
+/* TabunganSederhana.css - Tampilan Modern & Responsif */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --warna-primer: #2563eb;
+  --warna-primer-gelap: #1d4ed8;
+  --warna-sekunder: #f97316;
+  --warna-sekunder-gelap: #ea580c;
+  --warna-sukses: #10b981;
+  --warna-peringatan: #f59e0b;
+  --warna-bahaya: #ef4444;
+  --warna-info: #3b82f6;
+  --warna-latar: #e6edf7; /* Warna latar lebih biru */
+  --warna-latar-gelap: #d5e0f0; /* Warna latar gelap lebih biru */
+  --warna-latar-kartu: #f8fafc;
+  --warna-teks: #1e293b;
+  --warna-teks-sekunder: #64748b;
+  --warna-batas: #e2e8f0;
+  --bayangan-kartu: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --bayangan-tombol: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --radius-batas: 12px;
+  --font-utama: 'Poppins', sans-serif;
+  --transisi-standar: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--warna-latar);
+  font-family: var(--font-utama);
+}
+
+.simple-savings-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--warna-latar) 0%, var(--warna-latar-gelap) 100%);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--font-utama);
+  color: var(--warna-teks);
+  position: relative;
+  overflow-x: hidden;
+  padding: 20px 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.simple-savings-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+}
+
+/* Status Loading & Error */
+.simple-savings-loading,
+.simple-savings-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+  background: var(--warna-latar);
+  font-family: var(--font-utama);
+  line-height: 1.5;
+}
+
+.simple-savings-error h2 {
+  margin-bottom: 16px;
+  color: var(--warna-bahaya);
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.simple-savings-error p {
+  margin-bottom: 24px;
+  line-height: 1.6;
+  color: var(--warna-teks-sekunder);
+  max-width: 500px;
+}
+
+.simple-savings-error button {
+  background-color: var(--warna-primer);
+  color: white;
+  border: none;
+  border-radius: var(--radius-batas);
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  box-shadow: var(--bayangan-tombol);
+}
+
+.simple-savings-error button:hover {
+  background-color: var(--warna-primer-gelap);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px -2px rgba(37, 99, 235, 0.3);
+}
+
+.simple-savings-error button:active {
+  transform: translateY(0);
+}
+
+/* Header */
+.simple-savings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px;
+  position: relative;
+  border-radius: var(--radius-batas);
+  background: var(--warna-latar-kartu);
+  box-shadow: var(--bayangan-kartu);
+  border-left: 5px solid var(--warna-primer);
+}
+
+.simple-savings-header h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--warna-primer);
+  background: linear-gradient(to right, var(--warna-primer), var(--warna-info));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-info span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--warna-teks);
+  padding: 6px 12px;
+  background-color: var(--warna-latar-gelap);
+  border-radius: 20px;
+}
+
+.logout-btn {
+  background-color: var(--warna-bahaya);
+  color: white;
+  border: none;
+  border-radius: var(--radius-batas);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  box-shadow: var(--bayangan-tombol);
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px -2px rgba(239, 68, 68, 0.3);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+/* Kartu Saldo */
+.simple-savings-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.savings-card {
+  background-color: var(--warna-latar-kartu);
+  border-radius: var(--radius-batas);
+  box-shadow: var(--bayangan-kartu);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transisi-standar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.savings-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.savings-card:first-child {
+  border-top: 5px solid var(--warna-sukses);
+  background: linear-gradient(to bottom right, var(--warna-latar-kartu), rgba(16, 185, 129, 0.1));
+}
+
+.savings-card:first-child::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.15), transparent 70%);
+  z-index: 0;
+}
+
+.savings-card:last-child {
+  border-top: 5px solid var(--warna-peringatan);
+  background: linear-gradient(to bottom right, var(--warna-latar-kartu), rgba(245, 158, 11, 0.1));
+}
+
+.savings-card:last-child::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.15), transparent 70%);
+  z-index: 0;
+}
+
+.card-title__saving {
+  font-size: 16px;
+  color: var(--warna-teks-sekunder);
+  margin-bottom: 12px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+.card-amount_saving {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--warna-teks);
+  margin-bottom: 12px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.savings-card:first-child .card-amount_saving {
+  color: var(--warna-sukses);
+}
+
+.savings-card:last-child .card-amount_saving {
+  color: var(--warna-peringatan);
+}
+
+.card-status {
+  font-size: 14px;
+  color: var(--warna-teks-sekunder);
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  background-color: var(--warna-latar-gelap);
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+/* Tab Navigasi */
+.simple-savings-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--warna-batas);
+  margin-bottom: 20px;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  font-family: var(--font-utama);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--warna-teks-sekunder);
+  cursor: pointer;
+  transition: var(--transisi-standar);
+  position: relative;
+}
+
+.tab-button:hover {
+  color: var(--warna-primer);
+}
+
+.tab-button.active {
+  color: var(--warna-primer);
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--warna-primer);
+  border-radius: 3px 3px 0 0;
+}
+
+/* Form */
+.simple-savings-form-section {
+  background-color: var(--warna-latar-kartu);
+  border-radius: var(--radius-batas);
+  box-shadow: var(--bayangan-kartu);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.simple-savings-form-section h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--warna-teks);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.simple-savings-form-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--warna-primer);
+  border-radius: 3px;
+}
+
+.simple-deposit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-utama);
+  color: var(--warna-teks);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--warna-batas);
+  border-radius: var(--radius-batas);
+  font-size: 16px;
+  background-color: var(--warna-latar-kartu);
+  color: var(--warna-teks);
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--warna-primer);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-group input::placeholder {
+  color: var(--warna-teks-sekunder);
+}
+
+.file-input-container {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.file-input-container input[type="file"] {
+  border: 2px dashed var(--warna-batas);
+  border-radius: var(--radius-batas);
+  width: 100%;
+  padding: 20px;
+  background-color: var(--warna-latar-gelap);
+  cursor: pointer;
+  color: var(--warna-teks);
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+}
+
+.file-input-container input[type="file"]:hover {
+  border-color: var(--warna-primer);
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.file-help {
+  font-size: 12px;
+  color: var(--warna-teks-sekunder);
+  margin-top: 8px;
+  font-family: var(--font-utama);
+}
+
+.balance-info {
+  font-size: 14px;
+  color: var(--warna-teks-sekunder);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.receipt-preview {
+  position: relative;
+  max-width: 300px;
+  margin-top: 16px;
+  border-radius: var(--radius-batas);
+  overflow: hidden;
+  box-shadow: var(--bayangan-kartu);
+  transition: var(--transisi-standar);
+}
+
+.receipt-preview:hover {
+  transform: scale(1.02);
+}
+
+.receipt-preview img {
+  width: 100%;
+  display: block;
+  transition: var(--transisi-standar);
+}
+
+.remove-preview-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--warna-bahaya);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  opacity: 0.8;
+}
+
+.remove-preview-btn:hover {
+  transform: scale(1.1);
+  background-color: #dc2626;
+  opacity: 1;
+}
+
+.form-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-btn {
+  background-color: var(--warna-primer);
+  color: white;
+  border: none;
+  border-radius: var(--radius-batas);
+  padding: 14px 30px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  min-width: 200px;
+  box-shadow: var(--bayangan-tombol);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: var(--transisi-standar);
+}
+
+.submit-btn:hover {
+  background-color: var(--warna-primer-gelap);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px -2px rgba(37, 99, 235, 0.3);
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background-color: var(--warna-teks-sekunder);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.withdraw-btn {
+  background-color: var(--warna-sekunder);
+}
+
+.withdraw-btn:hover {
+  background-color: var(--warna-sekunder-gelap);
+  box-shadow: 0 6px 10px -2px rgba(249, 115, 22, 0.3);
+}
+
+.form-error {
+  color: var(--warna-bahaya);
+  font-size: 14px;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Riwayat Tabungan */
+.simple-savings-history {
+  background-color: var(--warna-latar-kartu);
+  border-radius: var(--radius-batas);
+  box-shadow: var(--bayangan-kartu);
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.simple-savings-history h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--warna-teks);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.simple-savings-history h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--warna-primer);
+  border-radius: 3px;
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radius-batas);
+  border: 1px solid var(--warna-batas);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.simple-savings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-family: var(--font-utama);
+}
+
+.simple-savings-table th,
+.simple-savings-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--warna-batas);
+}
+
+.simple-savings-table th {
+  background-color: var(--warna-latar-gelap);
+  font-weight: 600;
+  color: var(--warna-teks);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.simple-savings-table tr {
+  transition: var(--transisi-standar);
+}
+
+.simple-savings-table tr:hover {
+  background-color: var(--warna-latar-gelap);
+}
+
+.amount-cell {
+  font-weight: 600;
+  color: var(--warna-teks);
+}
+
+.status-cell {
+  font-weight: 500;
+  padding: 6px 12px;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.status-approved {
+  color: var(--warna-sukses);
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.status-pending {
+  color: var(--warna-peringatan);
+  background-color: rgba(245, 158, 11, 0.1);
+}
+
+.view-receipt-btn {
+  background-color: var(--warna-info);
+  color: white;
+  border: none;
+  border-radius: var(--radius-batas);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-utama);
+  transition: var(--transisi-standar);
+  box-shadow: var(--bayangan-tombol);
+}
+
+.view-receipt-btn:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+}
+
+.view-receipt-btn:active {
+  transform: translateY(0);
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--warna-teks-sekunder);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.simple-copyright {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--warna-teks-sekunder);
+  font-size: 14px;
+  padding: 20px 0;
+  font-family: var(--font-utama);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .simple-savings-container {
+    padding: 16px;
+  }
+  
+  .simple-savings-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .simple-savings-header h1 {
+    margin-bottom: 16px;
+  }
+  
+  .user-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .submit-btn {
+    width: 100%;
+  }
+  
+  .simple-savings-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet Kecil */
+@media (max-width: 600px) {
+  .simple-savings-container {
+    padding: 12px;
+  }
+  
+  .savings-card {
+    padding: 20px;
+  }
+
+  .card-status {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+  
+  .simple-savings-form-section,
+  .simple-savings-history {
+    padding: 20px;
+  }
+  
+  .simple-savings-table th:nth-child(1),
+  .simple-savings-table td:nth-child(1) {
+    display: none;
+  }
+  
+  .card-amount_saving {
+    font-size: 28px;
+  }
+}
+
+/* Ponsel Kecil */
+@media (max-width: 375px) {
+  .simple-savings-container {
+    padding: 10px;
+  }
+  
+  .simple-savings-header h1 {
+    font-size: 20px;
+  }
+  
+  .user-info {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .user-info span {
+    font-size: 14px;
+    padding: 4px 10px;
+  }
+  
+  .logout-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .savings-card {
+    padding: 16px;
+  }
+  
+  .card-title__saving {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .card-amount_saving {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .card-status {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+  
+  .simple-savings-form-section h2,
+  .simple-savings-history h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="number"] {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .file-help {
+    font-size: 11px;
+  }
+  
+  .submit-btn {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .simple-savings-table {
+    font-size: 12px;
+  }
+  
+  .simple-savings-table th,
+  .simple-savings-table td {
+    padding: 10px 8px;
+  }
+  
+  /* Sembunyikan kolom tanggal di layar sangat kecil */
+  .simple-savings-table th:nth-child(1),
+  .simple-savings-table td:nth-child(1) {
+    display: none;
+  }
+  
+  /* Buat kolom deskripsi lebih kecil */
+  .simple-savings-table th:nth-child(2),
+  .simple-savings-table td:nth-child(2) {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .status-cell {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+  
+  .view-receipt-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+}

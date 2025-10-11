@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f9f5ec"/>
+  <rect x="10" y="10" width="280" height="180" stroke="#d4a76a" stroke-width="2" fill="none" rx="8" ry="8"/>
+  <text x="150" y="100" font-family="Arial" font-size="20" text-anchor="middle" fill="#d4a76a">Gambar Offline</text>
+  <text x="150" y="130" font-family="Arial" font-size="14" text-anchor="middle" fill="#777">PERGIMMIKAN</text>
+</svg>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#f9f5ec"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1920" height="100" fill="#d4a76a"/>
+  <text x="960" y="60" font-family="Arial" font-size="32" text-anchor="middle" fill="#fff" font-weight="bold">PERGIMMIKAN</text>
+  
+  <!-- Hero Image -->
+  <rect x="100" y="150" width="1720" height="600" fill="#eee" rx="8" ry="8"/>
+  <text x="960" y="450" font-family="Arial" font-size="64" text-anchor="middle" fill="#999">Hero Image</text>
+  
+  <!-- Content Blocks -->
+  <rect x="100" y="800" width="550" height="200" fill="#e2bc8a" rx="8" ry="8"/>
+  <rect x="685" y="800" width="550" height="200" fill="#e2bc8a" rx="8" ry="8"/>
+  <rect x="1270" y="800" width="550" height="200" fill="#e2bc8a" rx="8" ry="8"/>
+  
+  <text x="960" y="1050" font-family="Arial" font-size="16" text-anchor="middle" fill="#999">PERGIMMIKAN - Desktop Home Screenshot</text>
+</svg>
