@@ -65,7 +65,7 @@
   border-bottom: none;
 }
 
-.section-title {
+.section-title-landing {
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
@@ -347,7 +347,7 @@
     padding: 1.25rem;
   }
   
-  .section-title {
+  .section-title-landing {
     margin-bottom: 1.25rem;
   }
   
@@ -482,7 +482,7 @@
     font-size: 1rem;
   }
   
-  .section-title {
+  .section-title-landing {
     font-size: 1.1rem;
     margin-bottom: 1rem;
   }

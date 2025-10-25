@@ -56,4 +56,3 @@ Crawl-delay: 10
 
 # Sitemap
 Sitemap: https://pergimmikan.site/sitemap.xml
-Sitemap: https://pergimmikan.site/team-sitemap.xml

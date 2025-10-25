@@ -55,181 +55,102 @@ const Quotes = () => {
 
   // Setup animations when loading completes
   useEffect(() => {
+    let timeline;
     if (!loading) {
       setTimeout(() => {
-        setupAnimations();
+        timeline = setupAnimations();
       }, 100);
     }
+    
+    // Cleanup
+    return () => {
+      if (timeline) {
+        timeline.kill();
+      }
+    };
   }, [loading]);
 
   const setupAnimations = () => {
-    // Basic fade in for mobile
-    if (isMobile) {
-      // Simple fade in for the whole section
-      gsap.to(sectionRef.current, {
-        opacity: 1,
-        duration: 0.5,
-        ease: "power1.out"
-      });
-
-      // Simple animation for quote container
-      if (quoteContainerRef.current) {
-        gsap.fromTo(quoteContainerRef.current,
-          { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-            delay: 0.2,
-            ease: "power1.out"
-          }
-        );
-      }
-
-      // Simple animations for quote elements
-      const elements = [
-        { ref: quoteTextRef.current, delay: 0.3 },
-        { ref: quoteAuthorRef.current, delay: 0.4 }
-      ];
-
-      elements.forEach(({ ref, delay }) => {
-        if (ref) {
-          gsap.fromTo(ref,
-            { opacity: 0, y: 10 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.5,
-              delay,
-              ease: "power1.out"
-            }
-          );
-        }
-      });
-
-      // Simple fade in for quote marks
-      const quoteMarks = [
-        { ref: quoteMarkLeftRef.current, x: -10 },
-        { ref: quoteMarkRightRef.current, x: 10 }
-      ];
-
-      quoteMarks.forEach(({ ref, x }) => {
-        if (ref) {
-          gsap.fromTo(ref,
-            { opacity: 0, x },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.5,
-              delay: 0.5,
-              ease: "power1.out"
-            }
-          );
-        }
-      });
-
-      return; // Exit early for mobile
-    }
-
-    // Desktop animations with optimizations
-    if (sectionRef.current) {
-      gsap.fromTo(sectionRef.current,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.8,
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
-    }
-
-    // Quote container animation
-    if (quoteContainerRef.current) {
-      gsap.fromTo(quoteContainerRef.current,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: 0.2,
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: quoteContainerRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
-    }
-
-    // Quote marks animation
-    const quoteMarks = [
-      { ref: quoteMarkLeftRef.current, x: -30 },
-      { ref: quoteMarkRightRef.current, x: 30 }
-    ];
-
-    quoteMarks.forEach(({ ref, x }) => {
-      if (ref) {
-        gsap.fromTo(ref,
-          { x, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            delay: 0.4,
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: quoteContainerRef.current,
-              start: "top 90%",
-              toggleActions: "play none none none"
-            }
-          }
-        );
+    // Optimized animations for both mobile and desktop
+    const timeline = gsap.timeline({
+      defaults: {
+        ease: "power2.out",
+        clearProps: "all"
       }
     });
 
-    // Quote text animation
-    if (quoteTextRef.current) {
-      gsap.fromTo(quoteTextRef.current,
-        { scale: 0.95, opacity: 0 },
-        {
-          scale: 1,
+    // Batch animation for mobile
+    if (isMobile) {
+      timeline
+        .to(sectionRef.current, {
           opacity: 1,
-          duration: 0.8,
-          delay: 0.6,
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: quoteContainerRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none"
-          }
-        }
-      );
+          duration: 0.4
+        })
+        .to(quoteContainerRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4
+        }, "-=0.2")
+        .to([quoteTextRef.current, quoteAuthorRef.current], {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1
+        }, "-=0.2")
+        .to([quoteMarkLeftRef.current, quoteMarkRightRef.current], {
+          opacity: 1,
+          x: 0,
+          duration: 0.3,
+          stagger: 0.1
+        }, "-=0.2");
+
+      return timeline;
     }
 
-    // Quote author animation
-    if (quoteAuthorRef.current) {
-      gsap.fromTo(quoteAuthorRef.current,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          delay: 0.8,
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: quoteContainerRef.current,
-            start: "top 90%",
-            toggleActions: "play none none none"
-          }
-        }
+    // Desktop animations - single ScrollTrigger
+    const desktopTimeline = gsap.timeline({
+      defaults: {
+        ease: "power2.out",
+        clearProps: "all"
+      },
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 85%",
+        toggleActions: "play none none none",
+        once: true // Only play once
+      }
+    });
+
+    desktopTimeline
+      .fromTo(sectionRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.6 }
+      )
+      .fromTo(quoteContainerRef.current,
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6 },
+        "-=0.4"
       );
-    }
+
+    // Add remaining animations to desktop timeline
+    desktopTimeline
+      .fromTo([quoteMarkLeftRef.current, quoteMarkRightRef.current],
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.5, stagger: 0.1 },
+        "-=0.3"
+      )
+      .fromTo(quoteTextRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5 },
+        "-=0.3"
+      )
+      .fromTo(quoteAuthorRef.current,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4 },
+        "-=0.2"
+      );
+
+    return desktopTimeline;
   };
 
   const fetchFeaturedQuote = async () => {

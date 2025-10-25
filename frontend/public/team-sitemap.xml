@@ -1,172 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-   
-   <!-- Halaman Profil Anggota Tim Lainnya -->
-   <url>
-      <loc>https://pergimmikan.site/team#muhamad-jordi-iawan</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/muhamad-jordi-iawan.jpg</image:loc>
-         <image:title>Muhamad Jordi Iawan - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#muhammad-zulfa</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/muhammad-zulfa.jpg</image:loc>
-         <image:title>Muhammad Zulfa - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#frasiskus-aldi-jebadu</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/frasiskus-aldi-jebadu.jpg</image:loc>
-         <image:title>Frasiskus Aldi Jebadu - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#muhammad-darril-fauzi</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/muhammad-darril-fauzi.jpg</image:loc>
-         <image:title>Muhammad Darril Fauzi - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#miraj-diamond-sundachi</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/miraj-diamond-sundachi.jpg</image:loc>
-         <image:title>Miraj Diamond Sundachi - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#indira-arifin</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/indira-arifin.jpg</image:loc>
-         <image:title>Indira Arifin - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#zaki-syifa-nugroho</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/zaki-syifa-nugroho.jpg</image:loc>
-         <image:title>Zaki Syifa Nugroho - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#zul-widya-pratiwi</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/zul-widya-pratiwi.jpg</image:loc>
-         <image:title>Zul Widya Pratiwi - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#lia-agustin-pratiwi</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/lia-agustin-pratiwi.jpg</image:loc>
-         <image:title>Lia Agustin Pratiwi - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#fadia-nurmasri</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/fadia-nurmasri.jpg</image:loc>
-         <image:title>Fadia Nurmasari - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#maesheilla</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/maesheilla.jpg</image:loc>
-         <image:title>Maesheilla - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#toha-hisyamuddin</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/toha-hisyamuddin.jpg</image:loc>
-         <image:title>Toha Hisyamuddin - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#arvan-bukhari-putra-maulana</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/arvan-bukhari-putra-maulana.jpg</image:loc>
-         <image:title>Arvan Bukhari Putra Maulana - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#farrel</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/farrel.jpg</image:loc>
-         <image:title>Farrel - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
-   
-   <url>
-      <loc>https://pergimmikan.site/team#fadil-satria-widodo</loc>
-      <lastmod>2025-04-04T12:00:00+07:00</lastmod>
-      <changefreq>monthly</changefreq>
-      <priority>0.7</priority>
-      <image:image>
-         <image:loc>https://pergimmikan.site/images/team/fadil-satria-widodo.jpg</image:loc>
-         <image:title>Fadil Satria Widodo - PERGIMMIKAN</image:title>
-      </image:image>
-   </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Team Page -->
+  <url>
+    <loc>https://pergimmikan.site/team</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Team Members -->
+  <url>
+    <loc>https://pergimmikan.site/team#tunggul-bayu-kusuma</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/14/image</image:loc>
+      <image:title>Tunggul Bayu Kusuma - Ketua</image:title>
+      <image:caption>Tunggul Bayu Kusuma, Ketua at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#deva-satrya-ramadhan</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/15/image</image:loc>
+      <image:title>Deva Satrya Ramadhan - Member</image:title>
+      <image:caption>Deva Satrya Ramadhan, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#akbar-hidayatullah</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/16/image</image:loc>
+      <image:title>Akbar Hidayatullah - Member</image:title>
+      <image:caption>Akbar Hidayatullah, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#frasiskus-aldi-jebadu</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/17/image</image:loc>
+      <image:title>Frasiskus Aldi Jebadu - Member</image:title>
+      <image:caption>Frasiskus Aldi Jebadu, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhammad-darril-fauzi</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/18/image</image:loc>
+      <image:title>Muhammad Darril Fauzi - Member</image:title>
+      <image:caption>Muhammad Darril Fauzi, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#miraj-diamond-sundachi</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/19/image</image:loc>
+      <image:title>Miraj Diamond Sundachi - Member</image:title>
+      <image:caption>Miraj Diamond Sundachi, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#indira-arifin</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/20/image</image:loc>
+      <image:title>Indira Arifin - Momi</image:title>
+      <image:caption>Indira Arifin, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#zaki-syifa-nugroho</loc>
+    <lastmod>2025-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/21/image</image:loc>
+      <image:title>Zaki Syifa Nugroho - Member</image:title>
+      <image:caption>Zaki Syifa Nugroho, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#zul-widya-pratiwi</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/22/image</image:loc>
+      <image:title>Zul Widya Pratiwi - Momi</image:title>
+      <image:caption>Zul Widya Pratiwi, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#lia-agustin-pratiwi</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/23/image</image:loc>
+      <image:title>Lia Agustin Pratiwi - Momi</image:title>
+      <image:caption>Lia Agustin Pratiwi, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#fadia-nurmasri</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/24/image</image:loc>
+      <image:title>Fadia Nurmasri - Momi</image:title>
+      <image:caption>Fadia Nurmasri, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#maesheilla</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/25/image</image:loc>
+      <image:title>Maesheilla - Momi</image:title>
+      <image:caption>Maesheilla, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#fira</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/26/image</image:loc>
+      <image:title>Fira - Momi</image:title>
+      <image:caption>Fira, Momi at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhamad-jordi-riawan</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/28/image</image:loc>
+      <image:title>Muhamad Jordi Riawan - Member</image:title>
+      <image:caption>Muhamad Jordi Riawan, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhammad-zulfa</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/31/image</image:loc>
+      <image:title>Muhammad Zulfa - Member</image:title>
+      <image:caption>Muhammad Zulfa, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhammad-kahfi-chidani</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/32/image</image:loc>
+      <image:title>Muhammad Kahfi Chidani - Member</image:title>
+      <image:caption>Muhammad Kahfi Chidani, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhammad-raga-pratama</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/33/image</image:loc>
+      <image:title>Muhammad Raga Pratama - Member</image:title>
+      <image:caption>Muhammad Raga Pratama, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#toha-hisyamuddin</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/34/image</image:loc>
+      <image:title>Toha Hisyamuddin - Member</image:title>
+      <image:caption>Toha Hisyamuddin, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#arvan-bukhari</loc>
+    <lastmod>2025-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/35/image</image:loc>
+      <image:title>Arvan Bukhari - Member</image:title>
+      <image:caption>Arvan Bukhari, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://pergimmikan.site/team#muhammad-ridho-bareng</loc>
+    <lastmod>2025-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://pergimmikan.site/api/team/36/image</image:loc>
+      <image:title>Muhammad ridho bareng - Member</image:title>
+      <image:caption>Muhammad ridho bareng, Member at PERGIMMIKAN</image:caption>
+    </image:image>
+  </url>
 </urlset>

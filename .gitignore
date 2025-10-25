@@ -1,48 +1,58 @@
 # Dependencies
 node_modules/
 package-lock.json
+yarn.lock
 
-# Environment
+# Environment variables
 .env
 .env.local
+.env.development
 .env.production
+.env.test
 
-# Build
+# Build outputs
 dist/
 build/
-frontend/dist/
-frontend/build/
-
-# Logs
 *.log
-npm-debug.log*
-logs/
-
-# OS
-.DS_Store
-Thumbs.db
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
-# Uploads (jika ada folder upload besar)
-server/uploads/
-public/uploads/
+# OS
+.DS_Store
+Thumbs.db
 
-# Cache
-.cache/
-.parcel-cache/
+# Uploads
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Testing
 coverage/
 .nyc_output/
 
-# Temporary
+# Temporary files
 *.tmp
-temp/
-tmp/
+*.temp
+.cache/
 
-.git_backup/
+# Database
+*.sql.backup
+*.db
+
+# PM2
+.pm2/
+ecosystem.config.js
+
+# Docker
+docker-compose.override.yml

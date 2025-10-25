@@ -600,7 +600,7 @@ const ActivityForm = () => {
             </div>
 
             <div className="form-section">
-              <h5 className="section-title">
+              <h5 className="section-title-landing">
                 <FaImage className="section-icon" />
                 Main Image
               </h5>
@@ -699,7 +699,7 @@ const ActivityForm = () => {
             </div>
 
             <div className="form-section gallery-section">
-              <h5 className="section-title">
+              <h5 className="section-title-landing">
                 <FaImage className="section-icon" />
                 Gallery Photos
               </h5>

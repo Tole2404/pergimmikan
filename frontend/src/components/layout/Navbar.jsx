@@ -253,8 +253,8 @@ export default function Navbar() {
             <span>our members</span>
           </Link>
           <Link to="/next" className={isActive('/next')}>
-            NEXT
-            <span>next trip</span>
+            TRIP
+            <span>plan your journey</span>
           </Link>
           {isLoggedIn && userData ? (
             <NotificationDropdown key={`notif-${userData.id}-${refreshKey}`} />
@@ -352,8 +352,8 @@ export default function Navbar() {
                 <span>our members</span>
               </Link>
               <Link to="/next" onClick={toggleMenu} className={isActive('/next')}>
-                NEXT
-                <span>next trip</span>
+                TRIP
+                <span>plan your journey</span>
               </Link>
               {isLoggedIn && userData ? (
                 <div className="mobile-profile">

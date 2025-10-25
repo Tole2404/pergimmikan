@@ -62,12 +62,6 @@
   max-width: 800px;
 }
 
-.search-icon {
-  top: 100px;
-  left: 50px;
-  color: #6c757d;
-}
-
 .search-input__legacy {
   height: 38px;
   padding-left: 50px;

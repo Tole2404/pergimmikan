@@ -31,7 +31,7 @@ const Footer = () => {
           <p className="footer-copyright">
             {new Date().getFullYear()} PERGIMMIKAN. All rights reserved.
           </p>
-          <p className="footer-love">Made with in Indonesia</p>
+          <p className="footer-love">Made In Tole</p>
         </div>
       </div>
     </footer>

@@ -34,16 +34,21 @@ import CategoryForm from '../pages/admin/crud/CategoryForm';
 import SavingsManagement from '../pages/admin/crud/SavingsManagement';
 import NextAdmin from '../pages/admin/NextAdmin';
 import FeaturedJourneyManagement from '../pages/admin/FeaturedJourneyManagement';
+import SEOManagement from '../pages/admin/SEOManagement';
 import AdminAuthMiddleware from '../middleware/AdminAuthMiddleware';
 import AuthMiddleware from '../middleware/AuthMiddleware';
 import SimpleLogin from '../pages/SimpleLogin';
 import SimpleSavings from '../pages/SimpleSavings';
+import MountainsManagement from '../pages/admin/crud/MountainsManagement';
+import TracksManagement from '../pages/admin/crud/TracksManagement';
+import TransportationManagement from '../pages/admin/crud/TransportationManagement';
+import EquipmentManagement from '../pages/admin/crud/EquipmentManagement';
 
 // Simulated delay for loading state
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const withDelay = (Component) => async () => {
-  await delay(800); // Adjust timing as needed
+  await delay(1500); // Longer loading for better UX
   return { Component }; 
 };
 
@@ -269,6 +274,31 @@ export const router = createBrowserRouter([
         path: 'savings',
         element: <SavingsManagement />,
         loader: withDelay(SavingsManagement),
+      },
+      {
+        path: 'seo',
+        element: <SEOManagement />,
+        loader: withDelay(SEOManagement),
+      },
+      {
+        path: 'trip-calculator/mountains',
+        element: <MountainsManagement />,
+        loader: withDelay(MountainsManagement),
+      },
+      {
+        path: 'trip-calculator/tracks',
+        element: <TracksManagement />,
+        loader: withDelay(TracksManagement),
+      },
+      {
+        path: 'trip-calculator/transportation',
+        element: <TransportationManagement />,
+        loader: withDelay(TransportationManagement),
+      },
+      {
+        path: 'trip-calculator/equipment',
+        element: <EquipmentManagement />,
+        loader: withDelay(EquipmentManagement),
       },
     ],
   },

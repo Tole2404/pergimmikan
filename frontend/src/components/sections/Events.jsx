@@ -438,7 +438,7 @@ const Events = () => {
             <span className="vintage-stamp-text">EVENTS</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title" ref={titleRef}>Upcoming Events</h2>
+            <h2 className="section-title-landing" ref={titleRef}>Upcoming Events</h2>
             <div className="section-divider" ref={dividerRef}>
               <span className="divider-star">★</span>
               <span className="divider-line"></span>

@@ -15,6 +15,7 @@ const activityRoutes = require('./activity.routes');
 const savingsRoutes = require('./savings.routes');
 const roleRoutes = require('./role.routes');
 const featuredJourneyRoutes = require('./featured_journey.routes');
+const seoRoutes = require('./seo.routes');
 
 // Use admin routes
 router.use('/auth', authRoutes);     // /api/admin/auth/*
@@ -30,5 +31,6 @@ router.use('/activities', activityRoutes); // /api/admin/activities/*
 router.use('/tabungan', savingsRoutes);  // /api/admin/tabungan/*
 router.use('/roles', roleRoutes);     // /api/admin/roles/*
 router.use('/featured-journeys', featuredJourneyRoutes); // /api/admin/featured-journeys/*
+router.use('/seo', seoRoutes);       // /api/admin/seo/*
 
 module.exports = router;

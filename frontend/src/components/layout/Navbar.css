@@ -373,7 +373,12 @@
   padding: 10px;
   z-index: 1001;
   position: relative;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
+
+/* Hover effect untuk hamburger - Disabled for mobile */
+/* Active effect - Disabled to prevent movement */
 
 .hamburger-box {
   width: 30px;
@@ -388,7 +393,7 @@
   background-color: var(--retro-cream);
   border-radius: 3px;
   position: absolute;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -402,7 +407,7 @@
   background-color: var(--retro-cream);
   border-radius: 3px;
   position: absolute;
-  transition: transform 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hamburger-inner::before {
@@ -413,8 +418,11 @@
   bottom: -10px;
 }
 
+/* Hover effect untuk lines - Disabled */
+
+/* Active state - transform ke X */
 .hamburger.active .hamburger-inner {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .hamburger.active .hamburger-inner::before {
@@ -427,6 +435,8 @@
   background-color: var(--retro-gold);
 }
 
+/* Hover saat active - Disabled */
+
 /* Fix for scrolled navbar hamburger */
 .nav-ribbon.scrolled .hamburger-inner,
 .nav-ribbon.scrolled .hamburger-inner::before,
@@ -434,14 +444,18 @@
   background-color: #333;
 }
 
+/* Hover effect saat scrolled - Disabled */
+
 .nav-ribbon.scrolled .hamburger.active .hamburger-inner {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .nav-ribbon.scrolled .hamburger.active .hamburger-inner::before,
 .nav-ribbon.scrolled .hamburger.active .hamburger-inner::after {
   background-color: var(--retro-brown);
 }
+
+/* Hover saat active & scrolled - Disabled */
 
 /* Mobile Menu Styling */
 .mobile-menu {

@@ -1,394 +1,770 @@
-# 🚀 DEPLOYMENT GUIDE - CPANEL GIT
+# 🚀 Deployment Guide - PERGIMMIKAN
 
-## 📋 PREREQUISITES
-
-- ✅ Repository GitHub/GitLab
-- ✅ cPanel account dengan Git Version Control
-- ✅ SSH access (optional tapi recommended)
+Panduan lengkap untuk deploy PERGIMMIKAN ke berbagai platform.
 
 ---
 
-## 🎯 OPTION 1: GIT VERSION CONTROL (CPANEL)
+## 📋 Table of Contents
 
-### **STEP 1: Setup Repository di GitHub**
+- [Prerequisites](#prerequisites)
+- [Environment Setup](#environment-setup)
+- [Deploy to cPanel](#deploy-to-cpanel)
+- [Deploy to VPS](#deploy-to-vps)
+- [Deploy to Cloud](#deploy-to-cloud)
+- [Docker Deployment](#docker-deployment)
+- [Post-Deployment](#post-deployment)
+- [Troubleshooting](#troubleshooting)
+
+---
+
+## ✅ Prerequisites
+
+### Required
+
+- Node.js >= 16.x
+- MySQL >= 8.0
+- Domain name (optional tapi recommended)
+- SSL Certificate (Let's Encrypt atau commercial)
+
+### Recommended
+
+- Git untuk version control
+- PM2 untuk process management
+- Nginx sebagai reverse proxy
+- Backup strategy
+
+---
+
+## 🔧 Environment Setup
+
+### 1. Prepare Production Build
+
+#### Backend
 
 ```bash
-# Di local project
-cd PERGIMMIKAN
+cd server
 
-# Initialize git (jika belum)
-git init
+# Install production dependencies only
+npm install --production
 
-# Add remote
-git remote add origin https://github.com/username/pergimmikan.git
-
-# Commit semua changes
-git add .
-git commit -m "Initial commit"
-
-# Push ke GitHub
-git push -u origin main
+# Test production build
+NODE_ENV=production npm start
 ```
 
-### **STEP 2: Setup di cPanel**
+#### Frontend
+
+```bash
+cd frontend
+
+# Build untuk production
+npm run build
+
+# Output akan ada di folder dist/
+# Folder ini yang akan di-deploy
+```
+
+### 2. Environment Variables
+
+#### Backend `.env`
+
+```env
+# Production settings
+NODE_ENV=production
+PORT=5000
+
+# Database (gunakan production credentials)
+DB_HOST=your_db_host
+DB_USER=your_db_user
+DB_PASS=your_strong_password
+DB_NAME=pergimmikan_prod
+
+# JWT (generate strong secret)
+JWT_SECRET=your_super_secret_production_key_here
+JWT_EXPIRES_IN=7d
+
+# CORS (gunakan production domain)
+CORS_ORIGIN=https://yourdomain.com
+
+# Telegram (optional)
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
+```
+
+#### Frontend `.env`
+
+```env
+# Production API URL
+VITE_API_URL=https://api.yourdomain.com/api
+
+# App name
+VITE_APP_NAME=PERGIMMIKAN
+```
+
+---
+
+## 🌐 Deploy to cPanel
+
+### Step 1: Upload Files
+
+```bash
+# Compress project
+tar -czf pergimmikan.tar.gz .
+
+# Upload via FTP/SFTP atau cPanel File Manager
+# Extract di home directory
+```
+
+### Step 2: Setup Node.js App
 
 1. **Login ke cPanel**
-2. **Cari "Git Version Control"** di search bar
-3. **Click "Create"**
+2. **Buka "Setup Node.js App"**
+3. **Create Application**:
+   - Node.js version: 16.x atau lebih tinggi
+   - Application mode: Production
+   - Application root: `server`
+   - Application URL: `api.yourdomain.com`
+   - Application startup file: `src/app.js`
 
-**Form Settings:**
+### Step 3: Setup Database
+
+```bash
+# Via cPanel MySQL Database Wizard
+1. Create database: pergimmikan_prod
+2. Create user dengan strong password
+3. Grant all privileges
+
+# Import database
+mysql -u username -p pergimmikan_prod < database/MOUNTAIN-TRACKS-SCHEMA.sql
+mysql -u username -p pergimmikan_prod < database/trip-calculator-schema.sql
 ```
-Clone URL: https://github.com/username/pergimmikan.git
-Repository Path: /home/username/repositories/pergimmikan
-Repository Name: pergimmikan
+
+### Step 4: Configure Environment
+
+```bash
+# Via cPanel Terminal atau SSH
+cd server
+nano .env
+# Paste production environment variables
 ```
 
-4. **Click "Create"**
-5. **Wait for clone to complete**
+### Step 5: Install Dependencies
 
-### **STEP 3: Setup Deployment Path**
+```bash
+cd server
+npm install --production
 
-**Di Git Version Control:**
-1. Click **"Manage"** pada repository
-2. Scroll ke **"Pull or Deploy"** section
-3. Set **Deployment Path:**
-   ```
-   /home/username/public_html/pergimmikan
-   ```
-4. Click **"Update"**
+# Run migrations
+node run-notification-migration.js
+node run-comment-migration.js
+```
 
-### **STEP 4: Deploy**
+### Step 6: Deploy Frontend
 
-**Setiap kali ada update:**
+```bash
+# Upload dist/ folder ke public_html
+# Atau subdomain folder
 
-1. **Push ke GitHub:**
-   ```bash
-   git add .
-   git commit -m "Update telegram feature"
-   git push
-   ```
+# Via cPanel File Manager:
+1. Navigate ke public_html
+2. Upload semua file dari dist/
+3. Extract jika dalam zip
+```
 
-2. **Di cPanel Git Version Control:**
-   - Click **"Manage"** pada repo
-   - Click **"Pull or Deploy"** tab
-   - Click **"Update from Remote"**
-   - ✅ Done! Auto deploy!
+### Step 7: Setup .htaccess
+
+Create `.htaccess` di public_html:
+
+```apache
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect HTTP to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# React Router - redirect all to index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+# Browser Caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+```
+
+### Step 8: Start Application
+
+```bash
+# Via cPanel Node.js App interface
+# Click "Start" button
+
+# Atau via terminal
+cd server
+npm start
+```
+
+**Lihat panduan lengkap**: [CPANEL-QUICK-GUIDE.md](CPANEL-QUICK-GUIDE.md)
 
 ---
 
-## 🎯 OPTION 2: SSH + GIT (ADVANCED)
+## 🖥️ Deploy to VPS
 
-### **STEP 1: Enable SSH di cPanel**
-
-1. cPanel → **SSH Access**
-2. **Generate SSH Key** (jika belum ada)
-3. Copy **Public Key**
-
-### **STEP 2: Add SSH Key ke GitHub**
-
-1. GitHub → **Settings** → **SSH and GPG keys**
-2. **New SSH key**
-3. Paste public key dari cPanel
-4. Save
-
-### **STEP 3: Clone via SSH**
+### Step 1: Server Setup
 
 ```bash
-# SSH ke server
-ssh username@pergimmikan.site
+# Update system
+sudo apt update && sudo apt upgrade -y
 
-# Navigate to directory
-cd public_html
+# Install Node.js
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+
+# Install MySQL
+sudo apt install -y mysql-server
+sudo mysql_secure_installation
+
+# Install Nginx
+sudo apt install -y nginx
+
+# Install PM2
+sudo npm install -g pm2
+
+# Install Git
+sudo apt install -y git
+```
+
+### Step 2: Clone Repository
+
+```bash
+# Create app directory
+sudo mkdir -p /var/www/pergimmikan
+sudo chown $USER:$USER /var/www/pergimmikan
 
 # Clone repository
-git clone git@github.com:username/pergimmikan.git
+cd /var/www/pergimmikan
+git clone https://github.com/Tole2404/pergimmikan.git .
+```
+
+### Step 3: Setup Database
+
+```bash
+# Login ke MySQL
+sudo mysql -u root -p
+
+# Create database dan user
+CREATE DATABASE pergimmikan_prod;
+CREATE USER 'pergimmikan_user'@'localhost' IDENTIFIED BY 'strong_password';
+GRANT ALL PRIVILEGES ON pergimmikan_prod.* TO 'pergimmikan_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+
+# Import schema
+mysql -u pergimmikan_user -p pergimmikan_prod < database/MOUNTAIN-TRACKS-SCHEMA.sql
+mysql -u pergimmikan_user -p pergimmikan_prod < database/trip-calculator-schema.sql
+```
+
+### Step 4: Setup Backend
+
+```bash
+cd /var/www/pergimmikan/server
 
 # Install dependencies
-cd pergimmikan/server
+npm install --production
+
+# Create .env
+nano .env
+# Paste production environment variables
+
+# Run migrations
+node run-notification-migration.js
+node run-comment-migration.js
+
+# Test
+npm start
+# Ctrl+C to stop
+```
+
+### Step 5: Setup PM2
+
+```bash
+# Start with PM2
+pm2 start src/app.js --name pergimmikan-api
+
+# Save PM2 configuration
+pm2 save
+
+# Setup auto-start on reboot
+pm2 startup
+# Copy and run the command shown
+
+# Monitor
+pm2 status
+pm2 logs pergimmikan-api
+```
+
+### Step 6: Setup Frontend
+
+```bash
+cd /var/www/pergimmikan/frontend
+
+# Install dependencies
 npm install
 
-cd ../frontend
-npm install
+# Build
 npm run build
+
+# Copy build to nginx directory
+sudo cp -r dist/* /var/www/html/
 ```
 
-### **STEP 4: Update Script**
-
-**Create update script: `update.sh`**
+### Step 7: Configure Nginx
 
 ```bash
-#!/bin/bash
-
-echo "🔄 Pulling latest changes..."
-git pull origin main
-
-echo "📦 Installing server dependencies..."
-cd server
-npm install
-
-echo "🔄 Restarting server..."
-pm2 restart pergimmikan-server
-
-echo "📦 Building frontend..."
-cd ../frontend
-npm install
-npm run build
-
-echo "✅ Deployment complete!"
+# Create Nginx config
+sudo nano /etc/nginx/sites-available/pergimmikan
 ```
 
-**Make executable:**
-```bash
-chmod +x update.sh
-```
-
-**Update command:**
-```bash
-./update.sh
-```
-
----
-
-## 🎯 OPTION 3: GITHUB ACTIONS (AUTO DEPLOY)
-
-### **Setup GitHub Actions**
-
-**Create: `.github/workflows/deploy.yml`**
-
-```yaml
-name: Deploy to cPanel
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+```nginx
+# Frontend
+server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
     
-    steps:
-    - name: 🚀 Deploy via FTP
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: ftp.pergimmikan.site
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/pergimmikan/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/.env
-```
-
-**Setup Secrets:**
-1. GitHub → **Settings** → **Secrets and variables** → **Actions**
-2. Add secrets:
-   - `FTP_USERNAME`: Your cPanel username
-   - `FTP_PASSWORD`: Your cPanel password
-
-**Now every push auto-deploys!** 🎉
-
----
-
-## 🎯 OPTION 4: WEBHOOK AUTO DEPLOY
-
-### **Create Webhook Script**
-
-**File: `public_html/deploy.php`**
-
-```php
-<?php
-// Security: Check secret token
-$secret = 'YOUR_SECRET_TOKEN_HERE';
-$headers = getallheaders();
-$signature = isset($headers['X-Hub-Signature']) ? $headers['X-Hub-Signature'] : '';
-
-// Verify GitHub signature
-$payload = file_get_contents('php://input');
-$hash = 'sha1=' . hash_hmac('sha1', $payload, $secret);
-
-if (hash_equals($hash, $signature)) {
-    // Execute git pull
-    $output = shell_exec('cd /home/username/public_html/pergimmikan && git pull origin main 2>&1');
+    root /var/www/html;
+    index index.html;
     
-    // Log
-    file_put_contents('deploy.log', date('Y-m-d H:i:s') . " - Deploy triggered\n" . $output . "\n\n", FILE_APPEND);
+    # Gzip compression
+    gzip on;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
     
-    echo "Deployment successful!";
-} else {
-    http_response_code(403);
-    echo "Invalid signature";
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+    
+    # Cache static assets
+    location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
 }
-?>
+
+# Backend API
+server {
+    listen 80;
+    server_name api.yourdomain.com;
+    
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
 ```
 
-### **Setup GitHub Webhook**
-
-1. GitHub → **Settings** → **Webhooks** → **Add webhook**
-2. **Payload URL:** `https://pergimmikan.site/deploy.php`
-3. **Content type:** `application/json`
-4. **Secret:** `YOUR_SECRET_TOKEN_HERE`
-5. **Events:** Just the push event
-6. **Active:** ✅
-7. Save
-
-**Now every push auto-deploys!** 🚀
-
----
-
-## 📋 RECOMMENDED WORKFLOW
-
-### **Development:**
 ```bash
-# Local development
-git checkout develop
-# Make changes
-git add .
-git commit -m "Add feature"
-git push origin develop
+# Enable site
+sudo ln -s /etc/nginx/sites-available/pergimmikan /etc/nginx/sites-enabled/
+
+# Test configuration
+sudo nginx -t
+
+# Restart Nginx
+sudo systemctl restart nginx
 ```
 
-### **Production:**
-```bash
-# Merge to main
-git checkout main
-git merge develop
-git push origin main
+### Step 8: Setup SSL with Let's Encrypt
 
-# Auto deploy via:
-# - cPanel Git (manual pull)
-# - GitHub Actions (auto)
-# - Webhook (auto)
+```bash
+# Install Certbot
+sudo apt install -y certbot python3-certbot-nginx
+
+# Get SSL certificate
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com -d api.yourdomain.com
+
+# Auto-renewal test
+sudo certbot renew --dry-run
 ```
 
----
-
-## 🔧 POST-DEPLOYMENT TASKS
-
-### **After Each Deploy:**
+### Step 9: Setup Firewall
 
 ```bash
-# SSH to server
-ssh username@pergimmikan.site
+# Enable UFW
+sudo ufw enable
 
-# Navigate to project
-cd public_html/pergimmikan
+# Allow SSH
+sudo ufw allow ssh
 
-# Install dependencies (if package.json changed)
-cd server && npm install
-cd ../frontend && npm install
-
-# Build frontend
-cd frontend
-npm run build
-
-# Restart server
-pm2 restart pergimmikan-server
+# Allow HTTP and HTTPS
+sudo ufw allow 'Nginx Full'
 
 # Check status
+sudo ufw status
+```
+
+---
+
+## ☁️ Deploy to Cloud
+
+### AWS EC2
+
+1. **Launch EC2 Instance**
+   - AMI: Ubuntu 22.04 LTS
+   - Instance type: t2.micro (free tier) atau t2.small
+   - Security group: Allow HTTP (80), HTTPS (443), SSH (22)
+
+2. **Follow VPS deployment steps above**
+
+3. **Setup RDS for MySQL** (optional)
+   - Create RDS MySQL instance
+   - Update DB_HOST di .env
+
+### Google Cloud Platform
+
+1. **Create Compute Engine VM**
+   - Machine type: e2-micro atau e2-small
+   - Boot disk: Ubuntu 22.04 LTS
+   - Firewall: Allow HTTP and HTTPS
+
+2. **Follow VPS deployment steps above**
+
+3. **Setup Cloud SQL** (optional)
+   - Create MySQL instance
+   - Update DB_HOST di .env
+
+### DigitalOcean
+
+1. **Create Droplet**
+   - Image: Ubuntu 22.04 LTS
+   - Plan: Basic $6/month
+   - Add SSH key
+
+2. **Follow VPS deployment steps above**
+
+3. **Setup Managed Database** (optional)
+   - Create MySQL cluster
+   - Update DB_HOST di .env
+
+### Heroku
+
+```bash
+# Install Heroku CLI
+npm install -g heroku
+
+# Login
+heroku login
+
+# Create app
+heroku create pergimmikan-api
+
+# Add MySQL addon
+heroku addons:create cleardb:ignite
+
+# Get database URL
+heroku config:get CLEARDB_DATABASE_URL
+
+# Set environment variables
+heroku config:set NODE_ENV=production
+heroku config:set JWT_SECRET=your_secret
+
+# Deploy
+git push heroku main
+
+# Open app
+heroku open
+```
+
+---
+
+## 🐳 Docker Deployment
+
+### Step 1: Create Dockerfile
+
+#### Backend Dockerfile
+
+```dockerfile
+# server/Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --production
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["npm", "start"]
+```
+
+#### Frontend Dockerfile
+
+```dockerfile
+# frontend/Dockerfile
+FROM node:18-alpine as build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+### Step 2: Create docker-compose.yml
+
+```yaml
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: pergimmikan-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: pergimmikan
+      MYSQL_USER: pergimmikan_user
+      MYSQL_PASSWORD: user_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - pergimmikan-network
+
+  # Backend API
+  api:
+    build: ./server
+    container_name: pergimmikan-api
+    restart: always
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_USER: pergimmikan_user
+      DB_PASS: user_password
+      DB_NAME: pergimmikan
+      JWT_SECRET: your_jwt_secret
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    networks:
+      - pergimmikan-network
+
+  # Frontend
+  frontend:
+    build: ./frontend
+    container_name: pergimmikan-frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    networks:
+      - pergimmikan-network
+
+volumes:
+  db_data:
+
+networks:
+  pergimmikan-network:
+    driver: bridge
+```
+
+### Step 3: Deploy with Docker
+
+```bash
+# Build images
+docker-compose build
+
+# Start containers
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop containers
+docker-compose down
+
+# Remove volumes (WARNING: deletes data)
+docker-compose down -v
+```
+
+---
+
+## ✅ Post-Deployment
+
+### 1. Verify Deployment
+
+```bash
+# Check backend
+curl https://api.yourdomain.com/api/health
+
+# Check frontend
+curl https://yourdomain.com
+
+# Check database connection
+mysql -h your_db_host -u your_user -p
+```
+
+### 2. Setup Monitoring
+
+```bash
+# Install monitoring tools
+npm install -g pm2
+
+# Monitor with PM2
+pm2 monit
+
+# Setup alerts
+pm2 install pm2-logrotate
+```
+
+### 3. Setup Backups
+
+```bash
+# Database backup script
+#!/bin/bash
+DATE=$(date +%Y%m%d_%H%M%S)
+BACKUP_DIR="/backups/mysql"
+mkdir -p $BACKUP_DIR
+
+mysqldump -u user -p password pergimmikan_prod > $BACKUP_DIR/backup_$DATE.sql
+
+# Keep only last 7 days
+find $BACKUP_DIR -name "backup_*.sql" -mtime +7 -delete
+
+# Add to crontab
+crontab -e
+# Add: 0 2 * * * /path/to/backup-script.sh
+```
+
+### 4. Setup Analytics
+
+- Google Analytics
+- Google Search Console
+- Error tracking (Sentry)
+- Performance monitoring (New Relic)
+
+### 5. Security Checklist
+
+- [ ] HTTPS enabled
+- [ ] Firewall configured
+- [ ] Strong passwords
+- [ ] Regular backups
+- [ ] Monitoring enabled
+- [ ] Error logging
+- [ ] Rate limiting
+- [ ] CORS configured
+
+---
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### 1. Port Already in Use
+
+```bash
+# Find process using port
+sudo lsof -i :5000
+
+# Kill process
+sudo kill -9 <PID>
+```
+
+#### 2. Permission Denied
+
+```bash
+# Fix file permissions
+sudo chown -R $USER:$USER /var/www/pergimmikan
+chmod -R 755 /var/www/pergimmikan
+```
+
+#### 3. Database Connection Failed
+
+```bash
+# Check MySQL status
+sudo systemctl status mysql
+
+# Restart MySQL
+sudo systemctl restart mysql
+
+# Check credentials in .env
+```
+
+#### 4. Nginx 502 Bad Gateway
+
+```bash
+# Check backend is running
 pm2 status
+
+# Check Nginx logs
+sudo tail -f /var/log/nginx/error.log
+
+# Restart services
+pm2 restart all
+sudo systemctl restart nginx
 ```
 
----
-
-## 🎯 BEST PRACTICES
-
-### **1. Use .gitignore**
-
-```
-# .gitignore
-node_modules/
-.env
-dist/
-build/
-*.log
-.DS_Store
-```
-
-### **2. Environment Variables**
-
-**Never commit `.env` file!**
+#### 5. SSL Certificate Issues
 
 ```bash
-# On server, create .env manually
-nano server/.env
+# Renew certificate
+sudo certbot renew
 
-# Or use cPanel File Manager
-```
-
-### **3. Database Migrations**
-
-```bash
-# After deploy, run migrations
-cd server
-node database/migrations/add-telegram-id.js
-```
-
-### **4. Build Frontend**
-
-```bash
-# Always build after deploy
-cd frontend
-npm run build
+# Force renew
+sudo certbot renew --force-renewal
 ```
 
 ---
 
-## 🚀 QUICK DEPLOYMENT CHECKLIST
+## 📚 Additional Resources
 
-- [ ] Push code to GitHub
-- [ ] Pull in cPanel (or auto-deploy)
-- [ ] Install dependencies (`npm install`)
-- [ ] Run migrations (if any)
-- [ ] Build frontend (`npm run build`)
-- [ ] Restart server (`pm2 restart`)
-- [ ] Check logs (`pm2 logs`)
-- [ ] Test website
+- [PM2 Documentation](https://pm2.keymetrics.io/docs/)
+- [Nginx Documentation](https://nginx.org/en/docs/)
+- [Let's Encrypt Documentation](https://letsencrypt.org/docs/)
+- [Docker Documentation](https://docs.docker.com/)
+- [AWS EC2 Guide](https://docs.aws.amazon.com/ec2/)
 
 ---
 
-## 💡 TIPS
+## 🆘 Need Help?
 
-### **Speed Up Deployment:**
-
-1. **Use PM2 ecosystem file:**
-   ```javascript
-   // ecosystem.config.js
-   module.exports = {
-     apps: [{
-       name: 'pergimmikan-server',
-       script: './server/src/app.js',
-       watch: false,
-       env: {
-         NODE_ENV: 'production'
-       }
-     }]
-   }
-   ```
-
-2. **Create deploy script:**
-   ```bash
-   # deploy.sh
-   git pull
-   cd server && npm install
-   cd ../frontend && npm install && npm run build
-   pm2 restart pergimmikan-server
-   ```
-
-3. **One command deploy:**
-   ```bash
-   ./deploy.sh
-   ```
+- 📧 Email: your.email@example.com
+- 💬 Telegram: @yourusername
+- 📖 Documentation: [GitHub Wiki](https://github.com/Tole2404/pergimmikan/wiki)
 
 ---
 
-## 🎉 RESULT
-
-**Before:** Manual upload every time 😫
-**After:** Just `git push` → Auto deploy! 🚀
-
-Choose the option that fits your needs:
-- **Beginner:** Option 1 (cPanel Git)
-- **Intermediate:** Option 2 (SSH + Git)
-- **Advanced:** Option 3 or 4 (Auto deploy)
+**Happy Deploying! 🚀**

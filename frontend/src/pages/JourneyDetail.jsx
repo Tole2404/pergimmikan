@@ -164,13 +164,19 @@ export default function JourneyDetail() {
     
   return (
     <>
-      {/* SEO Meta Tags */}
+      {/* SEO Meta Tags - Enhanced for Social Sharing */}
       <SEOHead
         title={`${journeyDetail.title || 'Journey'} - PERGIMMIKAN`}
-        description={journeyDetail.description || 'Explore our amazing journey and adventures'}
+        description={journeyDetail.description || 'Explore our amazing journey and adventures with PERGIMMIKAN. Discover breathtaking moments and unforgettable experiences.'}
         image={mainImage ? `${API_URL}${mainImage}` : null}
+        url={`https://pergimmikan.site/journey/${id}`}
         type="article"
-        keywords={`journey, travel, ${journeyDetail.title}, ${journeyDetail.location}, adventure`}
+        keywords={`journey, travel, ${journeyDetail.title}, ${journeyDetail.location}, adventure, PERGIMMIKAN, hiking, exploration`}
+        publishedTime={journeyDetail.date ? new Date(journeyDetail.date).toISOString() : null}
+        modifiedTime={journeyDetail.updated_at ? new Date(journeyDetail.updated_at).toISOString() : null}
+        section="Travel & Adventure"
+        tags={[journeyDetail.title, journeyDetail.location, 'Adventure', 'Travel', 'Photography']}
+        author="PERGIMMIKAN Team"
       />
 
       <div className="journey-detail-container" id="journey-detail-content">
@@ -252,12 +258,12 @@ export default function JourneyDetail() {
         <div className={`journey-section ${activeSection === 'overview' ? 'active' : ''}`}>
           <div className="journey-row">
             <div className="journey-col journey-col-main">
-              <h2 className="section-title">Overview</h2>
+              <h2 className="section-title-landing">Overview</h2>
               <div className="journey-content">
                 <p>{journeyDetail.description || 'No description available for this journey.'}</p>
               </div>
               
-              <h2 className="section-title">Highlights</h2>
+              <h2 className="section-title-landing">Highlights</h2>
               <div className="journey-highlights">
                 {JOURNEY_HIGHLIGHTS.map((highlight, index) => (
                   <div className="highlight-card" key={index}>
@@ -323,7 +329,7 @@ export default function JourneyDetail() {
         
         {/* Itinerary Section */}
         <div className={`journey-section ${activeSection === 'itinerary' ? 'active' : ''}`}>
-          <h2 className="section-title">Itinerary</h2>
+          <h2 className="section-title-landing">Itinerary</h2>
           <div className="journey-itinerary">
             {JOURNEY_ITINERARY.map((day, index) => (
               <div className="itinerary-day" key={index}>
@@ -345,7 +351,7 @@ export default function JourneyDetail() {
         
         {/* Gallery Section */}
         <div className={`journey-section ${activeSection === 'gallery' ? 'active' : ''}`}>
-          <h2 className="section-title">Gallery</h2>
+          <h2 className="section-title-landing">Gallery</h2>
           <div className="journey-gallery">
             {journeyDetail.photos && journeyDetail.photos.length > 0 ? (
               <>
@@ -414,7 +420,7 @@ export default function JourneyDetail() {
         
         {/* Travel Info Section */}
         <div className={`journey-section ${activeSection === 'travel-info' ? 'active' : ''}`}>
-          <h2 className="section-title">Travel Information</h2>
+          <h2 className="section-title-landing">Travel Information</h2>
           <div className="journey-row info-row">
             {TRAVEL_INFO.map((info, index) => (
               <div className="info-card" key={index}>

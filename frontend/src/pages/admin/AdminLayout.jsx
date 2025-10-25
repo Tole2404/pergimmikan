@@ -5,7 +5,7 @@ import './styles/Admin.css'; // Pastikan path ini benar dan file CSS ada
 import {
   FaTachometerAlt, FaUsers, FaUsersCog, FaFileAlt, FaImages, FaCalendarAlt,
   FaLandmark, FaQuoteRight, FaHistory, FaMapMarkedAlt, FaHiking, FaPiggyBank,
-  FaSignOutAlt, FaBars, FaChevronDown, FaChevronUp
+  FaSignOutAlt, FaBars, FaChevronDown, FaChevronUp, FaSearch, FaMountain, FaCalculator
 } from 'react-icons/fa';
 
 // Komponen untuk Dropdown Navigasi
@@ -87,6 +87,11 @@ export default function AdminLayout() {
       '/dashboard/journey': 'Journey',
       '/dashboard/activities': 'Activities',
       '/dashboard/savings': 'Savings',
+      '/dashboard/trip-calculator/mountains': 'Mountains Management',
+      '/dashboard/trip-calculator/tracks': 'Tracks Management',
+      '/dashboard/trip-calculator/transportation': 'Transportation Management',
+      '/dashboard/trip-calculator/equipment': 'Equipment Management',
+      '/dashboard/seo': 'SEO Management',
     };
     // Cari judul yang cocok, atau kembalikan judul default
     for (const route in routes) {
@@ -156,6 +161,15 @@ export default function AdminLayout() {
             <NavLink to="/dashboard/journey" className="nav-link"><FaMapMarkedAlt /> <span className="nav-text">Journeys</span></NavLink>
             <NavLink to="/dashboard/activities" className="nav-link"><FaHiking /> <span className="nav-text">Activities</span></NavLink>
             <NavLink to="/dashboard/savings" className="nav-link"><FaPiggyBank /> <span className="nav-text">Savings</span></NavLink>
+            
+            <NavDropdown title="Trip Calculator" icon={<FaCalculator />} path="/dashboard/trip-calculator">
+              <NavLink to="/dashboard/trip-calculator/mountains" className="nav-link"><FaMountain /> <span className="nav-text">Mountains</span></NavLink>
+              <NavLink to="/dashboard/trip-calculator/tracks" className="nav-link"><FaMapMarkedAlt /> <span className="nav-text">Tracks</span></NavLink>
+              <NavLink to="/dashboard/trip-calculator/transportation" className="nav-link"><FaHiking /> <span className="nav-text">Transportation</span></NavLink>
+              <NavLink to="/dashboard/trip-calculator/equipment" className="nav-link"><FaLandmark /> <span className="nav-text">Equipment</span></NavLink>
+            </NavDropdown>
+            
+            <NavLink to="/dashboard/seo" className="nav-link"><FaSearch /> <span className="nav-text">SEO Management</span></NavLink>
           </div>
           <div className="logout-container">
             <button onClick={handleLogout} className="logout-button">

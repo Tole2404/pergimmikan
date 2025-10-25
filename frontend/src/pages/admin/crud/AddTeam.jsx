@@ -11,6 +11,7 @@ export default function AddTeam() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
+    short_name: '',
     role: '',
     image: null,
     description: '',
@@ -77,6 +78,9 @@ export default function AddTeam() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
+      if (formData.short_name) {
+        formDataToSend.append('short_name', formData.short_name);
+      }
       formDataToSend.append('role', formData.role);
       formDataToSend.append('description', formData.description);
       formDataToSend.append('status', formData.status);
@@ -161,15 +165,29 @@ export default function AddTeam() {
                 <Card className="mb-4">
                   <Card.Body>
                     <Form.Group className="mb-3">
-                      <Form.Label>Name</Form.Label>
+                      <Form.Label>Full Name</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter name"
+                        placeholder="Enter full name (e.g., Muhammad Rizki Pratama)"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                         disabled={loading}
                       />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>Short Name <span className="text-muted">(Optional)</span></Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter short name (e.g., Rizki)"
+                        value={formData.short_name}
+                        onChange={(e) => setFormData({ ...formData, short_name: e.target.value })}
+                        disabled={loading}
+                      />
+                      <Form.Text className="text-muted">
+                        Nama singkat untuk ditampilkan di beberapa tempat. Jika kosong, akan menggunakan nama lengkap.
+                      </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3">

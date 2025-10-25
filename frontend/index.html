@@ -1,10 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/images/logo-192x192.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PERGIMMIKAN - Sekumpulan Pertemanan Mengabadikan Momen Trip dan Nongkrong</title>
+    
+    <!-- Meta tags will be managed by React Helmet -->
+    <title>PERGIMMIKAN</title>
+    
+    <!-- Theme color -->
+    <meta name="theme-color" content="#2c5f2d" />
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "PERGIMMIKAN",
+      "alternateName": "Sekumpulan Pertemanan Mengabadikan Momen Trip dan Nongkrong",
+      "url": "https://pergimmikan.site",
+      "logo": "https://pergimmikan.site/images/logo-192x192.svg",
+      "description": "Komunitas petualangan dan persahabatan yang mengabadikan setiap momen perjalanan dan kebersamaan",
+      "sameAs": [
+        "https://www.instagram.com/pergimmikan",
+        "https://www.facebook.com/pergimmikan"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Customer Service",
+        "availableLanguage": ["Indonesian"]
+      }
+    }
+    </script>
+
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7Q4TB2BJC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X7Q4TB2BJC', {
+        'send_page_view': true,
+        'anonymize_ip': true
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>

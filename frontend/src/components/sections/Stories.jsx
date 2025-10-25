@@ -495,7 +495,7 @@ const Stories = () => {
               <span className="vintage-stamp-text">STORIES</span>
             </div>
             <div className="header-content">
-              <h2 className="section-title">Our Journey Stories</h2>
+              <h2 className="section-title-landing">Our Journey Stories</h2>
               <div className="section-divider">
                 <span className="divider-star">★</span>
                 <span className="divider-line"></span>
@@ -577,7 +577,7 @@ const Stories = () => {
             <span className="vintage-stamp-text">STORIES</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title" ref={titleRef}>Our Journey Stories</h2>
+            <h2 className="section-title-landing" ref={titleRef}>Our Journey Stories</h2>
             <div className="section-divider" ref={dividerRef}>
               <span className="divider-star">★</span>
               <span className="divider-line"></span>

@@ -12,6 +12,7 @@ export default function EditTeam() {
   const { id } = useParams();
   const [formData, setFormData] = useState({
     name: '',
+    short_name: '',
     role: '',
     image: null,
     description: '',
@@ -58,6 +59,7 @@ export default function EditTeam() {
         
         setFormData({
           ...data,
+          short_name: data.short_name || '',
           image: null, // Reset image since we don't want to send it back unless changed
           social: {
             linkedin: linkedinValue,
@@ -176,6 +178,9 @@ export default function EditTeam() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
+      if (formData.short_name) {
+        formDataToSend.append('short_name', formData.short_name);
+      }
       formDataToSend.append('role', formData.role);
       formDataToSend.append('description', formData.description);
       formDataToSend.append('status', formData.status);
@@ -195,6 +200,14 @@ export default function EditTeam() {
       }
 
       const token = localStorage.getItem('adminToken');
+      
+      // Debug: Log what we're sending
+      console.log('Sending update for team ID:', id);
+      console.log('FormData contents:');
+      for (let pair of formDataToSend.entries()) {
+        console.log(pair[0] + ':', pair[1]);
+      }
+      
       const response = await fetch(`${API_URL}/api/admin/team/${id}`, {
         method: 'PUT',
         headers: {
@@ -205,7 +218,8 @@ export default function EditTeam() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+        console.error('Server error response:', errorData);
         throw new Error(errorData.message || 'Failed to update team member');
       }
 
@@ -214,6 +228,7 @@ export default function EditTeam() {
     } catch (error) {
       setError(error.message);
       console.error('Error updating team member:', error);
+      showError('Error', error.message || 'Failed to update team member');
     } finally {
       setSaving(false);
     }
@@ -285,15 +300,29 @@ export default function EditTeam() {
                 <Card className="mb-4">
                   <Card.Body>
                     <Form.Group className="mb-3">
-                      <Form.Label>Name</Form.Label>
+                      <Form.Label>Full Name</Form.Label>
                       <Form.Control
                         type="text"
-                        placeholder="Enter name"
+                        placeholder="Enter full name (e.g., Muhammad Rizki Pratama)"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                         disabled={saving}
                       />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>Short Name <span className="text-muted">(Optional)</span></Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter short name (e.g., Rizki)"
+                        value={formData.short_name}
+                        onChange={(e) => setFormData({ ...formData, short_name: e.target.value })}
+                        disabled={saving}
+                      />
+                      <Form.Text className="text-muted">
+                        Nama singkat untuk ditampilkan di beberapa tempat. Jika kosong, akan menggunakan nama lengkap.
+                      </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3">

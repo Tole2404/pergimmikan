@@ -35,7 +35,7 @@ class TeamController {
   // Create new team member
   async createTeamMember(req, res, next) {
     try {
-      const { name, role, description, status, linkedin, github, instagram } = req.body;
+      const { name, short_name, role, description, status, linkedin, github, instagram } = req.body;
       const image_url = req.file ? `/images/team/${req.file.filename}` : null;
 
       // Handle social media data
@@ -61,6 +61,7 @@ class TeamController {
 
       const teamId = await Team.create({
         name,
+        short_name: short_name || null,
         role,
         image_url,
         description,
@@ -78,7 +79,12 @@ class TeamController {
   // Update team member
   async updateTeamMember(req, res, next) {
     try {
-      const { name, role, description, status, linkedin, github, instagram } = req.body;
+      console.log('=== UPDATE TEAM MEMBER ===');
+      console.log('Team ID:', req.params.id);
+      console.log('Request body:', req.body);
+      console.log('File:', req.file);
+      
+      const { name, short_name, role, description, status, linkedin, github, instagram } = req.body;
       
       // Handle social media data
       let social_media = {};
@@ -103,6 +109,7 @@ class TeamController {
 
       const updates = {
         name,
+        short_name: short_name !== undefined ? (short_name || null) : undefined,
         role,
         description,
         status: status || 'active',
@@ -113,10 +120,19 @@ class TeamController {
         updates.image_url = `/images/team/${req.file.filename}`;
       }
 
+      console.log('Updates to apply:', updates);
+
       await Team.update(req.params.id, updates);
+      
+      console.log('Update successful!');
       const updatedMember = await Team.findById(req.params.id);
       res.json(updatedMember);
     } catch (error) {
+      console.error('=== ERROR UPDATING TEAM ===');
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+      console.error('Error code:', error.code);
+      console.error('Error SQL:', error.sql);
       next(error);
     }
   }

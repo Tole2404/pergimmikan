@@ -15,6 +15,8 @@ export default defineConfig({
         injectionPoint: undefined,
         swSrc: 'public/service-worker.js',
         swDest: 'dist/service-worker.js',
+        globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
       },
       manifest: false, // Gunakan manifest.json manual dari public folder
       devOptions: {
@@ -23,5 +25,26 @@ export default defineConfig({
         navigateFallback: 'index.html',
       }
     })
-  ]
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'ui-vendor': ['react-slick', 'slick-carousel', 'jquery'],
+          'animation-vendor': ['gsap'],
+          'date-vendor': ['date-fns'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    sourcemap: false,
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
+  },
+  optimizeDeps: {
+    include: ['jquery', 'slick-carousel'],
+  },
 })

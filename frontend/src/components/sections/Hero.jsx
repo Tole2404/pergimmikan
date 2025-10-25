@@ -24,51 +24,52 @@ const Hero = () => {
       title.classList.add('typewriter-active');
     }
     
-    // Set initial states for elements to ensure they're visible
-    gsap.set([subtitleRef.current, dividerRef.current, h2Ref.current, descriptionRef.current, musicPlayerRef.current], {
-      opacity: 1,
-      y: 0,
-      scale: 1
+    // GSAP animations - optimized
+    const timeline = gsap.timeline({ 
+      defaults: { 
+        ease: "power2.out",
+        clearProps: "all" // Clear props after animation
+      } 
     });
     
-    // GSAP animations
-    const timeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+    // Batch set initial states
+    gsap.set([subtitleRef.current, dividerRef.current, h2Ref.current, descriptionRef.current, musicPlayerRef.current], {
+      opacity: 0,
+      willChange: "transform, opacity" // GPU acceleration hint
+    });
     
-    // Make elements initially invisible
-    gsap.set(subtitleRef.current, { opacity: 0, y: -30 });
-    gsap.set(dividerRef.current, { opacity: 0, scale: 0.5 });
-    gsap.set(h2Ref.current, { opacity: 0, y: 30 });
-    gsap.set(descriptionRef.current, { opacity: 0, y: 30 });
-    gsap.set(musicPlayerRef.current, { opacity: 0, y: 30 });
-    
-    // Stagger the animations
+    // Optimized stagger animation - shorter delays
     timeline
       .to(subtitleRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.3
+        duration: 0.4
       })
       .to(dividerRef.current, {
         opacity: 1,
         scale: 1,
-        duration: 0.3,
-        ease: "power2.out"
-      }, "+=0.4")
+        duration: 0.4
+      }, "-=0.2") // Overlap animations
       .to(h2Ref.current, {
         opacity: 1,
         y: 0,
-        duration: 0.3
-      }, "+=0.3")
+        duration: 0.4
+      }, "-=0.2")
       .to(descriptionRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.3
-      }, "+=0.3")
+        duration: 0.4
+      }, "-=0.2")
       .to(musicPlayerRef.current, {
         opacity: 1,
         y: 0,
-        duration: 0.3
-      }, "+=0.2");
+        duration: 0.4
+      }, "-=0.2");
+    
+    // Cleanup
+    return () => {
+      timeline.kill();
+    };
   }, []);
 
   const handlePlayPause = () => {

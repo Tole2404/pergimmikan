@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faSearch, faSort, faUsers, faFilter, faTags } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { showWarning } from '../../utils/sweetalert';
+import DynamicSEO from '../common/DynamicSEO';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -12,6 +14,7 @@ import './Team.css';
 import './highlight.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
+const SITE_URL = 'https://pergimmikan.site';
 
 const Team = () => {
   const [teamMembers, setTeamMembers] = useState([]);
@@ -109,6 +112,36 @@ const Team = () => {
     return [...leaderMembers, ...momiMembers, ...otherMembers];
   }, [leaderMembers, momiMembers, otherMembers]);
 
+  // Generate structured data for all team members
+  const generateStructuredData = () => {
+    const members = teamMembers.map(member => ({
+      "@type": "Person",
+      "name": member.name,
+      ...(member.short_name && { "alternateName": member.short_name }),
+      "jobTitle": member.role,
+      "image": `${API_URL}${member.image_url}`,
+      "url": `${SITE_URL}/team#${member.name.toLowerCase().replace(/\s+/g, '-')}`,
+      "description": member.description,
+      "memberOf": {
+        "@type": "Organization",
+        "name": "PERGIMMIKAN"
+      },
+      ...(member.linkedin && { "sameAs": [member.linkedin] }),
+      ...(member.github && { "sameAs": [member.github] }),
+      ...(member.instagram && { "sameAs": [member.instagram] })
+    }));
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": members.map((member, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": member
+      }))
+    };
+  };
+
   const TeamMemberCard = ({ member, isLeader = false, isMomi = false }) => {
     const handleSocialClick = (platform, url) => {
       if (url && url.trim() !== '') {
@@ -124,7 +157,12 @@ const Team = () => {
     const anchorId = member.name.toLowerCase().replace(/\s+/g, '-');
 
     return (
-      <div id={anchorId} className={`pgm-team__card ${isLeader ? 'pgm-team__card--leader' : ''} ${isMomi ? 'pgm-team__card--momi' : ''}`}>
+      <article 
+        id={anchorId} 
+        className={`pgm-team__card ${isLeader ? 'pgm-team__card--leader' : ''} ${isMomi ? 'pgm-team__card--momi' : ''}`}
+        itemScope 
+        itemType="https://schema.org/Person"
+      >
         {isMomi && <div className="pgm-team__momi-label">MOMI</div>}
         {isLeader && (
           <>
@@ -141,14 +179,18 @@ const Team = () => {
             alt={member.name} 
             className="pgm-team__image"
             loading="lazy"
+            itemProp="image"
           />
         </div>
         <div className="pgm-team__card-content">
           <div>
-            <h2 id={`${member.name.toLowerCase().replace(/\s+/g, '-')}-profile`} className="pgm-team__name">{member.name}</h2>
-            <p className="pgm-team__role">{member.role}</p>
+            <h2 id={`${member.name.toLowerCase().replace(/\s+/g, '-')}-profile`} className="pgm-team__name" itemProp="name">{member.name}</h2>
+            <p className="pgm-team__role" itemProp="jobTitle">{member.role}</p>
           </div>
           <div className="pgm-team__social" style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+            {member.linkedin && <link itemProp="sameAs" href={member.linkedin} />}
+            {member.github && <link itemProp="sameAs" href={member.github} />}
+            {member.instagram && <link itemProp="sameAs" href={member.instagram} />}
             <span 
               onClick={() => handleSocialClick('LinkedIn', member.linkedin)}
               className={`pgm-team__social-icon ${member.linkedin ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
@@ -171,7 +213,7 @@ const Team = () => {
             </span>
           </div>
         </div>
-      </div>
+      </article>
     );
   };
 
@@ -263,22 +305,50 @@ const Team = () => {
     );
   }
 
+  // Generate member names for meta description
+  const memberNames = allFilteredAndSortedMembers.slice(0, 10).map(m => m.name).join(', ') || 'Tim Petualang';
+  const totalMembers = teamMembers.filter(m => m.status !== 'inactive').length;
+  const pageTitle = totalMembers > 0 ? `Tim PERGIMMIKAN - ${totalMembers} Anggota Petualang Indonesia` : 'Tim PERGIMMIKAN - Komunitas Petualang Indonesia';
+  const ogTitle = totalMembers > 0 ? `Tim PERGIMMIKAN - ${totalMembers} Anggota Petualang` : 'Tim PERGIMMIKAN - Komunitas Petualang';
+
   return (
-    <div className="pgm-team">
-      <div className="pgm-team__container">
-        <div className="pgm-team__header">
-          <div className="pgm-team__header-background"></div>
-          <div className="pgm-team__header-icon"><FontAwesomeIcon icon={faUsers} /></div>
-          <h1 className="pgm-team__title">Our Team</h1>
-          <p className="pgm-team__subtitle">The Creative Minds Behind PERGIMMIKAN</p>
-          <div className="pgm-team__header-decoration"></div>
-        </div>
+    <>
+      {/* Dynamic SEO from database or fallback */}
+      <DynamicSEO 
+        pageType="team"
+        fallback={{
+          title: pageTitle,
+          description: `Kenali tim PERGIMMIKAN: ${memberNames}${totalMembers > 10 ? ' dan lainnya' : ''}. Komunitas petualang dan pendaki gunung Indonesia yang solid dan berpengalaman.`,
+          keywords: `PERGIMMIKAN team, ${teamMembers.map(m => m.name).join(', ') || 'tim pendaki'}, tim pendaki Indonesia, komunitas petualangan, ${teamMembers.map(m => m.short_name).filter(Boolean).join(', ')}`,
+          og_title: ogTitle,
+          og_description: `Kenali tim PERGIMMIKAN: ${memberNames}${totalMembers > 10 ? ' dan lainnya' : ''}. Komunitas petualang Indonesia.`,
+          canonical_url: `${SITE_URL}/team`,
+          structured_data: generateStructuredData()
+        }}
+      />
+
+      <div className="pgm-team">
+        <div className="pgm-team__container">
+          <div className="pgm-team__header">
+            <div className="pgm-team__header-background"></div>
+            <div className="pgm-team__header-icon"><FontAwesomeIcon icon={faUsers} /></div>
+            <h1 className="pgm-team__title">Our Team</h1>
+            <p className="pgm-team__subtitle">The Creative Minds Behind PERGIMMIKAN</p>
+            <div className="pgm-team__header-decoration"></div>
+          </div>
         
         <div className="pgm-team__seo-anchors" style={{ display: 'none' }}>
           {teamMembers.map(member => (
-            <h2 key={member.id} id={`${member.name.toLowerCase().replace(/\s+/g, '-')}-seo`}>
-              {member.name} - {member.role} at PERGIMMIKAN
-            </h2>
+            <React.Fragment key={member.id}>
+              <h2 id={`${member.name.toLowerCase().replace(/\s+/g, '-')}-seo`}>
+                {member.name} - {member.role} at PERGIMMIKAN
+              </h2>
+              {member.short_name && (
+                <h3 id={`${member.short_name.toLowerCase().replace(/\s+/g, '-')}-seo`}>
+                  {member.short_name} ({member.name}) - {member.role} PERGIMMIKAN
+                </h3>
+              )}
+            </React.Fragment>
           ))}
         </div>
 
@@ -394,6 +464,7 @@ const Team = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

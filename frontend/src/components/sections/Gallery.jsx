@@ -297,7 +297,7 @@ const Gallery = () => {
             <span className="vintage-stamp-text">GALLERY</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title">BEST MOMENTS</h2>
+            <h2 className="section-title-landing">BEST MOMENTS</h2>
             <div className="section-divider">
               <span className="divider-star">★</span>
               <span className="divider-line"></span>
@@ -347,7 +347,7 @@ const Gallery = () => {
             <span className="vintage-stamp-text">GALLERY</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title">BEST MOMENTS</h2>
+            <h2 className="section-title-landing">BEST MOMENTS</h2>
             <div className="section-divider">
               <span className="divider-star">★</span>
               <span className="divider-line"></span>
@@ -373,7 +373,7 @@ const Gallery = () => {
             <span className="vintage-stamp-text">GALLERY</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title">BEST MOMENTS</h2>
+            <h2 className="section-title-landing">BEST MOMENTS</h2>
             <div className="section-divider">
               <span className="divider-star">★</span>
               <span className="divider-line"></span>
@@ -400,7 +400,7 @@ const Gallery = () => {
             <span className="vintage-stamp-text">GALLERY</span>
           </div>
           <div className="header-content">
-            <h2 className="section-title" ref={titleRef}>BEST MOMENTS</h2>
+            <h2 className="section-title-landing" ref={titleRef}>BEST MOMENTS</h2>
             <div className="section-divider" ref={dividerRef}>
               <span className="divider-star">★</span>
               <span className="divider-line"></span>

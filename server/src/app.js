@@ -32,6 +32,13 @@ const verifyApiKeyRoutes = require('./routes/verify_api_key.routes');
 const telegramRoutes = require('./routes/telegram.routes');
 const notificationsRoutes = require('./routes/notifications.routes');
 const commentsRoutes = require('./routes/comments.routes');
+const seoRoutes = require('./routes/seo.routes');
+const sitemapRoutes = require('./routes/sitemap.routes');
+const tripCalculatorRoutes = require('./routes/tripCalculator.routes');
+const mountainsAdminRoutes = require('./routes/mountainsAdmin.routes');
+const tracksAdminRoutes = require('./routes/tracksAdmin.routes');
+const transportationAdminRoutes = require('./routes/transportationAdmin.routes');
+const equipmentAdminRoutes = require('./routes/equipmentAdmin.routes');
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -114,10 +121,15 @@ app.use('/images', express.static(path.join(__dirname, '../public/images'), {
         ? 'https://pergimmikan.site' 
         : 'http://localhost:5173');
     }
+    // CRITICAL: Allow cross-origin resource sharing
     res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+    res.set('Cross-Origin-Embedder-Policy', 'unsafe-none');
     res.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.set('Cache-Control', 'public, max-age=86400'); 
+    res.set('Access-Control-Allow-Credentials', 'true');
+    res.set('Cache-Control', 'public, max-age=86400');
+    // Remove X-Frame-Options to allow embedding
+    res.removeHeader('X-Frame-Options');
   }
 }));
 
@@ -137,11 +149,18 @@ app.use('/api/featured-journeys', featuredJourneysRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/telegram', telegramRoutes);
+app.use('/api/seo', seoRoutes);
+app.use('/api/trip-calculator', tripCalculatorRoutes);
+app.use('/', sitemapRoutes);
 
 // Admin routes
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin/next', nextAdminRoutes);
 app.use('/api/admin/api-keys', apiKeysRoutes);
+app.use('/api/admin', mountainsAdminRoutes);
+app.use('/api/admin', tracksAdminRoutes);
+app.use('/api/admin', transportationAdminRoutes);
+app.use('/api/admin', equipmentAdminRoutes);
 
 // API Key verification route
 app.use('/api/verify-api-key', verifyApiKeyRoutes);

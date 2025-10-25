@@ -27,6 +27,7 @@
     "eslint-plugin-react": "^7.37.4",
     "framer-motion": "^12.4.10",
     "gsap": "^3.12.7",
+    "jquery": "^3.7.1",
     "jspdf": "^3.0.0",
     "jspdf-autotable": "^5.0.2",
     "leaflet": "^1.9.4",

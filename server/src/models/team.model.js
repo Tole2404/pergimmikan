@@ -1,15 +1,15 @@
 const db = require('../config/database');
 
 class Team {
-  static async create({ name, role, image_url, description, status, social_media }) {
+  static async create({ name, short_name, role, image_url, description, status, social_media }) {
     const conn = await db.getConnection();
     try {
       await conn.beginTransaction();
 
       // Insert team data
       const [teamResult] = await conn.execute(
-        'INSERT INTO teams (name, role, image_url, description, status) VALUES (?, ?, ?, ?, ?)',
-        [name, role, image_url, description, status]
+        'INSERT INTO teams (name, short_name, role, image_url, description, status) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, short_name || null, role, image_url, description, status]
       );
       const teamId = teamResult.insertId;
 
@@ -65,7 +65,7 @@ class Team {
     return rows[0];
   }
 
-  static async update(id, { name, role, image_url, description, status, social_media }) {
+  static async update(id, { name, short_name, role, image_url, description, status, social_media }) {
     const conn = await db.getConnection();
     try {
       await conn.beginTransaction();
@@ -77,6 +77,10 @@ class Team {
       if (name) {
         updateFields.push('name = ?');
         updateValues.push(name);
+      }
+      if (short_name !== undefined) {
+        updateFields.push('short_name = ?');
+        updateValues.push(short_name || null);
       }
       if (role) {
         updateFields.push('role = ?');
@@ -103,19 +107,28 @@ class Team {
       }
 
       // Update social media links
-      if (social_media) {
-        // Delete existing social media links
-        await conn.execute('DELETE FROM social_media WHERE team_id = ?', [id]);
+      if (social_media && typeof social_media === 'object') {
+        try {
+          // Delete existing social media links
+          await conn.execute('DELETE FROM social_media WHERE team_id = ?', [id]);
 
-        // Insert new social media links
-        const platforms = ['linkedin', 'github', 'instagram'];
-        for (const platform of platforms) {
-          if (social_media[platform]) {
-            await conn.execute(
-              'INSERT INTO social_media (team_id, platform, url) VALUES (?, ?, ?)',
-              [id, platform, social_media[platform]]
-            );
+          // Insert new social media links
+          const platforms = ['linkedin', 'github', 'instagram'];
+          for (const platform of platforms) {
+            const url = social_media[platform];
+            // Only insert if URL exists and is not empty
+            if (url && typeof url === 'string' && url.trim() !== '' && url.toLowerCase() !== 'null') {
+              await conn.execute(
+                'INSERT INTO social_media (team_id, platform, url) VALUES (?, ?, ?)',
+                [parseInt(id), platform, url.trim()]
+              );
+            }
           }
+        } catch (socialError) {
+          console.error('Error updating social media:', socialError);
+          console.error('Social media data:', social_media);
+          console.error('Team ID:', id);
+          throw socialError;
         }
       }
 
