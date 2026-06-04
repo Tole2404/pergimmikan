@@ -26,7 +26,7 @@ jobs:
       - name: 🔨 Build Frontend
         working-directory: frontend
         run: |
-          npm ci
+          npm install
           echo "VITE_API_URL=https://apiv1.pergimmikan.site" > .env
           npm run build
 
