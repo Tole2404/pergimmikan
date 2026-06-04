@@ -164,7 +164,7 @@ export default function UserManagement() {
                 Team Management
               </h5>
               <p className="text-muted small mb-0 d-none d-md-block">
-                Kelola semua anggota tim di satu tempattt
+                Kelola semua anggota tim di satu tempat 🚀 (Tes Auto Deploy CI/CD)
               </p>
             </Col>
             <Col xs={12} md={6}>
