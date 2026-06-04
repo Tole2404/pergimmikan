@@ -1,0 +1,57 @@
+name: 🚀 Deploy PERGIMMIKAN
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout kode dari repo
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      # 3. Install dependencies & Build frontend
+      - name: 🔨 Build Frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          echo "VITE_API_URL=https://apiv1.pergimmikan.site" > .env
+          npm run build
+
+      # 4. Deploy frontend (dist) ke VPS
+      - name: 📤 Deploy Frontend to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          password: ${{ secrets.VPS_PASSWORD }}
+          source: "frontend/dist/*"
+          target: "/var/www/pergimmikan/"
+          strip_components: 2
+
+      # 5. Deploy backend & restart PM2
+      - name: ⚙️ Deploy Backend to VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          password: ${{ secrets.VPS_PASSWORD }}
+          script: |
+            cd /root/pergimmikan
+            git pull origin main
+            cd server
+            npm install --production
+            pm2 restart backend-pergimmikan
+            echo "✅ Deployment selesai!"

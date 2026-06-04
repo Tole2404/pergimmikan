@@ -1,27 +1,27 @@
 import { useState, useEffect } from 'react';
-import { 
-  Container, 
-  Card, 
-  Table, 
-  Badge, 
-  Button, 
+import {
+  Container,
+  Card,
+  Table,
+  Badge,
+  Button,
   InputGroup,
   Row,
   Col,
-  Form 
+  Form
 } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { 
-  FaUserPlus, 
-  FaEdit, 
-  FaTrash, 
+import {
+  FaUserPlus,
+  FaEdit,
+  FaTrash,
   FaSearch,
   FaFilter,
   FaCheck,
   FaTimes,
   FaUserCircle
 } from 'react-icons/fa';
-import './styles/UserManagement.css'; 
+import './styles/UserManagement.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -67,8 +67,8 @@ export default function UserManagement() {
   useEffect(() => {
     const filtered = users.filter(user => {
       const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          (user.description && user.description.toLowerCase().includes(searchTerm.toLowerCase()));
+        user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (user.description && user.description.toLowerCase().includes(searchTerm.toLowerCase()));
       const matchesStatus = filterStatus === 'all' || user.status === filterStatus;
       return matchesSearch && matchesStatus;
     });
@@ -106,15 +106,15 @@ export default function UserManagement() {
 
   const getImageUrl = (imageUrl) => {
     if (!imageUrl) return null;
-    
+
     if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
       return imageUrl;
     }
-    
+
     if (imageUrl.startsWith('/')) {
       return `${API_URL}${imageUrl}`;
     }
-    
+
     return `${API_URL}/${imageUrl}`;
   };
 
@@ -164,13 +164,13 @@ export default function UserManagement() {
                 Team Management
               </h5>
               <p className="text-muted small mb-0 d-none d-md-block">
-              Kelola semua anggota tim di satu tempat
+                Kelola semua anggota tim di satu tempattt
               </p>
             </Col>
             <Col xs={12} md={6}>
               <div className="d-flex justify-content-md-end">
-                <Button 
-                  variant="primary" 
+                <Button
+                  variant="primary"
                   onClick={() => navigate('/dashboard/team/add')}
                   className="action-button d-flex align-items-center gap-2"
                 >
@@ -232,14 +232,14 @@ export default function UserManagement() {
                   <tr key={user.id} className="user-row">
                     <td>
                       <div className="d-flex align-items-center">
-                        <div 
-                          className="user-avatar rounded-circle overflow-hidden me-2" 
+                        <div
+                          className="user-avatar rounded-circle overflow-hidden me-2"
                           style={{ width: '45px', height: '45px', flexShrink: 0 }}
                         >
                           {user.image_url ? (
-                            <img 
-                              src={getImageUrl(user.image_url)} 
-                              alt={user.name} 
+                            <img
+                              src={getImageUrl(user.image_url)}
+                              alt={user.name}
                               className="w-100 h-100 object-fit-cover"
                               onError={(e) => {
                                 e.target.onerror = null;
@@ -263,12 +263,12 @@ export default function UserManagement() {
                       <div className="description-cell">{user.description || '-'}</div>
                     </td>
                     <td>
-                      <Badge 
-                        bg={getStatusBadgeVariant(user.status)} 
+                      <Badge
+                        bg={getStatusBadgeVariant(user.status)}
                         className="status-badge text-uppercase"
                       >
-                        {user.status === 'active' ? 
-                          <FaCheck className="me-1" size={10} /> : 
+                        {user.status === 'active' ?
+                          <FaCheck className="me-1" size={10} /> :
                           <FaTimes className="me-1" size={10} />
                         }
                         {user.status}
@@ -276,8 +276,8 @@ export default function UserManagement() {
                     </td>
                     <td>
                       <div className="d-flex gap-2 justify-content-end">
-                        <Button 
-                          variant="outline-primary" 
+                        <Button
+                          variant="outline-primary"
                           size="sm"
                           className="action-btn edit-btn"
                           onClick={() => navigate(`/dashboard/team/edit/${user.id}`)}
@@ -286,8 +286,8 @@ export default function UserManagement() {
                           <FaEdit />
                           <span className="d-none d-md-inline ms-1">Edit</span>
                         </Button>
-                        <Button 
-                          variant="outline-danger" 
+                        <Button
+                          variant="outline-danger"
                           size="sm"
                           className="action-btn delete-btn"
                           onClick={() => handleDelete(user.id)}
@@ -314,7 +314,7 @@ export default function UserManagement() {
               </tbody>
             </Table>
           </div>
-          
+
           <div className="d-flex justify-content-between align-items-center p-3">
             <div className="small text-muted">
               Showing {filteredUsers.length} of {users.length} team members
