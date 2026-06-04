@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-
 import { useNavigate } from 'react-router-dom';
 import L from 'leaflet';
 import { FaMapMarkerAlt, FaCamera, FaCalendarAlt, FaFilter, FaTimes, FaRoute } from 'react-icons/fa';
+import { MapSkeleton } from '../common/Skeleton';
 import mapService from '../../utils/mapService';
 import 'leaflet/dist/leaflet.css';
 import './InteractiveMap.css';
@@ -150,9 +151,8 @@ const InteractiveMap = () => {
 
   if (loading) {
     return (
-      <div className="map-loading">
-        <div className="map-spinner"></div>
-        <p>Loading map...</p>
+      <div className="interactive-map-container">
+        <MapSkeleton />
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { showWarning } from '../../utils/sweetalert';
 import DynamicSEO from '../common/DynamicSEO';
+import { TeamSkeleton } from '../common/Skeleton';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -276,20 +277,7 @@ const Team = () => {
     return (
       <div className="pgm-team">
         <div className="pgm-team__container">
-          <div className="pgm-team__loading-container">
-            <div className="pgm-team__loading-card">
-              <div className="pgm-team__loading-lanyard"></div>
-              <div className="pgm-team__loading-spinner">
-                <div className="pgm-team__loading-circle"></div>
-                <FontAwesomeIcon icon={faUsers} className="pgm-team__loading-icon" />
-              </div>
-              <div className="pgm-team__loading-text">
-                <div className="pgm-team__loading-line"></div>
-                <div className="pgm-team__loading-line pgm-team__loading-line--short"></div>
-              </div>
-              <div className="pgm-team__loading-label">Loading Team Members...</div>
-            </div>
-          </div>
+          <TeamSkeleton />
         </div>
       </div>
     );

@@ -28,9 +28,7 @@ const updateSW = registerSW({
 const helmetContext = {};
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <HelmetProvider context={helmetContext}>
-      <RouterProvider router={router} />
-    </HelmetProvider>
-  </React.StrictMode>,
+  <HelmetProvider context={helmetContext}>
+    <RouterProvider router={router} />
+  </HelmetProvider>,
 )

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import RetroModal from '../common/RetroModal';
 import DownloadImageButton from '../common/DownloadImageButton';
+import { ActivitiesSkeleton } from '../common/Skeleton';
 import { FaCamera, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import './Activities.css';
 
@@ -173,48 +174,7 @@ export default function Activities() {
   if (loading) {
     return (
       <div className="pgm-activities">
-        <div className="pgm-activities__loading-container">
-          <div className="pgm-activities__loading-card">
-            <div className="pgm-activities__loading-header">
-              <div className="pgm-activities__loading-icon">
-                <FaCamera className="camera-icon-pulse" />
-              </div>
-              <div className="pgm-activities__loading-title">Loading Activities</div>
-            </div>
-            
-            <div className="pgm-activities__loading-content">
-              <div className="pgm-activities__loading-image"></div>
-              <div className="pgm-activities__loading-details">
-                <div className="pgm-activities__loading-line loading-line-lg"></div>
-                <div className="pgm-activities__loading-line loading-line-sm"></div>
-                <div className="pgm-activities__loading-metadata">
-                  <div className="pgm-activities__loading-meta-item">
-                    <FaCalendarAlt />
-                    <div className="loading-meta-line"></div>
-                  </div>
-                  <div className="pgm-activities__loading-meta-item">
-                    <FaMapMarkerAlt />
-                    <div className="loading-meta-line"></div>
-                  </div>
-                </div>
-                <div className="pgm-activities__loading-text">
-                  <div className="loading-text-line"></div>
-                  <div className="loading-text-line"></div>
-                  <div className="loading-text-line loading-text-line--short"></div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="pgm-activities__loading-footer">
-              <div className="pgm-activities__loading-progress">
-                <div className="loading-progress-track">
-                  <div className="loading-progress-bar"></div>
-                </div>
-                <div className="loading-progress-text">Retrieving memories...</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ActivitiesSkeleton />
       </div>
     );
   }

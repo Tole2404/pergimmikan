@@ -85,7 +85,8 @@ const StoryCard = ({ story }) => {
             alt={title} 
             loading="lazy"
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/400x300?text=Adventure+Awaits';
+              e.target.onerror = null;
+              e.target.src = '/images/offline-image.svg';
             }}
           />
           <div className="image-overlay">
@@ -117,7 +118,8 @@ const StoryCard = ({ story }) => {
                 src={`${API_URL}${typeof photo === 'string' ? photo : photo?.src}`} 
                 alt={`thumbnail ${index + 1}`}
                 onError={(e) => {
-                  e.target.src = 'https://via.placeholder.com/100x100?text=Photo';
+                  e.target.onerror = null;
+                  e.target.src = '/images/offline-image.svg';
                 }}
               />
             </div>

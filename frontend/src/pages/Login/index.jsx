@@ -37,7 +37,7 @@ export default function Login() {
 
       // Save token
       localStorage.setItem('adminToken', data.token);
-      
+
       // Selalu simpan user data (tidak perlu check keepLoggedIn)
       localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -53,7 +53,7 @@ export default function Login() {
       // Close loading popup and show success
       closePopup();
       await showSuccess('FAR OUT!', 'Login successful!');
-      
+
       navigate('/'); // Mengubah route ke halaman utama (Landing)
     } catch (error) {
       closePopup();
@@ -130,8 +130,8 @@ export default function Login() {
                 </label>
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="retro-button"
                 disabled={loading}
               >

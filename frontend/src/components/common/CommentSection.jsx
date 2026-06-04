@@ -115,7 +115,7 @@ const CommentSection = ({ contentType, contentId }) => {
           src={comment.user_avatar ? `${API_URL}${comment.user_avatar}` : DEFAULT_AVATAR}
           alt={comment.username}
           className="comment-avatar"
-          onError={(e) => { e.target.src = DEFAULT_AVATAR; }}
+          onError={(e) => { e.target.onerror = null; e.target.src = DEFAULT_AVATAR; }}
         />
         <div className="comment-content">
           <div className="comment-header">
@@ -211,7 +211,7 @@ const CommentSection = ({ contentType, contentId }) => {
               src={currentUser.image_url ? `${API_URL}${currentUser.image_url}` : DEFAULT_AVATAR}
               alt={currentUser.username}
               className="comment-avatar"
-              onError={(e) => { e.target.src = DEFAULT_AVATAR; }}
+              onError={(e) => { e.target.onerror = null; e.target.src = DEFAULT_AVATAR; }}
             />
             <textarea
               value={newComment}

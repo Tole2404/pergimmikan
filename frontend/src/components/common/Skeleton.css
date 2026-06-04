@@ -1,0 +1,480 @@
+/* ============================================
+   Skeleton UI - Reusable Loading Placeholders
+   ============================================ */
+
+/* Base skeleton shimmer animation */
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Base skeleton block */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(139, 90, 43, 0.08) 25%,
+    rgba(139, 90, 43, 0.15) 50%,
+    rgba(139, 90, 43, 0.08) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton--circle {
+  border-radius: 50%;
+}
+
+.skeleton--rounded {
+  border-radius: 12px;
+}
+
+.skeleton--pill {
+  border-radius: 50px;
+}
+
+/* ============================================
+   Skeleton Page Wrapper 
+   ============================================ */
+.skeleton-page {
+  min-height: 80vh;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skeleton-page__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-top: 1rem;
+}
+
+.skeleton-page__title {
+  width: 280px;
+  height: 36px;
+  margin: 0 auto 12px;
+}
+
+.skeleton-page__subtitle {
+  width: 400px;
+  height: 18px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   Journey Skeleton 
+   ============================================ */
+.skeleton-journey__timeline {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+  padding: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skeleton-journey__year-card {
+  width: 140px;
+  height: 100px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.skeleton-journey__content {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.skeleton-journey__photo-area {
+  border-radius: 16px;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+}
+
+.skeleton-journey__thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.skeleton-journey__thumb {
+  width: 72px;
+  height: 54px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.skeleton-journey__info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.skeleton-journey__info-title {
+  width: 60%;
+  height: 28px;
+}
+
+.skeleton-journey__info-text {
+  width: 100%;
+  height: 14px;
+}
+
+.skeleton-journey__info-text--short {
+  width: 75%;
+}
+
+.skeleton-journey__info-text--shorter {
+  width: 50%;
+}
+
+.skeleton-journey__stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.skeleton-journey__stat {
+  width: 100px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+.skeleton-journey__btn {
+  width: 160px;
+  height: 44px;
+  border-radius: 50px;
+  margin-top: 8px;
+}
+
+/* ============================================
+   Team Skeleton
+   ============================================ */
+.skeleton-team__controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.skeleton-team__search {
+  width: 280px;
+  height: 44px;
+  border-radius: 50px;
+}
+
+.skeleton-team__filter {
+  width: 150px;
+  height: 44px;
+  border-radius: 50px;
+}
+
+.skeleton-team__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 1rem 0;
+}
+
+.skeleton-team__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  border-radius: 16px;
+  background: rgba(139, 90, 43, 0.03);
+  border: 1px solid rgba(139, 90, 43, 0.08);
+}
+
+.skeleton-team__card-strap {
+  width: 4px;
+  height: 30px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.skeleton-team__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+.skeleton-team__name {
+  width: 140px;
+  height: 18px;
+  margin-bottom: 8px;
+}
+
+.skeleton-team__role {
+  width: 90px;
+  height: 14px;
+  margin-bottom: 16px;
+}
+
+.skeleton-team__socials {
+  display: flex;
+  gap: 12px;
+}
+
+.skeleton-team__social-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* ============================================
+   Activities Skeleton
+   ============================================ */
+.skeleton-activities__wrapper {
+  display: flex;
+  gap: 2rem;
+}
+
+.skeleton-activities__filters {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(139, 90, 43, 0.03);
+  border: 1px solid rgba(139, 90, 43, 0.08);
+  height: fit-content;
+}
+
+.skeleton-activities__filter-title {
+  width: 120px;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.skeleton-activities__filter-btn {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.skeleton-activities__list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.skeleton-activities__item {
+  display: flex;
+  gap: 20px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(139, 90, 43, 0.03);
+  border: 1px solid rgba(139, 90, 43, 0.08);
+  overflow: hidden;
+}
+
+.skeleton-activities__item-image {
+  width: 240px;
+  height: 180px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.skeleton-activities__item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.skeleton-activities__item-title {
+  width: 70%;
+  height: 22px;
+}
+
+.skeleton-activities__item-meta {
+  display: flex;
+  gap: 16px;
+}
+
+.skeleton-activities__item-meta-item {
+  width: 100px;
+  height: 16px;
+}
+
+.skeleton-activities__item-text {
+  width: 100%;
+  height: 12px;
+}
+
+.skeleton-activities__item-text--short {
+  width: 60%;
+}
+
+.skeleton-activities__item-btn {
+  width: 130px;
+  height: 38px;
+  border-radius: 50px;
+  margin-top: auto;
+}
+
+/* ============================================
+   Map Skeleton
+   ============================================ */
+.skeleton-map__stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skeleton-map__stat {
+  width: 140px;
+  height: 70px;
+  border-radius: 12px;
+}
+
+.skeleton-map__area {
+  width: 100%;
+  height: 500px;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-map__area::after {
+  content: '🗺️';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  opacity: 0.15;
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.skeleton-map__legend {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.skeleton-map__legend-item {
+  width: 90px;
+  height: 32px;
+  border-radius: 50px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .skeleton-page {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .skeleton-page__title {
+    width: 200px;
+    height: 28px;
+  }
+
+  .skeleton-page__subtitle {
+    width: 260px;
+    height: 14px;
+  }
+
+  /* Journey */
+  .skeleton-journey__timeline {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  .skeleton-journey__year-card {
+    width: 110px;
+    height: 80px;
+  }
+
+  .skeleton-journey__content {
+    grid-template-columns: 1fr;
+  }
+
+  .skeleton-journey__photo-area {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Team */
+  .skeleton-team__grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .skeleton-team__avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .skeleton-team__controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .skeleton-team__search,
+  .skeleton-team__filter {
+    width: 100%;
+  }
+
+  /* Activities */
+  .skeleton-activities__wrapper {
+    flex-direction: column;
+  }
+
+  .skeleton-activities__filters {
+    width: 100%;
+  }
+
+  .skeleton-activities__item {
+    flex-direction: column;
+  }
+
+  .skeleton-activities__item-image {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* Map */
+  .skeleton-map__area {
+    height: 350px;
+  }
+
+  .skeleton-map__stats {
+    gap: 10px;
+  }
+
+  .skeleton-map__stat {
+    width: 100px;
+    height: 60px;
+  }
+}

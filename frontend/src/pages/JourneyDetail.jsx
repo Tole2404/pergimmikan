@@ -204,7 +204,8 @@ export default function JourneyDetail() {
               src={`${API_URL}${mainImage}`}
               alt={journeyDetail.title} 
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/1200x600?text=Groovy+Journey';
+                e.target.onerror = null;
+                e.target.src = 'https://via.placeholder.com/800x400?text=Journey+Cover';
               }}
             />
             <div className="journey-hero-overlay">
@@ -360,6 +361,7 @@ export default function JourneyDetail() {
                     src={`${API_URL}${journeyDetail.photos[activeImage]?.src || journeyDetail.image}`}
                     alt={journeyDetail.photos[activeImage]?.caption || journeyDetail.title} 
                     onError={(e) => {
+                      e.target.onerror = null;
                       e.target.src = 'https://via.placeholder.com/1200x600?text=No+Image+Available';
                     }}
                   />
@@ -381,6 +383,7 @@ export default function JourneyDetail() {
                         src={`${API_URL}${photo.src}`}
                         alt={photo.caption || `Photo ${index + 1}`}
                         onError={(e) => {
+                          e.target.onerror = null;
                           e.target.src = 'https://via.placeholder.com/100x100?text=Error';
                         }}
                       />
@@ -400,7 +403,8 @@ export default function JourneyDetail() {
                         alt={photo.caption || `Photo ${index + 1}`}
                         onClick={() => setActiveImage(index)}
                         onError={(e) => {
-                          e.target.src = 'https://via.placeholder.com/300x200?text=Error';
+                          e.target.onerror = null;
+                          e.target.src = 'https://via.placeholder.com/800x600?text=Photo';
                         }}
                       />
                       {photo.caption && (

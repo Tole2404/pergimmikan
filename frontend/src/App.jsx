@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigation } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Loading from './components/common/Loading';
 import ScrollToTop from './components/ScrollToTop';
 import PWAInstallPrompt from './components/common/PWAInstallPrompt';
 import { ToastContainer } from 'react-toastify';
@@ -12,8 +11,6 @@ import './styles/index.css';
 import './styles/scrollToTop.css';
 
 const App = () => {
-  const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -42,7 +39,6 @@ const App = () => {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Navbar />
-      {isLoading && <Loading overlay size="medium" text="Loading mass..." />}
       <main style={{ flexGrow: 1 }}>
         <Outlet />
       </main>

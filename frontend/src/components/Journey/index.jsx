@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import RetroModal from '../common/RetroModal';
 import DownloadImageButton from '../common/DownloadImageButton';
+import { JourneySkeleton } from '../common/Skeleton';
 import { FaMapMarkerAlt, FaCalendarAlt, FaCameraRetro, FaCompass, FaHiking, FaMountain, 
   FaGlobeAmericas, FaArrowRight, FaArrowLeft, FaStar, FaRoute, FaUsers, FaHistory,
   FaClock, FaMapMarked, FaMedal } from 'react-icons/fa';
@@ -155,67 +156,7 @@ export default function Journey() {
   if (loading) {
     return (
       <div className="pgm-journey">
-        <div className="pgm-journey__loading-container">
-          <div className="pgm-journey__loading-card">
-            <div className="pgm-journey__loading-header">
-              <div className="pgm-journey__loading-title">
-                <FaHistory className="loading-icon-pulse" />
-                <span>Journey Loading</span>
-              </div>
-              <div className="pgm-journey__loading-subtitle">Traveling through time...</div>
-            </div>
-            
-            <div className="pgm-journey__loading-timeline">
-              {[...Array(5)].map((_, index) => (
-                <div key={index} className="pgm-journey__loading-year">
-                  <div className="loading-year-card">
-                    <div className="loading-year-number"></div>
-                    <div className="loading-year-title"></div>
-                  </div>
-                  <div className="loading-year-line"></div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="pgm-journey__loading-photo-section">
-              <div className="pgm-journey__loading-main-photo">
-                <div className="loading-photo-frame">
-                  <FaCameraRetro className="loading-camera-icon" />
-                </div>
-                <div className="loading-photo-nav loading-photo-nav-left">
-                  <FaArrowLeft />
-                </div>
-                <div className="loading-photo-nav loading-photo-nav-right">
-                  <FaArrowRight />
-                </div>
-              </div>
-              
-              <div className="pgm-journey__loading-thumbnails">
-                {[...Array(4)].map((_, index) => (
-                  <div key={index} className="loading-thumbnail"></div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="pgm-journey__loading-info">
-              <div className="loading-info-header"></div>
-              <div className="loading-info-text"></div>
-              <div className="loading-info-text loading-info-text--short"></div>
-              <div className="loading-info-stats">
-                {[...Array(3)].map((_, index) => (
-                  <div key={index} className="loading-stat-item">
-                    <div className="loading-stat-icon"></div>
-                    <div className="loading-stat-text"></div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div className="pgm-journey__loading-compass">
-              <div className="loading-compass-needle"></div>
-            </div>
-          </div>
-        </div>
+        <JourneySkeleton />
       </div>
     );
   }

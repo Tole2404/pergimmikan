@@ -44,14 +44,6 @@ import TracksManagement from '../pages/admin/crud/TracksManagement';
 import TransportationManagement from '../pages/admin/crud/TransportationManagement';
 import EquipmentManagement from '../pages/admin/crud/EquipmentManagement';
 
-// Simulated delay for loading state
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-const withDelay = (Component) => async () => {
-  await delay(1500); // Longer loading for better UX
-  return { Component }; 
-};
-
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -60,42 +52,34 @@ export const router = createBrowserRouter([
       { 
         index: true,
         element: <Landing />,
-        loader: withDelay(Landing),
       },
       {
         path: 'journey',
         element: <Journey />,
-        loader: withDelay(Journey),
       },
       {
         path: 'journey/:id',
         element: <JourneyDetail />,
-        loader: withDelay(JourneyDetail),
       },
       {
         path: 'map',
         element: <MapPage />,
-        loader: withDelay(MapPage),
       },
       {
         path: 'activities',
         element: <Activities />,
-        loader: withDelay(Activities),
       },
       {
         path: 'team',
         element: <Team />,
-        loader: withDelay(Team),
       },
       {
         path: 'events',
         element: <Events />,
-        loader: withDelay(Events),
       },
       {
         path: 'next',
         element: <NextPage />,
-        loader: withDelay(NextPage),
       },
       {
         path: 'settings',
@@ -104,7 +88,6 @@ export const router = createBrowserRouter([
             <Settings />
           </AuthMiddleware>
         ),
-        loader: withDelay(Settings),
       },
       {
         path: 'profile',
@@ -113,7 +96,6 @@ export const router = createBrowserRouter([
             <Profile />
           </AuthMiddleware>
         ),
-        loader: withDelay(Profile),
       },
       {
         path: 'savings',
@@ -122,7 +104,6 @@ export const router = createBrowserRouter([
             <Savings />
           </AuthMiddleware>
         ),
-        loader: withDelay(Savings),
       }
     ],
   },
@@ -133,7 +114,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Login />,
-        loader: withDelay(Login),
       },
     ],
   },
@@ -144,7 +124,6 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <SimpleLogin redirectTo="/tabungan" />,
-        loader: withDelay(SimpleLogin),
       },
     ],
   },
@@ -155,12 +134,10 @@ export const router = createBrowserRouter([
         <SimpleSavings />
       </AuthMiddleware>
     ),
-    loader: withDelay(SimpleSavings),
   },
   {
     path: '/adminpages',
     element: <AdminLogin />,
-    loader: withDelay(AdminLogin),
   },
   {
     path: '/dashboard',
@@ -173,132 +150,106 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
-        loader: withDelay(Dashboard),
       },
       {
         path: 'users',
         element: <UserManagement />,
-        loader: withDelay(UserManagement),
       },
       {
         path: 'team',
         element: <TeamManagement />,
-        loader: withDelay(TeamManagement),
       },
       {
         path: 'team/add',
         element: <AddTeam />,
-        loader: withDelay(AddTeam),
       },
       {
         path: 'team/edit/:id',
         element: <EditTeam />,
-        loader: withDelay(EditTeam),
       },
       {
         path: 'content',
         element: <ContentManagement />,
-        loader: withDelay(ContentManagement),
       },
       {
         path: 'gallery',
         element: <GalleryManagement />,
-        loader: withDelay(GalleryManagement),
       },
       {
         path: 'journey',
         element: <JourneyManagement />,
-        loader: withDelay(JourneyManagement),
       },
       {
         path: 'featured-journey',
         element: <FeaturedJourneyManagement />,
-        loader: withDelay(FeaturedJourneyManagement),
       },
       {
         path: 'journey/add',
         element: <AddJourney />,
-        loader: withDelay(AddJourney),
       },
       {
         path: 'journey/edit/:id',
         element: <EditJourney />,
-        loader: withDelay(EditJourney),
       },
       {
         path: 'events',
         element: <EventManagement />,
-        loader: withDelay(EventManagement),
       },
       {
         path: 'legacy',
         element: <LegacyManagement />,
-        loader: withDelay(LegacyManagement),
       },
       {
         path: 'quotes',
         element: <QuotesManagement />,
-        loader: withDelay(QuotesManagement),
       },
       {
         path: 'next',
         element: <NextAdmin />,
-        loader: withDelay(NextAdmin),
       },
       {
         path: 'activities',
         element: <ActivitiesManagement />,
-        loader: withDelay(ActivitiesManagement),
       },
       {
         path: 'activities/add',
         element: <ActivityForm />,
-        loader: withDelay(ActivityForm),
       },
       {
         path: 'activities/edit/:id',
         element: <ActivityForm />,
-        loader: withDelay(ActivityForm),
       },
       {
         path: 'activities/categories/add',
         element: <CategoryForm />,
-        loader: withDelay(CategoryForm),
       },
       {
         path: 'activities/categories/edit/:id',
         element: <CategoryForm />,
-        loader: withDelay(CategoryForm),
       },
       {
         path: 'savings',
         element: <SavingsManagement />,
-        loader: withDelay(SavingsManagement),
       },
       {
         path: 'seo',
         element: <SEOManagement />,
-        loader: withDelay(SEOManagement),
       },
       {
         path: 'trip-calculator/mountains',
         element: <MountainsManagement />,
-        loader: withDelay(MountainsManagement),
       },
       {
         path: 'trip-calculator/tracks',
         element: <TracksManagement />,
-        loader: withDelay(TracksManagement),
       },
       {
         path: 'trip-calculator/transportation',
         element: <TransportationManagement />,
-        loader: withDelay(TransportationManagement),
       },
       {
         path: 'trip-calculator/equipment',
         element: <EquipmentManagement />,
-        loader: withDelay(EquipmentManagement),
       },
     ],
   },

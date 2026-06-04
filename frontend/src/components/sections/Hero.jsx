@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaPlay, FaPause, FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
 import { gsap } from 'gsap';
 import heroBg from '../../assets/images/hero-bg.jpg';
-import './Hero.css'; 
+import './Hero.css';
 
 const Hero = () => {
   const titleRef = useRef(null);
@@ -16,28 +16,28 @@ const Hero = () => {
   const musicPlayerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  
+
   useEffect(() => {
     // Typewriter effect
     const title = titleRef.current;
     if (title) {
       title.classList.add('typewriter-active');
     }
-    
+
     // GSAP animations - optimized
-    const timeline = gsap.timeline({ 
-      defaults: { 
+    const timeline = gsap.timeline({
+      defaults: {
         ease: "power2.out",
         clearProps: "all" // Clear props after animation
-      } 
+      }
     });
-    
+
     // Batch set initial states
     gsap.set([subtitleRef.current, dividerRef.current, h2Ref.current, descriptionRef.current, musicPlayerRef.current], {
       opacity: 0,
       willChange: "transform, opacity" // GPU acceleration hint
     });
-    
+
     // Optimized stagger animation - shorter delays
     timeline
       .to(subtitleRef.current, {
@@ -65,7 +65,7 @@ const Hero = () => {
         y: 0,
         duration: 0.4
       }, "-=0.2");
-    
+
     // Cleanup
     return () => {
       timeline.kill();
@@ -97,7 +97,7 @@ const Hero = () => {
         <p ref={descriptionRef} className="hero-description">
           A collective journey of friendship, captured through our lens
         </p>
-        
+
         <div ref={musicPlayerRef} className="hero-music-player">
           <audio ref={audioRef} loop>
             <source src="/music/Hindia-Kitakesana.mp3" type="audio/mp3" />
@@ -119,14 +119,14 @@ const Hero = () => {
                 ))}
               </div>
               <div className="music-controls">
-                <button 
+                <button
                   className={`music-btn play-btn ${isPlaying ? 'playing' : ''}`}
                   onClick={handlePlayPause}
                   aria-label={isPlaying ? 'Pause music' : 'Play music'}
                 >
                   {isPlaying ? <FaPause /> : <FaPlay />}
                 </button>
-                <button 
+                <button
                   className={`music-btn volume-btn ${isMuted ? 'muted' : ''}`}
                   onClick={handleMute}
                   aria-label={isMuted ? 'Unmute' : 'Mute'}

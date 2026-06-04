@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#d4a76a"/>
+  <text x="256" y="280" font-family="Arial" font-size="120" text-anchor="middle" fill="#fff" font-weight="bold">GIMMIK</text>
+  <rect x="0" y="0" width="512" height="512" stroke="#fff" stroke-width="16" fill="none" rx="64" ry="64"/>
+</svg>

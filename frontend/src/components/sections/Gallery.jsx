@@ -4,13 +4,13 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const DEFAULT_PLACEHOLDER = 'https://via.placeholder.com/300x300?text=No+Image';
+const DEFAULT_PLACEHOLDER = '/images/offline-image.svg';
 
 const Gallery = () => {
   const [moments, setMoments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // Refs for animations
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
@@ -26,9 +26,9 @@ const Gallery = () => {
 
   useEffect(() => {
     fetchGalleries();
-    
+
     gsap.registerPlugin(ScrollTrigger);
-    
+
     // Set up animations when component mounts
     const setupAnimations = () => {
       if (sectionRef.current) {
@@ -43,7 +43,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (headerRef.current) {
         // Animate header
         gsap.from(headerRef.current, {
@@ -57,7 +57,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (stampRef.current) {
         // Zoom in the stamp
         gsap.from(stampRef.current, {
@@ -72,7 +72,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (titleRef.current) {
         // Fade up the title
         gsap.from(titleRef.current, {
@@ -87,7 +87,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (dividerRef.current) {
         // Fade in the divider
         gsap.from(dividerRef.current, {
@@ -101,7 +101,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (descriptionRef.current) {
         // Fade up the description
         gsap.from(descriptionRef.current, {
@@ -116,7 +116,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (galleryWrapperRef.current) {
         // Fade up the gallery wrapper
         gsap.from(galleryWrapperRef.current, {
@@ -131,7 +131,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       // Animate each polaroid card
       polaroidRefs.current.forEach((ref, index) => {
         if (ref) {
@@ -140,10 +140,10 @@ const Gallery = () => {
           const row = Math.floor(index / 3);
           const col = index % 3;
           const delay = 0.8 + (row * 0.1) + (col * 0.1);
-          
+
           // Choose different animations based on position
           const animationType = index % 3;
-          
+
           if (animationType === 0) {
             // Fade up
             gsap.from(ref, {
@@ -187,7 +187,7 @@ const Gallery = () => {
           }
         }
       });
-      
+
       if (vintageTextRef.current) {
         // Fade up the vintage text
         gsap.from(vintageTextRef.current, {
@@ -202,7 +202,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (signatureRef.current) {
         // Fade in the signature
         gsap.from(signatureRef.current, {
@@ -216,7 +216,7 @@ const Gallery = () => {
           }
         });
       }
-      
+
       if (scrollIndicatorRef.current) {
         // Fade in the scroll indicator
         gsap.from(scrollIndicatorRef.current, {
@@ -231,19 +231,19 @@ const Gallery = () => {
         });
       }
     };
-    
+
     // Initialize animations after data is loaded
     if (!loading && moments.length > 0) {
       setupAnimations();
     }
-    
+
     // Set up a window resize handler to refresh ScrollTrigger
     const handleResize = () => {
       ScrollTrigger.refresh();
     };
-    
+
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
       window.removeEventListener('resize', handleResize);
       ScrollTrigger.getAll().forEach(st => st.kill());
@@ -259,10 +259,10 @@ const Gallery = () => {
       });
 
       if (!response.ok) throw new Error('Failed to fetch galleries');
-      
+
       const data = await response.json();
       console.log('Raw API Response:', data);
-      
+
       // Transform gallery data and sort by date descending
       const galleryData = data
         .map(gallery => ({
@@ -278,7 +278,7 @@ const Gallery = () => {
 
       console.log('Transformed Gallery Data:', galleryData);
       setMoments(galleryData);
-      
+
       // Initialize refs array for polaroids after data is loaded
       polaroidRefs.current = galleryData.map(() => React.createRef());
     } catch (err) {
@@ -308,9 +308,9 @@ const Gallery = () => {
           </div>
         </div>
         <div className="section-description">
-            <p>Capturing our journey through photographs</p>
+          <p>Capturing our journey through photographs</p>
         </div>
-        
+
         <div className="gallery-loading-container">
           <div className="gallery-loading-polaroids">
             {[...Array(4)].map((_, index) => (
@@ -358,7 +358,7 @@ const Gallery = () => {
           </div>
         </div>
         <div className="section-description">
-            <p>Capturing our journey through photographs</p>
+          <p>Capturing our journey through photographs</p>
         </div>
         <div className="error-text">{error}</div>
       </div>
@@ -384,7 +384,7 @@ const Gallery = () => {
           </div>
         </div>
         <div className="section-description">
-            <p>Capturing our journey through photographs</p>
+          <p>Capturing our journey through photographs</p>
         </div>
         <div className="empty-text">No moments captured yet.</div>
       </div>
@@ -411,21 +411,21 @@ const Gallery = () => {
           </div>
         </div>
         <div className="section-description" ref={descriptionRef}>
-            <p>Capturing our journey through photographs</p>
+          <p>Capturing our journey through photographs</p>
         </div>
         <div className="gallery-wrapper" ref={galleryWrapperRef}>
           <div className="polaroid-grid">
             {moments.map((moment, index) => (
-              <div 
-                className="polaroid" 
+              <div
+                className="polaroid"
                 key={moment.id}
                 ref={el => polaroidRefs.current[index] = el}
               >
                 <div className="polaroid-frame">
                   <div className="polaroid-image-wrapper">
-                    <img 
+                    <img
                       src={moment.imageUrl ? `${API_URL}${moment.imageUrl}` : DEFAULT_PLACEHOLDER}
-                      alt={moment.caption} 
+                      alt={moment.caption}
                       loading="lazy"
                       onError={(e) => {
                         if (e.target.src !== DEFAULT_PLACEHOLDER) {
