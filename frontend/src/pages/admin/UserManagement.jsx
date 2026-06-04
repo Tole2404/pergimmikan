@@ -243,11 +243,7 @@ export default function UserManagement() {
                               className="w-100 h-100 object-fit-cover"
                               onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = '/images/placeholder-user.png';
-                                if (!e.target.complete) {
-                                  e.target.style.display = 'none';
-                                  e.target.parentNode.innerHTML = '<div class="d-flex justify-content-center align-items-center bg-light w-100 h-100"><FaUserCircle class="text-secondary" size={30} /></div>';
-                                }
+                                e.target.style.display = 'none';
                               }}
                             />
                           ) : (

@@ -18,6 +18,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,svg,webp}'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB
       },
+      filename: 'service-worker.js',
       manifest: false, // Gunakan manifest.json manual dari public folder
       devOptions: {
         enabled: true,
