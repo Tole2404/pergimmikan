@@ -20,50 +20,6 @@ const StoryCard = ({ story }) => {
   const contentRef = useRef(null);
   const footerRef = useRef(null);
   
-  // Add GSAP animations for card elements
-  useEffect(() => {
-    // Only animate if refs are available
-    if (cardRef.current && imageRef.current && contentRef.current && footerRef.current) {
-      // Create a timeline for this card
-      const cardTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none"
-        }
-      });
-      
-      // Add animations to timeline
-      cardTl
-        .fromTo(cardRef.current, 
-          { opacity: 0, y: 30 }, 
-          { opacity: 1, y: 0, duration: 0.6, clearProps: "all" }
-        )
-        .fromTo(imageRef.current, 
-          { opacity: 0, scale: 0.9 }, 
-          { opacity: 1, scale: 1, duration: 0.5, clearProps: "all" }, 
-          "-=0.4"
-        )
-        .fromTo(contentRef.current, 
-          { opacity: 0, y: 20 }, 
-          { opacity: 1, y: 0, duration: 0.5, clearProps: "all" }, 
-          "-=0.3"
-        )
-        .fromTo(footerRef.current, 
-          { opacity: 0 }, 
-          { opacity: 1, duration: 0.4, clearProps: "all" }, 
-          "-=0.2"
-        );
-      
-      return () => {
-        // Clean up ScrollTrigger instance when component unmounts
-        if (cardTl.scrollTrigger) {
-          cardTl.scrollTrigger.kill();
-        }
-      };
-    }
-  }, []);
-  
   // Get up to 3 photos for thumbnails, with fallbacks
   const thumbnails = photos.length > 1 
     ? photos.slice(0, 3) 
@@ -171,7 +127,21 @@ const Stories = () => {
     
     gsap.registerPlugin(ScrollTrigger);
     
-    // Set up initial animations when component mounts
+    const isMobile = window.innerWidth < 768;
+    
+    // Skip GSAP scroll animations on mobile to prevent invisible content
+    if (isMobile) {
+      // Still set up resize handler for potential orientation changes
+      const handleResize = () => {
+        ScrollTrigger.refresh();
+      };
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+    
+    // Set up initial animations when component mounts (desktop only)
     const setupAnimations = () => {
       if (sectionRef.current) {
         const tl = gsap.timeline({
@@ -297,36 +267,37 @@ const Stories = () => {
         });
       }
       
-      // Add animation for sliderContainerRef
+      // Add animation for sliderContainerRef and staggered cards
       if (sliderContainerRef.current) {
-        gsap.fromTo(sliderContainerRef.current,
-          { opacity: 0, y: 30 },
-          { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.8,
-            delay: 0.7,
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: sliderContainerRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none"
-            }
-          }
-        );
-      }
-
-      if (arrowsRef.current) {
-        gsap.from(arrowsRef.current, {
-          opacity: 0,
-          duration: 0.6,
-          delay: 0.8,
+        const storiesTl = gsap.timeline({
           scrollTrigger: {
             trigger: sliderContainerRef.current,
-            start: "top 90%",
+            start: "top 85%",
             toggleActions: "play none none none"
           }
         });
+
+        storiesTl
+          .fromTo(sliderContainerRef.current,
+            { opacity: 0, y: 30 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.8,
+              clearProps: "all"
+            }
+          )
+          .fromTo(".story-card",
+            { opacity: 0, y: 20 },
+            { 
+              opacity: 1, 
+              y: 0, 
+              duration: 0.6, 
+              stagger: 0.15,
+              clearProps: "all"
+            },
+            "-=0.4"
+          );
       }
       
       if (footerRef.current) {

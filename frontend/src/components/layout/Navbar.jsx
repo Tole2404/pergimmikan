@@ -314,16 +314,18 @@ export default function Navbar() {
           )}
         </div>
 
-        <button 
+        <div 
           ref={buttonRef}
           className={`hamburger ${isMenuOpen ? 'active' : ''}`}
           onClick={toggleMenu}
+          role="button"
+          tabIndex={0}
           aria-label="Menu"
         >
           <div className="hamburger-box">
             <div className="hamburger-inner"></div>
           </div>
-        </button>
+        </div>
 
         {isMenuOpen && (
           <div 

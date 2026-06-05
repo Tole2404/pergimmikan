@@ -31,6 +31,9 @@ const Gallery = () => {
 
     // Set up animations when component mounts
     const setupAnimations = () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) return; // Skip GSAP animations on mobile to prevent invisible cards
+
       if (sectionRef.current) {
         // Fade in the entire section
         gsap.from(sectionRef.current, {

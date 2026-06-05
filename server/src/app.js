@@ -43,7 +43,7 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-app.timeout = 300000; 
+app.timeout = 300000;
 
 const uploadDirs = [
   path.join(__dirname, '../public/images/team'),
@@ -63,13 +63,19 @@ uploadDirs.forEach(dir => {
 });
 
 console.log(expressListEndpoints(app));
+app.use(compression());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginEmbedderPolicy: false
+}));
 
-app.use(compression()); 
-app.use(helmet());
-
-const allowedOrigins = process.env.NODE_ENV === 'production' 
+let allowedOrigins = process.env.NODE_ENV === 'production'
   ? ['https://pergimmikan.site', 'https://www.pergimmikan.site', 'https://apiv1.pergimmikan.site', 'http://localhost:3000']
-  : ['http://localhost:5173', 'http://localhost:5000', 'http://localhost:3000'];
+  : ['http://localhost:5173', 'http://localhost:5000', 'http://localhost:3000', 'http://43.157.207.30:5173', 'https://pergimmikan.site', 'https://www.pergimmikan.site'];
+
+if (process.env.CORS_ORIGIN) {
+  allowedOrigins.push(...process.env.CORS_ORIGIN.split(',').map(o => o.trim()));
+}
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
@@ -79,8 +85,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Max-Age', '3600'); 
-  
+  res.header('Access-Control-Max-Age', '3600');
+
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -88,9 +94,9 @@ app.use((req, res, next) => {
 });
 
 app.use(cors({
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     if (!origin) return callback(null, true);
-    
+
     if (allowedOrigins.indexOf(origin) === -1) {
       const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
       return callback(new Error(msg), false);
@@ -117,8 +123,8 @@ app.use('/images', express.static(path.join(__dirname, '../public/images'), {
       res.set('Access-Control-Allow-Origin', origin);
     } else {
       // Fallback untuk development
-      res.set('Access-Control-Allow-Origin', process.env.NODE_ENV === 'production' 
-        ? 'https://pergimmikan.site' 
+      res.set('Access-Control-Allow-Origin', process.env.NODE_ENV === 'production'
+        ? 'https://pergimmikan.site'
         : 'http://localhost:5173');
     }
     // CRITICAL: Allow cross-origin resource sharing
@@ -208,8 +214,8 @@ const swaggerOptions = {
     }],
   },
   apis: [
-    './src/routes/*.js', 
-    './src/models/*.js', 
+    './src/routes/*.js',
+    './src/models/*.js',
     './src/swagger/*.js',
     './src/swagger/auth.js',
     './src/swagger/admin_auth.js',
@@ -239,13 +245,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, {
 
 app.get('/api/routes', (req, res) => {
   const routes = expressListEndpoints(app);
-  
+
   const formattedRoutes = routes.map(route => ({
     path: route.path,
     methods: route.methods,
     middlewares: route.middlewares.map(m => m.name || 'anonymous')
   }));
-  
+
   res.json({
     totalRoutes: formattedRoutes.length,
     routes: formattedRoutes

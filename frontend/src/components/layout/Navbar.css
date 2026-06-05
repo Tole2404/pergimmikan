@@ -368,16 +368,27 @@
 .hamburger {
   display: none;
   border: none;
-  background: transparent;
+  background: transparent !important;
   cursor: pointer;
   padding: 10px;
   z-index: 1001;
   position: relative;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none !important;
 }
 
-/* Hover effect untuk hamburger - Disabled for mobile */
+/* Hover dan Active - benar-benar no effect */
+.hamburger:hover,
+.hamburger:active,
+.hamburger:focus {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
 /* Active effect - Disabled to prevent movement */
 
 .hamburger-box {
@@ -385,6 +396,7 @@
   height: 24px;
   display: inline-block;
   position: relative;
+  pointer-events: none;
 }
 
 .hamburger-inner {
@@ -393,7 +405,7 @@
   background-color: var(--retro-cream);
   border-radius: 3px;
   position: absolute;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -407,7 +419,7 @@
   background-color: var(--retro-cream);
   border-radius: 3px;
   position: absolute;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hamburger-inner::before {
