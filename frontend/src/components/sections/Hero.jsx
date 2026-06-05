@@ -90,7 +90,7 @@ const Hero = () => {
   return (
     <section ref={heroRef} className="hero" style={{ backgroundImage: `url(${heroBg})` }}>
       <div className="hero-content">
-        <span ref={subtitleRef} className="hero-subtitle">Welcome to</span>
+        <span ref={subtitleRef} className="hero-subtitle">Welcome too</span>
         <h1 ref={titleRef} className="typewriter">PERGIMMIKAN</h1>
         <div ref={dividerRef} className="hero-divider">★ ★ ★</div>
         <h2 ref={h2Ref}>Memories & Moments</h2>
