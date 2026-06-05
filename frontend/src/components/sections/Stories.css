@@ -184,6 +184,7 @@
   padding: 0 2rem;
   margin-bottom: 3rem;
   z-index: 1;
+  overflow: hidden;
 }
 
 .stories-slider {

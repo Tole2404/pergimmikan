@@ -438,8 +438,8 @@ const Stories = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '60px'
+          centerMode: false,
+          centerPadding: '0'
         }
       },
       {
@@ -447,8 +447,8 @@ const Stories = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: '20px'
+          centerMode: false,
+          centerPadding: '0'
         }
       },
       {

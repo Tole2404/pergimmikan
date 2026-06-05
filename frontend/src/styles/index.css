@@ -11,10 +11,15 @@
   --text-secondary: #594A42;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Work Sans', sans-serif;
   background-color: var(--retro-cream);
   color: var(--retro-brown);
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {

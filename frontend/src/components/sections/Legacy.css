@@ -372,9 +372,8 @@
   margin: 0 auto;
   position: relative;
   padding: 0 2rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .closing-text::before,
