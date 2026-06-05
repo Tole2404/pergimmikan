@@ -14,12 +14,6 @@ const StoryCard = ({ story }) => {
   const { image, title, date, description, id, photos = [] } = story;
   const [activePhoto, setActivePhoto] = useState(0);
   
-  // Refs for GSAP animations
-  const cardRef = useRef(null);
-  const imageRef = useRef(null);
-  const contentRef = useRef(null);
-  const footerRef = useRef(null);
-  
   // Get up to 3 photos for thumbnails, with fallbacks
   const thumbnails = photos.length > 1 
     ? photos.slice(0, 3) 
@@ -33,57 +27,67 @@ const StoryCard = ({ story }) => {
   };
 
   return (
-    <div className="story-card mobile-story-card" ref={cardRef}>
+    <div className="story-card">
       <div className="story-main">
-        <div className="story-image" ref={imageRef}>
-          <img 
-            src={`${API_URL}${mainImage}`} 
-            alt={title} 
-            loading="lazy"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/images/offline-image.svg';
-            }}
-          />
-          <div className="image-overlay">
-            <div className="overlay-content">
-              <span>Explore Story</span>
-            </div>
+        <div className="story-image-wrapper">
+          <div className="story-image">
+            <img 
+              src={`${API_URL}${mainImage}`} 
+              alt={title} 
+              loading="lazy"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/images/offline-image.svg';
+              }}
+            />
+            <div className="story-image-badge">{date}</div>
           </div>
         </div>
-        <div className="story-content" ref={contentRef}>
-          <h3>{title}</h3>
-          <p>{description}</p>
-          <div className="story-meta">
-            <span className="story-date">{date}</span>
-            <Link to={`/journey/${id}`} className="read-more">
+        
+        <div className="story-content">
+          <div className="story-header-row">
+            <span className="story-category-tag">MEMORIES</span>
+            <span className="story-year-tag">{date.split(' ').pop() || date}</span>
+          </div>
+          
+          <h3 className="story-title">{title}</h3>
+          <p className="story-description">{description}</p>
+          
+          <div className="story-meta-row">
+            <Link to={`/journey/${id}`} className="story-read-btn">
               Read full story <span className="arrow">→</span>
             </Link>
           </div>
         </div>
       </div>
-      <div className="story-footer" ref={footerRef}>
-        <div className="story-thumbnails">
-          {thumbnails.map((photo, index) => (
-            <div 
-              key={index} 
-              className={`thumbnail ${index === activePhoto ? 'active' : ''}`}
-              onClick={() => handleThumbnailClick(index)}
-            >
-              <img 
-                src={`${API_URL}${typeof photo === 'string' ? photo : photo?.src}`} 
-                alt={`thumbnail ${index + 1}`}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/images/offline-image.svg';
-                }}
-              />
-            </div>
-          ))}
+      
+      <div className="story-footer">
+        <div className="story-thumbnails-section">
+          <span className="section-label">Gallery Preview:</span>
+          <div className="story-thumbnails">
+            {thumbnails.map((photo, index) => (
+              <div 
+                key={index} 
+                className={`story-thumbnail ${index === activePhoto ? 'active' : ''}`}
+                onClick={() => handleThumbnailClick(index)}
+              >
+                <img 
+                  src={`${API_URL}${typeof photo === 'string' ? photo : photo?.src}`} 
+                  alt={`thumbnail ${index + 1}`}
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = '/images/offline-image.svg';
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="story-badges">
-          <span className="year-badge">{date}</span>
-          <span className="photo-count-badge">{photos.length} photos</span>
+        
+        <div className="story-stats-section">
+          <span className="story-stat-badge">
+            📷 {photos.length} Photos
+          </span>
         </div>
       </div>
     </div>

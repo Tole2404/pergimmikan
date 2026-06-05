@@ -2,15 +2,62 @@ import { useState, useEffect, useRef } from 'react';
 import RetroModal from '../common/RetroModal';
 import DownloadImageButton from '../common/DownloadImageButton';
 import { JourneySkeleton } from '../common/Skeleton';
-import { FaMapMarkerAlt, FaCalendarAlt, FaCameraRetro, FaCompass, FaHiking, FaMountain, 
-  FaGlobeAmericas, FaArrowRight, FaArrowLeft, FaStar, FaRoute, FaUsers, FaHistory,
-  FaClock, FaMapMarked, FaMedal } from 'react-icons/fa';
+import { 
+  FaMapMarkerAlt, FaCalendarAlt, FaCameraRetro, FaCompass, 
+  FaMountain, FaGlobeAmericas, FaArrowRight, FaArrowLeft, 
+  FaStar, FaUsers, FaHistory, FaMusic, FaPlay, FaPause, FaTree,
+  FaChevronLeft, FaChevronRight
+} from 'react-icons/fa';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import './Journey.css';
 
 const API_URL = import.meta.env.VITE_API_URL;
-
-// Fallback image if image not found
 const FALLBACK_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23f0e6d2'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='18' text-anchor='middle' fill='%238b4513'%3EImage not available%3C/text%3E%3C/svg%3E";
+
+// Custom Leaflet marker icons
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+});
+
+const createCustomIcon = (destinationType) => {
+  const icons = {
+    gunung: '🏔️',
+    pantai: '🏖️',
+    hutan: '🌲',
+    air_terjun: '💧',
+    gua: '🕳️',
+    danau: '🏞️',
+    default: '📍'
+  };
+  const emoji = icons[destinationType] || icons.default;
+  const colors = {
+    gunung: '#8B4513',      // Brown
+    pantai: '#4A90E2',      // Blue
+    hutan: '#2ECC71',       // Green
+    air_terjun: '#3498DB',  // Light Blue
+    gua: '#95A5A6',         // Gray
+    danau: '#1ABC9C',       // Teal
+    default: '#E74C3C'      // Red
+  };
+  const color = colors[destinationType] || colors.default;
+  
+  return L.divIcon({
+    className: 'custom-marker-div',
+    html: `
+      <div class="marker-pin-wrapper" style="background-color: ${color};">
+        <span class="marker-pin-emoji">${emoji}</span>
+      </div>
+    `,
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -36]
+  });
+};
 
 export default function Journey() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,59 +66,20 @@ export default function Journey() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeYear, setActiveYear] = useState(null);
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [visibleStats, setVisibleStats] = useState({});
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-
-  // Tambahkan refs untuk tombol tahun
-  const yearButtonsRef = useRef({});
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  const audioRef = useRef(null);
+  const timelineRef = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchJourneyData();
-    
-    // Add timeout to give time for rendering
-    setTimeout(() => {
-      try {
-        // Add visible class to all elements when loading
-        document.querySelectorAll('.animate-on-scroll').forEach(elem => {
-          elem.classList.add('visible');
-        });
-        
-        // Setup observer for elements that appear on scroll
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        }, { threshold: 0.1 });
-        
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        
-        elements.forEach(elem => {
-          observer.observe(elem);
-        });
-        
-        return () => {
-          elements.forEach(elem => {
-            observer.unobserve(elem);
-          });
-        };
-      } catch (error) {
-        // Error handling for IntersectionObserver
-      }
-    }, 500);
   }, []);
 
   useEffect(() => {
-    // Deteksi apakah device menggunakan touch
-    const detectTouchDevice = () => {
-      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    };
-
-    detectTouchDevice();
-  }, []);
+    setActivePhotoIndex(0);
+  }, [activeYear]);
 
   const fetchJourneyData = async () => {
     try {
@@ -93,9 +101,7 @@ export default function Journey() {
       }
       
       const groupedData = data.reduce((acc, journey) => {
-        // Pastikan year disimpan sebagai number
         const journeyWithNumberYear = { ...journey, year: Number(journey.year) };
-        
         const existingJourney = acc.find(j => j.year === journeyWithNumberYear.year);
         if (existingJourney) {
           existingJourney.photos = [...existingJourney.photos, ...journeyWithNumberYear.photos];
@@ -118,39 +124,38 @@ export default function Journey() {
     }
   };
 
-  // Reset photo index when active year changes
-  useEffect(() => {
-    setCurrentPhotoIndex(0);
-    
-    // Set stats for active year
-    if (activeYear) {
-      setVisibleStats({
-        photos: true,
-        locations: true,
-        experiences: true
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(e => console.log("Audio play blocked by browser policies: ", e));
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handlePrevPhoto = () => {
+    if (!activeYearData || !activeYearData.photos || activeYearData.photos.length === 0) return;
+    setActivePhotoIndex((prev) => 
+      prev === 0 ? activeYearData.photos.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextPhoto = () => {
+    if (!activeYearData || !activeYearData.photos || activeYearData.photos.length === 0) return;
+    setActivePhotoIndex((prev) => 
+      prev === activeYearData.photos.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const scrollTimeline = (direction) => {
+    if (timelineRef.current) {
+      const scrollAmount = 340; // Approx 2 tags width
+      timelineRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
       });
     }
-  }, [activeYear]);
-
-  const handleViewMore = (yearData) => {
-    setSelectedYear(yearData);
-    setIsModalOpen(true);
-  };
-
-  const nextPhoto = () => {
-    const activeYearData = journeyData.find(data => data.year === activeYear);
-    if (!activeYearData) return;
-    
-    setCurrentPhotoIndex(prevIndex => 
-      prevIndex === activeYearData.photos.length - 1 ? 0 : prevIndex + 1);
-  };
-
-  const prevPhoto = () => {
-    const activeYearData = journeyData.find(data => data.year === activeYear);
-    if (!activeYearData) return;
-    
-    setCurrentPhotoIndex(prevIndex => 
-      prevIndex === 0 ? activeYearData.photos.length - 1 : prevIndex - 1);
   };
 
   if (loading) {
@@ -184,222 +189,310 @@ export default function Journey() {
   }
 
   const activeYearData = journeyData.find(data => data.year === activeYear);
+  const currentPhoto = activeYearData && activeYearData.photos && activeYearData.photos[activePhotoIndex];
 
   return (
     <div className="pgm-journey">
+      {/* Background elements */}
       <div className="pgm-journey__background-elements">
         <div className="pgm-journey__bg-circle circle-1"></div>
         <div className="pgm-journey__bg-circle circle-2"></div>
         <div className="pgm-journey__bg-circle circle-3"></div>
-        <div className="pgm-journey__bg-line line-1"></div>
-        <div className="pgm-journey__bg-line line-2"></div>
       </div>
-      
-      {/* Header section with new accents */}
+
+      {/* Floating Vinyl Player Widget */}
+      <div className="vinyl-player-widget">
+        <audio ref={audioRef} src="/music/Hindia-Kitakesana.mp3" loop />
+        <div className={`vinyl-disc ${isPlaying ? 'spinning' : ''}`} onClick={toggleMusic}>
+          <div className="vinyl-center"></div>
+        </div>
+        <div className={`vinyl-arm ${isPlaying ? 'active' : ''}`}></div>
+        <button className="vinyl-control-btn" onClick={toggleMusic}>
+          {isPlaying ? <FaPause /> : <FaPlay />}
+          <span>{isPlaying ? 'Pause Hindia' : 'Play Hindia'}</span>
+        </button>
+      </div>
+
+      {/* Header section */}
       <div className="pgm-journey__header">
         <div className="vintage-stamp">
           <span className="vintage-stamp-text">JOURNEY</span>
         </div>
         <div className="pgm-journey__header-decoration">
           <div className="decoration-line retro-pattern"></div>
-          <div className="decoration-star">
-            <FaStar />
-          </div>
+          <div className="decoration-star"><FaStar /></div>
           <div className="decoration-line retro-pattern"></div>
         </div>
         <h1 className="pgm-journey__title">Pergimmikan Journey</h1>
-        <p className="pgm-journey__subtitle">Timeline of our awesome adventures around the world</p>
-        <div className="pgm-journey__header-decoration bottom">
-          <div className="decoration-dot"></div>
-          <div className="decoration-line retro-dash"></div>
-          <div className="decoration-dot"></div>
-          <div className="decoration-line retro-dash"></div>
-          <div className="decoration-dot"></div>
-        </div>
+        <p className="pgm-journey__subtitle">The Scrapbook of Our Travels & Shared Adventures</p>
       </div>
 
-      {/* Timeline years navigation - Completely redesigned */}
+      {/* Luggage Tag Timeline Navigation */}
       <div className="pgm-journey__timeline-section">
         <div className="pgm-journey__section-header">
           <FaHistory className="pgm-journey__section-icon" />
-          <h2>Journey Timeline</h2>
+          <h2>Travel Log Timeline</h2>
         </div>
         
-        <div className="pgm-journey__years-cards">
-          {journeyData.map((yearData) => (
-            <button 
-              key={yearData.year}
-              type="button"
-              className={`pgm-journey__year-card ${activeYear === yearData.year ? 'active' : ''}`}
-              onClick={() => setActiveYear(yearData.year)}
-            >
-              <div className="pgm-journey__year-number">
-                <FaCalendarAlt className="year-icon" />
-                <span>{yearData.year}</span>
-              </div>
-              <div className="pgm-journey__year-title">
-                {yearData.title}
-              </div>
-              <div className="pgm-journey__photo-count">
-                <FaCameraRetro className="photo-icon" />
-                <span>{yearData.photos.length}</span>
-              </div>
-              
-              {activeYear === yearData.year && (
-                <div className="pgm-journey__active-indicator"></div>
-              )}
-            </button>
-          ))}
+        <div className="pgm-journey__timeline-carousel-wrapper">
+          <button 
+            type="button" 
+            className="timeline-nav-btn prev" 
+            onClick={() => scrollTimeline('left')}
+            aria-label="Scroll older"
+          >
+            <FaChevronLeft />
+          </button>
+          
+          <div className="pgm-journey__luggage-tags" ref={timelineRef}>
+            {journeyData.map((yearData, index) => {
+              // Apply slight random rotations to the tags
+              const rot = (index % 3 === 0) ? -2 : (index % 3 === 1) ? 2 : 1;
+              return (
+                <button 
+                  key={yearData.year}
+                  type="button"
+                  className={`pgm-journey__luggage-tag ${activeYear === yearData.year ? 'active' : ''}`}
+                  onClick={() => setActiveYear(yearData.year)}
+                  style={{ '--tag-rot': `${rot}deg` }}
+                >
+                  <div className="tag-strap"></div>
+                  <div className="tag-hole"></div>
+                  <div className="tag-content">
+                    <span className="tag-year">{yearData.year}</span>
+                    <span className="tag-title">{yearData.title}</span>
+                    <span className="tag-photos-count">
+                      <FaCameraRetro /> {yearData.photos.length} photos
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          <button 
+            type="button" 
+            className="timeline-nav-btn next" 
+            onClick={() => scrollTimeline('right')}
+            aria-label="Scroll newer"
+          >
+            <FaChevronRight />
+          </button>
         </div>
       </div>
-      
-      {activeYearData && (
-        <div className="pgm-journey__content-wrapper animate-on-scroll">
-          <div className="pgm-journey__year-banner">
-            <div className="pgm-journey__year-label">
-              <FaCalendarAlt className="pgm-journey__year-icon" />
-              <span>{activeYearData.year}</span>
-            </div>
-            <h2 className="pgm-journey__year-title">{activeYearData.title}</h2>
-          </div>
-          
-          <div className="pgm-journey__main-content">
-            <div className="pgm-journey__photo-showcase">
-              <div className="pgm-journey__photo-main">
-                <button className="pgm-journey__photo-nav prev" onClick={prevPhoto}>
-                  <FaArrowLeft />
-                </button>
-                <div className="pgm-journey__photo-frame">
-                  {activeYearData.photos.length > 0 && (
-                    <>
-                      <DownloadImageButton 
-                        imageUrl={`${API_URL}${activeYearData.photos[currentPhotoIndex].src}`}
-                        fileName={`journey-${activeYearData.year}-${currentPhotoIndex + 1}`}
-                        className="large"
-                      />
-                      <img
-                        src={`${API_URL}${activeYearData.photos[currentPhotoIndex].src}`}
-                        alt={activeYearData.photos[currentPhotoIndex].caption}
-                        onError={(e) => {
-                          e.target.src = FALLBACK_IMAGE;
-                        }}
-                      />
-                    </>
-                  )}
-                  <div className="pgm-journey__photo-counter">
-                    {currentPhotoIndex + 1} / {activeYearData.photos.length}
-                  </div>
-                </div>
-                <button className="pgm-journey__photo-nav next" onClick={nextPhoto}>
-                  <FaArrowRight />
-                </button>
-              </div>
-              
-              <div className="pgm-journey__photo-caption">
-                {activeYearData.photos.length > 0 && (
-                  <p>{activeYearData.photos[currentPhotoIndex].caption}</p>
-                )}
-              </div>
-              
-              <div className="pgm-journey__photo-thumbnails">
-                {activeYearData.photos.slice(0, 9).map((photo, index) => (
-                  <div 
-                    key={index} 
-                    className={`pgm-journey__thumbnail ${currentPhotoIndex === index ? 'active' : ''}`}
-                  >
-                    <DownloadImageButton 
-                      imageUrl={`${API_URL}${photo.src}`}
-                      fileName={`journey-${activeYearData.year}-${index + 1}`}
-                    />
-                    <img
-                      src={`${API_URL}${photo.src}`}
-                      alt={photo.caption}
-                      onClick={() => setCurrentPhotoIndex(index)}
-                      loading="lazy"
-                      onError={(e) => {
-                        e.target.src = FALLBACK_IMAGE;
-                      }}
-                    />
-                  </div>
-                ))}
-                {activeYearData.photos.length > 9 && (
-                  <div 
-                    className="pgm-journey__thumbnail pgm-journey__thumbnail-more"
-                    onClick={() => handleViewMore(activeYearData)}
-                  >
-                    <div className="thumbnail-more-content">
-                      <FaCameraRetro />
-                      <span>+{activeYearData.photos.length - 9}</span>
+
+      {/* Book Slider (Carousel Halaman Buku) */}
+      {journeyData.length > 0 && (
+        <div className="pgm-journey__book-carousel-container">
+          <div 
+            className="pgm-journey__book-slider" 
+            style={{ 
+              transform: `translateX(-${(journeyData.findIndex(item => item.year === activeYear) >= 0 ? journeyData.findIndex(item => item.year === activeYear) : 0) * 100}%)`
+            }}
+          >
+            {journeyData.map((yearData, idx) => {
+              const isThisActive = yearData.year === activeYear;
+              const photoIdx = isThisActive ? activePhotoIndex : 0;
+              const currentPhoto = yearData.photos[photoIdx];
+
+              return (
+                <div key={yearData.year} className="pgm-journey__book-page">
+                  <div className="pgm-journey__content-wrapper">
+                    <div className="pgm-journey__notebook-header">
+                      <div className="notebook-spine"></div>
+                      {/* Retro Fountain Pen */}
+                      <div className="retro-fountain-pen">
+                        <div className="retro-fountain-pen-clip"></div>
+                        <div className="retro-fountain-pen-band"></div>
+                        <div className="retro-fountain-pen-nib"></div>
+                      </div>
+                      <div className="notebook-header-content">
+                        <span className="notebook-date-badge">
+                          <FaCalendarAlt /> {yearData.year}
+                        </span>
+                        <h2 className="notebook-title">{yearData.title}</h2>
+                      </div>
+                    </div>
+
+                    <div className="pgm-journey__scrapbook-layout">
+                      {/* Book spine crease shadow in the center */}
+                      <div className="pgm-journey__book-spine-crease"></div>
+                      
+                      {/* Left Column: Scrapbook Note & Statistics & Map */}
+                      <div className="scrapbook-aside">
+                        <div className="scrapbook-note-card">
+                          <div className="note-pin">📌</div>
+                          <div className="pgm-journey__section-header small">
+                            <FaCompass className="pgm-journey__section-icon small" />
+                            <h3>Adventure Log Details</h3>
+                          </div>
+                          <p className="note-desc">{yearData.description}</p>
+                        </div>
+
+                        {/* Stat Stamps */}
+                        <div className="scrapbook-stats-grid">
+                          <div className="stat-stamp">
+                            <div className="stamp-icon"><FaCameraRetro /></div>
+                            <span className="stamp-value">{yearData.photos.length}</span>
+                            <span className="stamp-label">Snapshots</span>
+                          </div>
+                          <div className="stat-stamp">
+                            <div className="stamp-icon"><FaMapMarkerAlt /></div>
+                            <span className="stamp-value">{yearData.location || 'Various'}</span>
+                            <span className="stamp-label">Location</span>
+                          </div>
+                          <div className="stat-stamp">
+                            <div className="stamp-icon"><FaMountain /></div>
+                            <span className="stamp-value">{yearData.experiences || 'Nature'}</span>
+                            <span className="stamp-label">Theme</span>
+                          </div>
+                        </div>
+
+                        {/* Destination Map Card - Render only when active to avoid layout calculation issues */}
+                        {isThisActive && yearData.latitude && yearData.longitude && (
+                          <div className="scrapbook-map-card">
+                            <div className="map-tape top-left"></div>
+                            <div className="map-tape bottom-right"></div>
+                            <h4>
+                              <FaMapMarkerAlt /> Mini Route Map
+                            </h4>
+                            <div className="mini-map-container">
+                              <MapContainer
+                                center={[yearData.latitude, yearData.longitude]}
+                                zoom={8}
+                                scrollWheelZoom={false}
+                                className="mini-leaflet-map"
+                              >
+                                <TileLayer
+                                  attribution='&copy; OpenStreetMap contributors'
+                                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                <Marker 
+                                  position={[yearData.latitude, yearData.longitude]}
+                                  icon={createCustomIcon(yearData.destination_type)}
+                                >
+                                  <Popup>
+                                    <strong>{yearData.title}</strong>
+                                    <br />
+                                    {yearData.location}
+                                  </Popup>
+                                </Marker>
+                              </MapContainer>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Right Column: Featured Polaroid & Thumbnails */}
+                      <div className="scrapbook-gallery-main">
+                        <div className="polaroid-collage-header">
+                          <h3>📷 Polaroid Showcase</h3>
+                          <button 
+                            className="pgm-journey__view-all-btn"
+                            onClick={() => {
+                              setSelectedYear(yearData);
+                              setIsModalOpen(true);
+                            }}
+                          >
+                            <span>Expand Gallery</span>
+                            <FaGlobeAmericas />
+                          </button>
+                        </div>
+
+                        {/* Featured Polaroid Section */}
+                        {currentPhoto && (
+                          <div className="featured-polaroid-showcase">
+                            <button 
+                              type="button"
+                              className="featured-nav-btn prev-btn" 
+                              onClick={handlePrevPhoto}
+                              aria-label="Previous photo"
+                            >
+                              <FaChevronLeft />
+                            </button>
+
+                            <div className="featured-polaroid-card">
+                              <div className="polaroid-tape"></div>
+                              <div className="polaroid-image-frame">
+                                <DownloadImageButton 
+                                  imageUrl={`${API_URL}${currentPhoto.src}`}
+                                  fileName={`journey-${yearData.year}-${photoIdx + 1}`}
+                                />
+                                <img
+                                  src={`${API_URL}${currentPhoto.src}`}
+                                  alt={currentPhoto.caption || 'Featured snapshot'}
+                                  onError={(e) => {
+                                    e.target.src = FALLBACK_IMAGE;
+                                  }}
+                                />
+                                <div className="polaroid-image-counter">
+                                  {photoIdx + 1} / {yearData.photos.length}
+                                </div>
+                              </div>
+                              <div className="polaroid-caption">
+                                {currentPhoto.caption || `Snapshot #${photoIdx + 1}`}
+                              </div>
+                            </div>
+
+                            <button 
+                              type="button"
+                              className="featured-nav-btn next-btn" 
+                              onClick={handleNextPhoto}
+                              aria-label="Next photo"
+                            >
+                              <FaChevronRight />
+                            </button>
+                          </div>
+                        )}
+
+                        {/* Thumbnails Polaroid List */}
+                        {yearData.photos.length > 1 && (
+                          <div className="polaroid-thumbnails-list">
+                            {yearData.photos.map((photo, index) => {
+                              const rot = (index % 4 === 0) ? -3 : (index % 4 === 1) ? 2 : (index % 4 === 2) ? -1 : 3;
+                              return (
+                                <button
+                                  key={index}
+                                  type="button"
+                                  className={`mini-polaroid-item ${isThisActive && activePhotoIndex === index ? 'active' : ''}`}
+                                  onClick={() => isThisActive && setActivePhotoIndex(index)}
+                                  style={{ '--mini-rot': `${rot}deg` }}
+                                >
+                                  <div className="mini-polaroid-tape"></div>
+                                  <div className="mini-polaroid-frame">
+                                    <img 
+                                      src={`${API_URL}${photo.src}`} 
+                                      alt={`Thumbnail ${index + 1}`} 
+                                      onError={(e) => {
+                                        e.target.src = FALLBACK_IMAGE;
+                                      }}
+                                    />
+                                  </div>
+                                  <span className="mini-polaroid-number">#{index + 1}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                )}
-              </div>
-            </div>
-            
-            <div className="pgm-journey__info-panel">
-              <div className="pgm-journey__description">
-                <div className="pgm-journey__section-header small">
-                  <FaCompass className="pgm-journey__section-icon small" />
-                  <h3>About This Journey</h3>
                 </div>
-                <p>{activeYearData.description}</p>
-              </div>
-              
-              <div className="pgm-journey__stats">
-                <div className={`pgm-journey__stat-item ${visibleStats.photos ? 'visible' : ''}`}>
-                  <div className="pgm-journey__stat-icon">
-                    <FaCameraRetro />
-                  </div>
-                  <div className="pgm-journey__stat-info">
-                    <span className="pgm-journey__stat-value">{activeYearData.photos.length}</span>
-                    <span className="pgm-journey__stat-label">Photos</span>
-                  </div>
-                </div>
-                
-                <div className={`pgm-journey__stat-item ${visibleStats.locations ? 'visible' : ''}`}>
-                  <div className="pgm-journey__stat-icon">
-                    <FaMapMarkerAlt />
-                  </div>
-                  <div className="pgm-journey__stat-info">
-                    <span className="pgm-journey__stat-value">{activeYearData.locations || 'Various'}</span>
-                    <span className="pgm-journey__stat-label">Locations</span>
-                  </div>
-                </div>
-                
-                <div className={`pgm-journey__stat-item ${visibleStats.experiences ? 'visible' : ''}`}>
-                  <div className="pgm-journey__stat-icon">
-                    <FaMountain />
-                  </div>
-                  <div className="pgm-journey__stat-info">
-                    <span className="pgm-journey__stat-value">{activeYearData.experiences || 'Various'}</span>
-                    <span className="pgm-journey__stat-label">Experiences</span>
-                  </div>
-                </div>
-              </div>
-              
-              <button 
-                className="pgm-journey__view-all-btn"
-                onClick={() => handleViewMore(activeYearData)}
-              >
-                <span>View All Photos</span>
-                <FaGlobeAmericas className="view-all-icon" />
-              </button>
-            </div>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Teams section */}
-      <div className="pgm-journey__teams-section animate-on-scroll">
+      {/* Team CTA section */}
+      <div className="pgm-journey__teams-section">
         <div className="pgm-journey__section-header">
           <FaUsers className="pgm-journey__section-icon" />
           <h2>Pergimmikan Team</h2>
         </div>
-        
         <div className="pgm-journey__team-description">
-          <p>This journey was created by our awesome Pergimmikan team members who are dedicated to capturing every precious moment</p>
+          <p>Behind every epic trip is an amazing crew. Met our group of climbers, surfers, and dreamers.</p>
         </div>
-        
         <div className="pgm-journey__team-cta">
           <a href="/team" className="pgm-journey__team-button">
             <span>Meet Our Crew</span>
@@ -408,44 +501,7 @@ export default function Journey() {
         </div>
       </div>
 
-      {/* Routes and destinations section - only show if destination data exists */}
-      {journeyData.some(year => Array.isArray(year.destinations) && year.destinations.length > 0) && (
-        <div className="pgm-journey__destinations-section animate-on-scroll">
-          <div className="pgm-journey__section-header">
-            <FaRoute className="pgm-journey__section-icon" />
-            <h2>Journey Routes</h2>
-          </div>
-          
-          <div className="pgm-journey__destinations-map">
-            <div className="pgm-journey__map-placeholder">
-              <img 
-                src="/images/indonesia-map.svg" 
-                alt="Indonesia Map" 
-                onError={(e) => {
-                  e.target.src = FALLBACK_IMAGE;
-                }} 
-              />
-            </div>
-            
-            <div className="pgm-journey__destination-list">
-              {journeyData.flatMap(year => 
-                (year.destinations || []).map((destination, index) => (
-                  <div className="pgm-journey__destination-item" key={`${year.year}-${index}`}>
-                    <div className="pgm-journey__destination-icon">
-                      <FaMapMarkerAlt />
-                    </div>
-                    <div className="pgm-journey__destination-info">
-                      <h4>{destination}</h4>
-                      <span>{year.year}</span>
-                    </div>
-                  </div>
-                ))
-              ).slice(0, 5)}
-            </div>
-          </div>
-        </div>
-      )}
-
+      {/* Retro modal for viewing all album photos */}
       {selectedYear && (
         <RetroModal
           isOpen={isModalOpen}

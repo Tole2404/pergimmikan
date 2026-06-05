@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import Masonry from 'react-masonry-css';
 import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
@@ -68,7 +69,7 @@ const RetroModal = ({
     setFullscreenImage(newIndex);
   };
 
-  return (
+  return createPortal(
     <div className="pgm-modal-overlay" onClick={onClose}>
       <div className="pgm-modal" onClick={e => e.stopPropagation()}>
         <div className="pgm-modal__header">
@@ -136,7 +137,7 @@ const RetroModal = ({
         >
           <div 
             className="pgm-lightbox"
-            onClick={e => e.stopPropagation()}
+            onClick={() => setFullscreenImage(null)}
           >
             <button 
               className="pgm-lightbox__close" 
@@ -157,7 +158,10 @@ const RetroModal = ({
               <FaChevronLeft />
             </button>
             
-            <div className="pgm-lightbox__image-container">
+            <div 
+              className="pgm-lightbox__image-container"
+              onClick={(e) => e.stopPropagation()}
+            >
               <DownloadImageButton 
                 imageUrl={images[fullscreenImage].src}
                 fileName={`photo-${fullscreenImage + 1}`}
@@ -189,13 +193,17 @@ const RetroModal = ({
               <FaChevronRight />
             </button>
             
-            <div className="pgm-lightbox__counter">
+            <div 
+              className="pgm-lightbox__counter"
+              onClick={(e) => e.stopPropagation()}
+            >
               {fullscreenImage + 1} / {images.length}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 };
 

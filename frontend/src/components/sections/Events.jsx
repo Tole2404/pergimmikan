@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import { FaCalendar, FaMapMarkerAlt, FaClock, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaCalendar, FaMapMarkerAlt, FaClock, FaSearch, FaChevronLeft, FaChevronRight, FaFilter } from 'react-icons/fa';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 import './Events.css';
@@ -25,6 +25,7 @@ const Events = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [itemsPerPage, setItemsPerPage] = useState(isMobile ? MOBILE_ITEMS_PER_PAGE : DESKTOP_ITEMS_PER_PAGE);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
@@ -454,19 +455,30 @@ const Events = () => {
         </div>
         
         <div className="events-filters-container" role="search" aria-label="Event filters" ref={filtersRef}>
-          <div className="events-search-box" ref={searchBoxRef}>
-            <FaSearch className="events-search-icon" aria-hidden="true" />
-            <input
-              type="text"
-              placeholder="Search events..."
-              value={filters.search}
-              onChange={(e) => handleFilterChange('search', e.target.value)}
-              aria-label="Search events"
-              className="events-search-input"
-            />
+          <div className="events-filter-top-bar">
+            <div className="events-search-box" ref={searchBoxRef}>
+              <FaSearch className="events-search-icon" aria-hidden="true" />
+              <input
+                type="text"
+                placeholder="Search events..."
+                value={filters.search}
+                onChange={(e) => handleFilterChange('search', e.target.value)}
+                aria-label="Search events"
+                className="events-search-input"
+              />
+            </div>
+            <button 
+              type="button"
+              className={`events-filter-toggle-btn ${showMobileFilters ? 'active' : ''}`}
+              onClick={() => setShowMobileFilters(!showMobileFilters)}
+              aria-label="Toggle filters"
+            >
+              <FaFilter />
+              <span>Filters</span>
+            </button>
           </div>
           
-          <div className="events-filter-dropdown-group" ref={dropdownGroupRef}>
+          <div className={`events-filter-dropdown-group ${showMobileFilters ? 'show' : ''}`} ref={dropdownGroupRef}>
             <select
               value={filters.location}
               onChange={(e) => handleFilterChange('location', e.target.value)}
