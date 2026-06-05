@@ -625,17 +625,35 @@
   margin: 0 auto 2rem;
   padding: 0 10px;
   box-sizing: border-box;
+  position: relative;
 }
 
+.pgm-gallery__wechat-ambient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 340px; /* Increased height to span the entire dial and caption area */
+  z-index: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  opacity: 0.25; /* Faint ambient watermark */
+  filter: blur(4px); /* Very subtle blur to prevent visual clutter while keeping the photo recognizable */
+  pointer-events: none;
+  transition: all 0.5s ease-in-out;
+}
 
-
-
+.pgm-gallery__wechat-ambient-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* WeChat Radial Carousel */
 .pgm-gallery__wechat-carousel {
   position: relative;
   width: 100%;
-  height: 260px; /* Increased to accommodate larger images */
+  height: 300px; /* Increased to accommodate larger images */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -643,31 +661,31 @@
   margin: 1.5rem 0;
   user-select: none;
   touch-action: pan-y;
+  z-index: 1; /* Render above ambient background */
 }
 
 .pgm-gallery__wechat-wheel-container {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 440px; /* Increased from 380px for a much larger dial */
   aspect-ratio: 2 / 1;
   border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   background: 
     radial-gradient(circle at bottom, rgba(253, 249, 241, 0.9) 30%, rgba(212, 167, 106, 0.1) 75%),
     linear-gradient(180deg, rgba(212, 167, 106, 0.05) 0%, rgba(139, 90, 43, 0.1) 100%);
-  border: none; /* Completely removed the cheap dashed border */
+  border: none;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  /* 3D Metallic Brass/Bronze Bezel Layering */
   box-shadow: 
-    inset 0 0 0 3px #8b5a2b,    /* Outer dark bronze rim */
-    inset 0 0 0 7px #d4a76a,    /* Main golden brass ring */
-    inset 0 0 0 9px #5c3a21,    /* Inner shadow accent */
+    inset 0 0 0 3px #8b5a2b,
+    inset 0 0 0 7px #d4a76a,
+    inset 0 0 0 9px #5c3a21,
     inset 0 15px 30px rgba(139, 90, 43, 0.08),
-    0 10px 30px rgba(139, 90, 43, 0.2);
+    0 15px 40px rgba(139, 90, 43, 0.35); /* Deeper outer shadow for premium 3D look */
 }
 
-/* Concentric decorative ring 1 (Solid thin inner compass track) */
+/* Concentric decorative ring 1 */
 .pgm-gallery__wechat-wheel-container::before {
   content: '';
   position: absolute;
@@ -682,7 +700,7 @@
   z-index: 1;
 }
 
-/* Concentric decorative ring 2 (Subtle inner accent line) */
+/* Concentric decorative ring 2 */
 .pgm-gallery__wechat-wheel-container::after {
   content: '';
   position: absolute;
@@ -712,11 +730,11 @@
   margin-left: -120px;
   transform-origin: 50% 100%;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease-out;
-  clip-path: polygon(50% 100%, 0 0, 100% 0);
+  clip-path: polygon(50% 100%, 0 0, 100% 0); /* Reverted to triangle clip-path for 5 fanning cards look */
   cursor: pointer;
-  filter: drop-shadow(0 4px 10px rgba(139, 90, 43, 0.2));
+  filter: drop-shadow(0 6px 14px rgba(139, 90, 43, 0.25)); /* Deeper default slice shadow */
   will-change: transform, opacity;
-  background: #fdfaf5; /* Slightly warmer creamy polaroid edge */
+  background: #fdfaf5;
 }
 
 .pgm-gallery__wechat-slice img {
@@ -724,7 +742,7 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
-  clip-path: polygon(50% 100%, 0 0, 100% 0); /* Full wedge width, no gaps */
+  clip-path: polygon(50% 100%, 0 0, 100% 0); /* Match parent slice clip-path */
   transition: filter 0.4s ease;
 }
 
@@ -734,7 +752,7 @@
 }
 
 .pgm-gallery__wechat-slice.active {
-  filter: drop-shadow(0 8px 20px rgba(139, 90, 43, 0.4));
+  filter: drop-shadow(0 12px 28px rgba(139, 90, 43, 0.5)); /* Deeper active slice shadow for massive pop */
   z-index: 10;
 }
 

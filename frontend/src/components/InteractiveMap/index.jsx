@@ -41,6 +41,7 @@ const InteractiveMap = () => {
   const [mapCenter, setMapCenter] = useState([-2.5489, 118.0149]); // Indonesia center
   const [showFilters, setShowFilters] = useState(false);
   const [showRoute, setShowRoute] = useState(true);
+  const [showJournal, setShowJournal] = useState(false);
 
   // Indonesia map bounds
   const indonesiaBounds = [
@@ -168,129 +169,8 @@ const InteractiveMap = () => {
 
   return (
     <div className="interactive-map-container">
-      <div className="map-content-wrapper">
-      {/* Header */}
-      <div className="map-header">
-        <div className="map-header-content">
-          <h1 className="map-title">
-            <FaMapMarkerAlt /> Journey Map
-          </h1>
-          <p className="map-subtitle">
-            Explore {filteredJourneys.length} destinations across Indonesia
-          </p>
-        </div>
-        
-        <div className="map-header-actions">
-          <button 
-            className={`map-route-toggle ${showRoute ? 'active' : ''}`}
-            onClick={() => setShowRoute(!showRoute)}
-            title={showRoute ? 'Hide Route' : 'Show Route'}
-          >
-            <FaRoute /> {showRoute ? 'Route On' : 'Route Off'}
-          </button>
-          <button 
-            className="map-filter-toggle"
-            onClick={() => setShowFilters(true)}
-          >
-            <FaFilter /> Filters
-          </button>
-        </div>
-      </div>
-
-      {/* Filters Backdrop */}
-      <div 
-        className={`map-filters-backdrop ${showFilters ? 'show' : ''}`}
-        onClick={() => setShowFilters(false)}
-      />
-
-      {/* Filters Sidebar */}
-      <div className={`map-filters ${showFilters ? 'show' : ''}`}>
-        <div className="map-filters-content">
-          <div className="filters-header">
-            <h3>🎯 Filters</h3>
-            <button 
-              className="filters-close"
-              onClick={() => setShowFilters(false)}
-            >
-              <FaTimes />
-            </button>
-          </div>
-
-          <div className="filter-group">
-            <label>📍 Jenis Destinasi:</label>
-            <div className="filter-buttons">
-              {destinationTypes.map(type => (
-                <button
-                  key={type.value}
-                  className={`filter-btn ${selectedType === type.value ? 'active' : ''}`}
-                  onClick={() => setSelectedType(type.value)}
-                >
-                  <span className="filter-icon">{type.icon}</span>
-                  <span className="filter-label">{type.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="filter-group">
-            <label>📅 Tahun:</label>
-            <div className="filter-buttons">
-              <button
-                className={`filter-btn ${selectedYear === 'all' ? 'active' : ''}`}
-                onClick={() => setSelectedYear('all')}
-              >
-                Semua
-              </button>
-              {years.map(year => (
-                <button
-                  key={year}
-                  className={`filter-btn ${selectedYear === year ? 'active' : ''}`}
-                  onClick={() => setSelectedYear(year)}
-                >
-                  {year}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Statistics */}
-      {statistics && (
-        <div className="map-statistics">
-          <div className="stat-item">
-            <span className="stat-icon">📍</span>
-            <div className="stat-content">
-              <span className="stat-value">{statistics.summary.total_destinations}</span>
-              <span className="stat-label">Destinations</span>
-            </div>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon">🏔️</span>
-            <div className="stat-content">
-              <span className="stat-value">{statistics.summary.total_mountains}</span>
-              <span className="stat-label">Mountains</span>
-            </div>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon">🏖️</span>
-            <div className="stat-content">
-              <span className="stat-value">{statistics.summary.total_beaches}</span>
-              <span className="stat-label">Beaches</span>
-            </div>
-          </div>
-          <div className="stat-item">
-            <span className="stat-icon">🌲</span>
-            <div className="stat-content">
-              <span className="stat-value">{statistics.summary.total_forests}</span>
-              <span className="stat-label">Forests</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Map */}
-      <div className="map-wrapper">
+      {/* Fullscreen Map Background */}
+      <div className="map-fullscreen-wrapper">
         <MapContainer
           center={mapCenter}
           zoom={5}
@@ -370,23 +250,187 @@ const InteractiveMap = () => {
         </MapContainer>
       </div>
 
-      {/* Legend */}
-      <div className="map-legend">
-        <h4>Legend</h4>
-        <div className="legend-items">
-          {destinationTypes.filter(t => t.value !== 'all').map(type => (
-            <div key={type.value} className="legend-item">
-              <span 
-                className="legend-color" 
-                style={{ backgroundColor: mapService.getMarkerColor(type.value) }}
-              >
-                {type.icon}
-              </span>
-              <span className="legend-label">{type.label}</span>
-            </div>
-          ))}
+      {/* Floating Retro Header Board */}
+      <div className="map-floating-header">
+        <div className="map-floating-header-inner">
+          <h1 className="map-title">
+            <FaMapMarkerAlt /> Journey Map
+          </h1>
+          <p className="map-subtitle">
+            Explore {filteredJourneys.length} destinations
+          </p>
         </div>
       </div>
+
+      {/* Floating Compass Buttons (Top Right actions) */}
+      <div className="map-floating-actions">
+        <button 
+          className={`map-action-btn ${showRoute ? 'active' : ''}`}
+          onClick={() => setShowRoute(!showRoute)}
+          title={showRoute ? 'Hide Route' : 'Show Route'}
+        >
+          <FaRoute /> <span className="btn-label">{showRoute ? 'Route On' : 'Route Off'}</span>
+        </button>
+        <button 
+          className="map-action-btn"
+          onClick={() => setShowFilters(true)}
+          title="Filters"
+        >
+          <FaFilter /> <span className="btn-label">Filters</span>
+        </button>
+        <button 
+          className={`map-action-btn map-mobile-journal-btn ${showJournal ? 'active' : ''}`}
+          onClick={() => setShowJournal(!showJournal)}
+          title="Journal"
+        >
+          📖 <span className="btn-label">Journal</span>
+        </button>
+      </div>
+
+      {/* Floating Traveler's Notebook (Left Panel) */}
+      <div className={`map-journal-panel ${showJournal ? 'show-mobile' : ''}`}>
+        {/* Notebook Spiral Rings on Left Edge */}
+        <div className="map-journal-binder">
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+          <span className="binder-ring"></span>
+        </div>
+
+        {/* Notebook Content Sheet */}
+        <div className="map-journal-sheet">
+          <div className="map-journal-sheet-inner">
+            <div className="map-journal-header">
+              <h3>📖 Traveler's Journal</h3>
+              <button 
+                className="map-journal-close-btn"
+                onClick={() => setShowJournal(false)}
+                title="Close Journal"
+              >
+                <FaTimes />
+              </button>
+            </div>
+            
+            <p className="journal-intro">Catatan perjalanan gimik di seluruh Indonesia.</p>
+
+            {/* Statistics Section styled like passport stamps */}
+            {statistics && (
+              <div className="journal-stamps-section">
+                <h4>✈️ Destination Stamps</h4>
+                <div className="stamps-grid">
+                  <div className="stamp-item stamp-destinations">
+                    <div className="stamp-inner">
+                      <span className="stamp-icon">📍</span>
+                      <span className="stamp-value">{statistics.summary.total_destinations}</span>
+                      <span className="stamp-label">Explored</span>
+                    </div>
+                  </div>
+                  <div className="stamp-item stamp-mountains">
+                    <div className="stamp-inner">
+                      <span className="stamp-icon">🏔️</span>
+                      <span className="stamp-value">{statistics.summary.total_mountains}</span>
+                      <span className="stamp-label">Peaks</span>
+                    </div>
+                  </div>
+                  <div className="stamp-item stamp-beaches">
+                    <div className="stamp-inner">
+                      <span className="stamp-icon">🏖️</span>
+                      <span className="stamp-value">{statistics.summary.total_beaches}</span>
+                      <span className="stamp-label">Coasts</span>
+                    </div>
+                  </div>
+                  <div className="stamp-item stamp-forests">
+                    <div className="stamp-inner">
+                      <span className="stamp-icon">🌲</span>
+                      <span className="stamp-value">{statistics.summary.total_forests}</span>
+                      <span className="stamp-label">Wilds</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Legend Section */}
+            <div className="journal-legend-section">
+              <h4>🗺️ Map Legend</h4>
+              <div className="journal-legend-list">
+                {destinationTypes.filter(t => t.value !== 'all').map(type => (
+                  <div key={type.value} className="journal-legend-item">
+                    <span 
+                      className="legend-color-indicator" 
+                      style={{ backgroundColor: mapService.getMarkerColor(type.value) }}
+                    >
+                      {type.icon}
+                    </span>
+                    <span className="legend-text-label">{type.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filters Backdrop */}
+      <div 
+        className={`map-filters-backdrop ${showFilters ? 'show' : ''}`}
+        onClick={() => setShowFilters(false)}
+      />
+
+      {/* Filters Folder Drawer */}
+      <div className={`map-filters ${showFilters ? 'show' : ''}`}>
+        <div className="map-filters-content">
+          <div className="filters-header">
+            <h3>🎯 Filters</h3>
+            <button 
+              className="filters-close"
+              onClick={() => setShowFilters(false)}
+            >
+              <FaTimes />
+            </button>
+          </div>
+
+          <div className="filter-group">
+            <label>📍 Jenis Destinasi:</label>
+            <div className="filter-buttons">
+              {destinationTypes.map(type => (
+                <button
+                  key={type.value}
+                  className={`filter-btn ${selectedType === type.value ? 'active' : ''}`}
+                  onClick={() => setSelectedType(type.value)}
+                >
+                  <span className="filter-icon">{type.icon}</span>
+                  <span className="filter-label">{type.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="filter-group">
+            <label>📅 Tahun:</label>
+            <div className="filter-buttons">
+              <button
+                className={`filter-btn ${selectedYear === 'all' ? 'active' : ''}`}
+                onClick={() => setSelectedYear('all')}
+              >
+                Semua
+              </button>
+              {years.map(year => (
+                <button
+                  key={year}
+                  className={`filter-btn ${selectedYear === year ? 'active' : ''}`}
+                  onClick={() => setSelectedYear(year)}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

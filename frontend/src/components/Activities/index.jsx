@@ -25,6 +25,7 @@ export default function Activities() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showFiltersMobile, setShowFiltersMobile] = useState(false);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -191,14 +192,30 @@ export default function Activities() {
 
   return (
     <div className="pgm-activities">
+      {/* Decorative Scrapbook Pins */}
+      <div className="scrapbook-pin pin-top-left">📌</div>
+      <div className="scrapbook-pin pin-top-right">📌</div>
+      <div className="scrapbook-pin pin-bottom-left">📌</div>
+      <div className="scrapbook-pin pin-bottom-right">📌</div>
+
       <div className="pgm-activities__header">
         <h1 className="pgm-activities__title">Our Activities</h1>
         <p className="pgm-activities__subtitle">Capturing Moments, Creating Memories Together</p>
       </div>
 
+      {/* Mobile Filters Toggle Button */}
+      <div className="pgm-activities__mobile-filters-trigger">
+        <button 
+          className={`pgm-activities__mobile-toggle-btn ${showFiltersMobile ? 'active' : ''}`}
+          onClick={() => setShowFiltersMobile(!showFiltersMobile)}
+        >
+          🔍 {showFiltersMobile ? 'Close Filters' : 'Filter & Search'}
+        </button>
+      </div>
+
       <div className="pgm-activities__content-wrapper">
         {/* Left Column - Filters */}
-        <div className="pgm-activities__filters-column">
+        <div className={`pgm-activities__filters-column ${showFiltersMobile ? 'show-mobile' : ''}`}>
           <div className="pgm-activities__filter-card">
             <h3 className="pgm-activities__filter-heading">Event Filters</h3>
             
@@ -207,19 +224,28 @@ export default function Activities() {
               <div className="pgm-activities__status-filters">
                 <button
                   className={`pgm-activities__filter-btn ${filter === 'all' ? 'active' : ''}`}
-                  onClick={() => setFilter('all')}
+                  onClick={() => {
+                    setFilter('all');
+                    setShowFiltersMobile(false);
+                  }}
                 >
                   All Activities
                 </button>
                 <button
                   className={`pgm-activities__filter-btn ${filter === 'upcoming' ? 'active' : ''}`}
-                  onClick={() => setFilter('upcoming')}
+                  onClick={() => {
+                    setFilter('upcoming');
+                    setShowFiltersMobile(false);
+                  }}
                 >
                   Upcoming Events
                 </button>
                 <button
                   className={`pgm-activities__filter-btn ${filter === 'completed' ? 'active' : ''}`}
-                  onClick={() => setFilter('completed')}
+                  onClick={() => {
+                    setFilter('completed');
+                    setShowFiltersMobile(false);
+                  }}
                 >
                   Past Events
                 </button>
@@ -231,7 +257,10 @@ export default function Activities() {
               <div className="pgm-activities__category-filter">
                 <select
                   value={categoryFilter}
-                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  onChange={(e) => {
+                    setCategoryFilter(e.target.value);
+                    setShowFiltersMobile(false);
+                  }}
                   className="pgm-activities__category-select"
                 >
                   <option value="all">All Categories</option>
@@ -265,18 +294,25 @@ export default function Activities() {
             {paginatedActivities.length > 0 ? (
               paginatedActivities.map((activity) => (
                 <div key={activity.id} className="pgm-activities__item">
-                  <div className="pgm-activities__item-image">
-                    <DownloadImageButton 
-                      imageUrl={`${API_URL}${activity.image_url}`}
-                      fileName={`activity-${activity.title.replace(/\s+/g, '-').toLowerCase()}`}
-                    />
-                    <img 
-                      src={`${API_URL}${activity.image_url}`} 
-                      alt={activity.title}
-                      onError={(e) => {
-                        e.target.src = '/images/placeholder.jpg';
-                      }}
-                    />
+                  {/* Polaroid Frame Image Wrapper */}
+                  <div className="pgm-activities__item-image-polaroid">
+                    {/* Washi tape graphic */}
+                    <div className="polaroid-washi-tape"></div>
+                    
+                    <div className="polaroid-photo-frame">
+                      <DownloadImageButton 
+                        imageUrl={`${API_URL}${activity.image_url}`}
+                        fileName={`activity-${activity.title.replace(/\s+/g, '-').toLowerCase()}`}
+                      />
+                      <img 
+                        src={`${API_URL}${activity.image_url}`} 
+                        alt={activity.title}
+                        onError={(e) => {
+                          e.target.src = '/images/placeholder.jpg';
+                        }}
+                      />
+                    </div>
+                    
                     <div className="pgm-activities__item-category-badge">
                       {activity.category?.name || 'Uncategorized'}
                     </div>
@@ -284,18 +320,34 @@ export default function Activities() {
                       {activity.status === 'upcoming' ? 'Coming Soon' : 'Past Event'}
                     </div>
                   </div>
-                  <div className="pgm-activities__item-content">
+                  
+                  {/* Journal Notebook content wrapper */}
+                  <div className="pgm-activities__item-content-journal">
+                    <div className="journal-red-margin-line"></div>
+                    
+                    {/* Mobile Badges (hidden on desktop) */}
+                    <div className="journal-mobile-badges">
+                      <span className="journal-mobile-badge category">
+                        {activity.category?.name || 'Uncategorized'}
+                      </span>
+                      <span className="journal-mobile-badge status">
+                        {activity.status === 'upcoming' ? 'Coming Soon' : 'Past Event'}
+                      </span>
+                    </div>
+                    
                     <h2 className="pgm-activities__item-title">{activity.title}</h2>
                     <div className="pgm-activities__item-details">
                       <span><FaCalendarAlt /> {new Date(activity.date).toLocaleDateString()}</span>
                       <span><FaClock /> {activity.time}</span>
                       <span><FaMapMarkerAlt /> {activity.location}</span>
                     </div>
+                    
                     <p className="pgm-activities__item-description">
                       {truncateText(activity.description)}
                     </p>
+                    
                     <button 
-                      className="pgm-activities__item-btn"
+                      className="pgm-activities__item-btn-stamp"
                       onClick={() => handleViewPhotos(activity)}
                       aria-label="View photo gallery"
                     >

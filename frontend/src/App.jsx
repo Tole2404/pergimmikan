@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import PWAInstallPrompt from './components/common/PWAInstallPrompt';
+import DongkerChatbot from './components/common/NailongChatbot';
 import { ToastContainer } from 'react-toastify';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -46,6 +47,7 @@ const App = () => {
       <ScrollToTop />
       <ToastContainer position="bottom-right" />
       <PWAInstallPrompt />
+      <DongkerChatbot />
     </div>
   );
 };

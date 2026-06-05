@@ -500,6 +500,20 @@ const Gallery = () => {
         {isMobile ? (
           /* WeChat Moments Mobile Carousel */
           <div className="pgm-gallery__wechat-container">
+            {/* Ambient Blurry Background of the active moment */}
+            {moments[activeIndex] && (
+              <div className="pgm-gallery__wechat-ambient-bg">
+                <img
+                  src={moments[activeIndex].imageUrl ? `${API_URL}${moments[activeIndex].imageUrl}` : DEFAULT_PLACEHOLDER}
+                  alt="Ambient Background"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = DEFAULT_PLACEHOLDER;
+                  }}
+                />
+              </div>
+            )}
+            
             {/* The Radial Carousel */}
             <div
               className="pgm-gallery__wechat-carousel"
@@ -523,7 +537,7 @@ const Gallery = () => {
                     // Calculate rotation angle (40deg ensures 5 cards fan out beautifully)
                     const angle = diff * 40;
                     // Calculate scale (active card pops out heavily to look big)
-                    const scale = diff === 0 ? 1.15 : 0.92;
+                    const scale = diff === 0 ? 1.3 : 0.95;
                     // Calculate zIndex
                     const zIndex = diff === 0 ? 5 : 5 - Math.abs(diff);
                     // Calculate opacity: show 5 cards (diff <= 2)

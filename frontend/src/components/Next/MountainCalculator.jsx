@@ -663,6 +663,12 @@ const MountainCalculator = () => {
       )}
 
       <div className="mountain-calculator">
+        {/* Decorative Scrapbook Pins */}
+        <div className="scrapbook-pin pin-top-left">📌</div>
+        <div className="scrapbook-pin pin-top-right">📌</div>
+        <div className="scrapbook-pin pin-bottom-left">📌</div>
+        <div className="scrapbook-pin pin-bottom-right">📌</div>
+
         {/* Header - Only show stepper after mountain selected */}
         <div className="calculator-header">
           <div className="header-wave-bg">
@@ -795,6 +801,7 @@ const MountainCalculator = () => {
                         key={mountain.id} 
                         className={`mountain-card-new ${selectedMountain?.id === mountain.id ? 'selected' : ''}`}
                       >
+                        <div className="polaroid-washi-tape calculator-tape"></div>
                         <div className="mountain-card-image-wrapper">
                           <img src={mountain.image_url || '/images/default-mountain.jpg'} alt={mountain.name} />
                           <span className={`difficulty-badge-top ${mountain.difficulty?.toLowerCase().replace(' ', '-')}`}>
@@ -879,6 +886,7 @@ const MountainCalculator = () => {
                               }
                             }}
                           >
+                            <div className="polaroid-washi-tape calculator-tape"></div>
                             <div className="mountain-card-image-wrapper">
                               <img src={mountain.image_url || '/images/default-mountain.jpg'} alt={mountain.name} />
                               <span className={`difficulty-badge-top ${mountain.difficulty?.toLowerCase().replace(' ', '-')}`}>

@@ -35,6 +35,7 @@ const commentsRoutes = require('./routes/comments.routes');
 const seoRoutes = require('./routes/seo.routes');
 const sitemapRoutes = require('./routes/sitemap.routes');
 const tripCalculatorRoutes = require('./routes/tripCalculator.routes');
+const chatbotRoutes = require('./routes/chatbot.routes');
 const mountainsAdminRoutes = require('./routes/mountainsAdmin.routes');
 const tracksAdminRoutes = require('./routes/tracksAdmin.routes');
 const transportationAdminRoutes = require('./routes/transportationAdmin.routes');
@@ -157,6 +158,7 @@ app.use('/api/comments', commentsRoutes);
 app.use('/api/telegram', telegramRoutes);
 app.use('/api/seo', seoRoutes);
 app.use('/api/trip-calculator', tripCalculatorRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 app.use('/', sitemapRoutes);
 
 // Admin routes

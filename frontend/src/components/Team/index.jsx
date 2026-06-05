@@ -164,7 +164,18 @@ const Team = () => {
         itemScope 
         itemType="https://schema.org/Person"
       >
-        {isMomi && <div className="pgm-team__momi-label">MOMI</div>}
+        {isLeader && <div className="polaroid-clothespin leader-clothespin"></div>}
+        {isMomi && <div className="polaroid-washi-tape momi-tape"></div>}
+        {!isLeader && !isMomi && <div className="polaroid-washi-tape member-tape"></div>}
+
+        {isMomi && (
+          <>
+            <div className="pgm-team__momi-label">MOMI</div>
+            {/* Cute dolls peaking from Momi card */}
+            <div className="momi-doll doll-left" title="Cute Teddy!">🧸</div>
+            <div className="momi-doll doll-right" title="Cute Bunny!">🐰</div>
+          </>
+        )}
         {isLeader && (
           <>
             <div className="pgm-team__leader-decoration pgm-team__leader-decoration--left"></div>
@@ -172,8 +183,6 @@ const Team = () => {
             <div className="pgm-team__leader-label">KETUA</div>
           </>
         )}
-        <div className="lanyard-strap"></div>
-        <div className="lanyard-hole"></div>
         <div className="pgm-team__card-frame">
           <img 
             src={`${API_URL}${member.image_url}`}
@@ -181,6 +190,9 @@ const Team = () => {
             className="pgm-team__image"
             loading="lazy"
             itemProp="image"
+            onError={(e) => {
+              e.target.src = '/images/placeholder.jpg';
+            }}
           />
         </div>
         <div className="pgm-team__card-content">
@@ -188,27 +200,30 @@ const Team = () => {
             <h2 id={`${member.name.toLowerCase().replace(/\s+/g, '-')}-profile`} className="pgm-team__name" itemProp="name">{member.name}</h2>
             <p className="pgm-team__role" itemProp="jobTitle">{member.role}</p>
           </div>
-          <div className="pgm-team__social" style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <div className="pgm-team__social">
             {member.linkedin && <link itemProp="sameAs" href={member.linkedin} />}
             {member.github && <link itemProp="sameAs" href={member.github} />}
             {member.instagram && <link itemProp="sameAs" href={member.instagram} />}
             <span 
               onClick={() => handleSocialClick('LinkedIn', member.linkedin)}
-              className={`pgm-team__social-icon ${member.linkedin ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              className={`pgm-team__social-icon pgm-team__social-stamp linkedin ${member.linkedin ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              title="LinkedIn"
             >
               <FontAwesomeIcon icon={faLinkedin} />
             </span>
             
             <span 
               onClick={() => handleSocialClick('GitHub', member.github)}
-              className={`pgm-team__social-icon ${member.github ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              className={`pgm-team__social-icon pgm-team__social-stamp github ${member.github ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              title="GitHub"
             >
               <FontAwesomeIcon icon={faGithub} />
             </span>
             
             <span 
               onClick={() => handleSocialClick('Instagram', member.instagram)}
-              className={`pgm-team__social-icon ${member.instagram ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              className={`pgm-team__social-icon pgm-team__social-stamp instagram ${member.instagram ? 'pgm-team__social-icon--active' : 'pgm-team__social-icon--inactive'}`}
+              title="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </span>
@@ -316,6 +331,55 @@ const Team = () => {
       />
 
       <div className="pgm-team">
+        {/* Decorative Scrapbook Pins */}
+        <div className="scrapbook-pin pin-top-left">📌</div>
+        <div className="scrapbook-pin pin-top-right">📌</div>
+        <div className="scrapbook-pin pin-bottom-left">📌</div>
+        <div className="scrapbook-pin pin-bottom-right">📌</div>
+
+        {/* Background Art Doodles (Retro/Hand-drawn SVG watermarks) */}
+        <div className="bg-art bg-art-mountain">
+          <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20,50 Q60,30 100,50 Q140,30 180,50 L170,90 Q140,110 100,90 Q60,110 30,90 Z" fill="none" stroke="#2C1810" strokeWidth="3" strokeDasharray="5,4" opacity="0.32" />
+            <path d="M100,50 L100,90" fill="none" stroke="#2C1810" strokeWidth="2.5" opacity="0.32" />
+            <path d="M10,20 L15,10 L20,20 L30,25 L20,30 L15,40 L10,30 L0,25 Z" fill="none" stroke="#D35400" strokeWidth="2.5" opacity="0.35" />
+            <path d="M170,80 L175,70 L180,80 L190,85 L180,90 L175,100 L170,90 L160,85 Z" fill="none" stroke="#E6B33E" strokeWidth="2.5" opacity="0.35" />
+          </svg>
+        </div>
+
+        <div className="bg-art bg-art-compass">
+          <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="10" width="200" height="120" rx="10" fill="none" stroke="#2C1810" strokeWidth="3" strokeDasharray="5,4" opacity="0.32" />
+            <rect x="35" y="25" width="150" height="70" rx="5" fill="none" stroke="#2C1810" strokeWidth="2.5" opacity="0.3" />
+            <circle cx="75" cy="60" r="18" fill="none" stroke="#2C1810" strokeWidth="2.5" opacity="0.32" />
+            <circle cx="145" cy="60" r="18" fill="none" stroke="#2C1810" strokeWidth="2.5" opacity="0.32" />
+            <path d="M65,60 L85,60 M135,60 L155,60" fill="none" stroke="#2C1810" strokeWidth="2" opacity="0.32" />
+            <path d="M40,110 L180,110" fill="none" stroke="#2C1810" strokeWidth="2" opacity="0.28" />
+          </svg>
+        </div>
+
+        <div className="bg-art bg-art-trail">
+          <svg viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="180" height="110" rx="8" fill="none" stroke="#2C1810" strokeWidth="3" strokeDasharray="5,4" opacity="0.32" />
+            <circle cx="110" cy="85" r="35" fill="none" stroke="#2C1810" strokeWidth="3" opacity="0.32" />
+            <circle cx="110" cy="85" r="20" fill="none" stroke="#D35400" strokeWidth="2" opacity="0.38" />
+            <rect x="40" y="15" width="30" height="15" rx="3" fill="none" stroke="#2C1810" strokeWidth="2.5" opacity="0.32" />
+            <circle cx="160" cy="45" r="10" fill="none" stroke="#2C1810" strokeWidth="2" opacity="0.32" />
+            <path d="M150,110 Q160,120 170,110" fill="none" stroke="#45B7A4" strokeWidth="2.5" strokeLinecap="round" opacity="0.4" />
+          </svg>
+        </div>
+
+        <div className="bg-art bg-art-camp">
+          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="80" cy="80" r="70" fill="none" stroke="#2C1810" strokeWidth="3" strokeDasharray="5,4" opacity="0.32" />
+            <ellipse cx="55" cy="60" rx="6" ry="10" fill="#2C1810" opacity="0.35" />
+            <ellipse cx="105" cy="60" rx="6" ry="10" fill="#2C1810" opacity="0.35" />
+            <path d="M40,90 Q80,130 120,90" fill="none" stroke="#2C1810" strokeWidth="3.5" strokeLinecap="round" opacity="0.35" />
+            <circle cx="35" cy="85" r="8" fill="#8B2635" opacity="0.3" />
+            <circle cx="125" cy="85" r="8" fill="#8B2635" opacity="0.3" />
+          </svg>
+        </div>
+
         <div className="pgm-team__container">
           <div className="pgm-team__header">
             <div className="pgm-team__header-background"></div>
@@ -344,6 +408,57 @@ const Team = () => {
 
         {leaderMembers.length > 0 && (
           <div className="pgm-team__leader-section">
+            {/* Retro traveler stickers to fill the empty space on desktop */}
+            <div className="leader-decor-sticker sticker-left">
+              <div className="sticker-inner">
+                <span className="sticker-icon">🧭</span>
+                <span className="sticker-tag">ESTD. 2021</span>
+                <span className="sticker-title">PERGIMMIKAN</span>
+                <span className="sticker-badge">EXPLORER</span>
+              </div>
+            </div>
+
+            <div className="leader-decor-path path-left">
+              <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,20 C80,40 10,100 80,140" fill="none" stroke="#45B7A4" strokeWidth="3.5" strokeDasharray="6,5" strokeLinecap="round" opacity="0.45" />
+                <path d="M72,125 L82,142 L64,141" fill="none" stroke="#45B7A4" strokeWidth="2.5" strokeLinecap="round" opacity="0.45" />
+              </svg>
+            </div>
+
+            <div className="leader-decor-ticket ticket-left-under">
+              <div className="ticket-header">BOARDING PASS</div>
+              <div className="ticket-body">
+                <span className="ticket-from">JKT</span>
+                <span className="ticket-arrow">✈</span>
+                <span className="ticket-to">🏔️</span>
+              </div>
+              <div className="ticket-footer">PERGIMMIKAN TRIP</div>
+            </div>
+            
+            <div className="leader-decor-sticker sticker-right">
+              <div className="sticker-inner">
+                <span className="sticker-icon">⛰️</span>
+                <span className="sticker-tag">INDONESIA</span>
+                <span className="sticker-title">OUTDOOR CLUB</span>
+                <span className="sticker-badge">WILD & FREE</span>
+              </div>
+            </div>
+
+            <div className="leader-decor-path path-right">
+              <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10,20 Q120,40 60,100 T130,130" fill="none" stroke="#D35400" strokeWidth="3.5" strokeDasharray="8,6" strokeLinecap="round" opacity="0.5" />
+                <path d="M120,118 L131,131 L115,130" fill="none" stroke="#D35400" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
+              </svg>
+            </div>
+
+            <div className="leader-decor-photo photo-right-under">
+              <div className="photo-pin">📌</div>
+              <div className="photo-frame">
+                <span className="photo-emoji">🌅</span>
+              </div>
+              <div className="photo-caption">SLAMET '23</div>
+            </div>
+
             {isMobile ? (
               <Swiper
                 slidesPerView={1}
@@ -412,6 +527,39 @@ const Team = () => {
         
         {otherMembers.length > 0 && (
           <div className="pgm-team__regular-section">
+            {/* Background stickers for Members section on desktop */}
+            <div className="member-decor-sticker sticker-tent">
+              <div className="sticker-inner">
+                <span className="sticker-icon">⛺</span>
+                <span className="sticker-tag">CAMP LIFE</span>
+                <span className="sticker-title">OUTDOOR</span>
+              </div>
+            </div>
+
+            <div className="member-decor-sticker sticker-campfire">
+              <div className="sticker-inner">
+                <span className="sticker-icon">🔥</span>
+                <span className="sticker-tag">WARMTH</span>
+                <span className="sticker-title">CAMPFIRE</span>
+              </div>
+            </div>
+            
+            <div className="member-decor-sticker sticker-hike">
+              <div className="sticker-inner">
+                <span className="sticker-icon">🥾</span>
+                <span className="sticker-tag">HIKE MORE</span>
+                <span className="sticker-title">TRAIL HEAD</span>
+              </div>
+            </div>
+
+            <div className="member-decor-sticker sticker-pine">
+              <div className="sticker-inner">
+                <span className="sticker-icon">🌲</span>
+                <span className="sticker-tag">NATURE</span>
+                <span className="sticker-title">FOREST</span>
+              </div>
+            </div>
+
             {isMobile ? (
               <Swiper
                 slidesPerView={1.5}
